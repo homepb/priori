@@ -314,6 +314,7 @@ body:not(.authed) #app{visibility:hidden}
 </header>
 <main>
 <div id="perm" class="permb" role="status" hidden></div>
+<div id="upb" class="permb off noprint" role="status" hidden></div>
 <section id="v1">
   <h1 style="font-size:24px;margin-bottom:14px">Demandas</h1>
   <div id="alert"></div>
@@ -419,7 +420,10 @@ g("g_form").onsubmit=async ev=>{ev.preventDefault();const e=g("g_mail").value.tr
  g("g_go").disabled=false};
 g("g_wo").onclick=()=>auth.signOut().then(()=>location.reload());
 function wait(h,t,btn,fn){show("g_wait");g("g_wh").textContent=h;g("g_wt").textContent=t;const b=g("g_wb");b.hidden=!btn;if(btn){b.textContent=btn;b.onclick=fn}}
-function verifyScreen(u){wait("Confirme seu e-mail","Enviamos um link de confirmação para "+u.email+". Clique no link (veja também o spam) e depois toque no botão abaixo.","Já confirmei",async()=>{try{await u.reload();await u.getIdToken(true);if(auth.currentUser.emailVerified)start(auth.currentUser);else msg("Ainda não identificamos a confirmação. Clique no link do e-mail e tente de novo.")}catch(x){msg("Não foi possível verificar agora.")}});
+function verifyScreen(u){
+ // registra o cadastro como pendente já na criação da conta, para o editor ver antes da confirmação do e-mail
+ if(!ADMINS.includes(String(u.email||"").toLowerCase())){const rf=fs.doc("users/"+u.uid);rf.get().then(s=>{if(!s.exists)return rf.set({email:String(u.email||"").toLowerCase(),nome:u.displayName||window.__pn||"",role:"pendente",criado:new Date().toISOString()})}).catch(()=>{})}
+ wait("Confirme seu e-mail","Enviamos um link de confirmação para "+u.email+". Clique no link (veja também o spam) e depois toque no botão abaixo.","Já confirmei",async()=>{try{await u.reload();await u.getIdToken(true);if(auth.currentUser.emailVerified)start(auth.currentUser);else msg("Ainda não identificamos a confirmação. Clique no link do e-mail e tente de novo.")}catch(x){msg("Não foi possível verificar agora.")}});
  const r=document.createElement("button");r.type="button";r.id="g_rv";r.textContent="Reenviar e-mail";r.onclick=async()=>{try{await u.sendEmailVerification();msg("E-mail reenviado.",true)}catch(x){msg(ERR[x.code]||"Aguarde um pouco para reenviar.")}};const o=g("g_rv");if(o)o.remove();g("g_wo").parentNode.insertBefore(r,g("g_wo"))}
 function start(u){ME={uid:u.uid,email:String(u.email||"").toLowerCase(),nome:u.displayName||window.__pn||""};if(unsub)unsub();const adm=ADMINS.includes(ME.email),ref=fs.doc("users/"+u.uid);let first=true;
  unsub=ref.onSnapshot(async s=>{
@@ -507,7 +511,7 @@ async function del(id){
  if(col){try{await col.doc(id).delete();return true}catch(e){fail(e,"excluir");return false}}else{REAL=REAL.filter(x=>x.id!==id);saveLocal();render();return true}}
 local();
 (async()=>{try{const db=await window.claude?.use("db");if(!db){perm("off");return}try{const U=await window.claude?.use("user");if(U&&U.can("data.write")===false)perm("ro")}catch(e){}col=db.collection("demandas");ccol=db.collection("clientes");ccol.onSnapshot(s=>{CLERR=false;CL=s.docs.map(x=>({id:x.id,...x.data()}));clRefresh();render()},e=>{CLERR=true;updClb()});cfg=db.doc("config/lider");tpcfg=db.doc("config/pendencias");tpcfg.onSnapshot(s=>{if(s.exists&&Array.isArray((s.data()||{}).lista)){TP=s.data().lista;if($("av")&&!$("av").hidden&&avD==="P")renderAv()}},()=>{});mcfg=db.doc("config/motivos");mcfg.onSnapshot(s=>{if(s.exists){const x=s.data()||{};MOT={atraso:Array.isArray(x.atraso)&&x.atraso.length?x.atraso:MOT.atraso,cancel:Array.isArray(x.cancel)&&x.cancel.length?x.cancel:MOT.cancel};if($("av")&&!$("av").hidden&&(avD==="A"||avD==="X"))renderAv()}},()=>{});tcfg=db.doc("config/tipos");tcfg.onSnapshot(s=>{if(s.exists&&Array.isArray((s.data()||{}).lista)){TIPOS=s.data().lista;fillTipo();if($("av")&&!$("av").hidden&&avD==="T")renderAv()}},()=>{});cfg.onSnapshot(s=>{if(s.exists)LD=s.data()||{};ensureMat()},()=>{});
- setAcc();if(window.FB&&FB.role()==="lider"){document.body.classList.add("lid");setLM(true)}col.onSnapshot(s=>{REAL=s.docs.map(x=>nz({id:x.id,...x.data()}));render()},e=>{col=null;local();perm("off");render()})}catch(e){}})();
+ setAcc();watchPend(db);if(window.FB&&FB.role()==="lider"){document.body.classList.add("lid");setLM(true)}col.onSnapshot(s=>{REAL=s.docs.map(x=>nz({id:x.id,...x.data()}));render()},e=>{col=null;local();perm("off");render()})}catch(e){}})();
 let DL=null;
 (async()=>{try{DL=await window.claude?.use("downloads");if(DL)$("pdf").hidden=false}catch(e){}})();
 
@@ -809,6 +813,12 @@ function renderTipos(){const CAT={T:{l:"Tipos de serviço",a:()=>TIPOS,sv:saveTi
  document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{avD=b.dataset.cat;renderAv()});
  document.querySelectorAll(".t_del").forEach(b=>b.onclick=()=>{save(arr.filter((_,i)=>i!==+b.dataset.i));renderTipos()});
  $("t_ok").onclick=closeAv;$("avx").onclick=closeAv}
+
+// aviso de cadastros aguardando liberação (só Editor)
+let PU=[],puInit=false;
+function watchPend(db){if(!window.FB||FB.role()!=="editor")return;db.collection("users").where("role","==","pendente").onSnapshot(s=>{const L=s.docs.map(x=>({uid:x.id,...x.data()})),nv=L.filter(u=>!PU.some(p=>p.uid===u.uid));PU=L;renderPU();if(puInit&&nv.length)toast("Novo cadastro aguardando liberação: "+(nv[0].nome||nv[0].email)+".","ok");puInit=true;if(avD==="C")loadUsers()},()=>{})}
+function renderPU(){const n=PU.length,e=$("upb");let b=$("ubd");if(n&&!b){b=document.createElement("span");b.className="bd";b.id="ubd";$("acb").appendChild(b)}if(b){b.hidden=!n;b.textContent=n>9?"9+":n}
+ e.hidden=!n;e.innerHTML=n?`<b>${n} ${pl(n,"usuário aguarda","usuários aguardam")} liberação de acesso:</b> ${PU.map(u=>esc(u.nome||u.email)+(u.nome?" ("+esc(u.email)+")":"")).join(", ")}. <button type="button" id="upo">Liberar acesso</button>`:"";if(n)$("upo").onclick=openConta}
 
 let IMP=null,USR=[];
 function openConta(){avD="C";IMP=null;renderConta();$("av").hidden=false;if(window.FB&&FB.role()==="editor")loadUsers()}
