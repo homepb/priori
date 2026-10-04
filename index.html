@@ -270,6 +270,10 @@ body.lm #go,body.lm #tpb,body.lm #ldr,body.lm #bell{display:none!important}
 .rfr{font-size:13.5px;margin:12px 0}.rkg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.rk{background:#eef4f7;border-radius:8px;padding:8px 10px}.rk small{display:block;color:#566f84;font-size:10.5px;min-height:26px}.rk b{font:700 22px var(--hd);display:block}.rk span{font-size:10.5px;color:#566f84}
 .rsdoc table{min-width:0;width:100%;border-collapse:collapse;font-size:11.5px}.rsdoc th{text-align:left;color:#566f84;font-weight:700;border-bottom:1px solid #d6e2e9;padding:4px 6px}.rsdoc td{padding:5px 6px;border-bottom:1px solid #eef2f5}.rn{color:#566f84;font-size:11.5px;margin-top:4px}.rl{margin:2px 0}.rcols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.rft{margin-top:16px;font-size:10.5px;color:#566f84;border-top:1px solid #d6e2e9;padding-top:8px}
 @media(max-width:760px){.gcols,.rcols{grid-template-columns:1fr}.rkg{grid-template-columns:1fr 1fr}.rsdoc{padding:16px}.rhd{flex-direction:column}.rdt{text-align:left}}
+#rows td[data-l="Alerta"]{white-space:nowrap}#rows td[data-l="Data fim prevista"]{white-space:nowrap}
+.ib[disabled]{opacity:.35;cursor:not-allowed}
+.qf{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}.qf button{border-radius:999px;padding:5px 14px;font-size:13px;background:var(--soft)}.qf button.on{background:var(--btn);color:#fff;border-color:transparent;font-weight:700}.qf button:disabled{opacity:.45;cursor:default}
+.sb{all:unset;cursor:pointer;display:inline-flex;gap:5px;align-items:center;font-weight:inherit}.sb:focus-visible{outline:2px solid var(--teal);outline-offset:2px}.sb i{font-style:normal;font-size:10px;opacity:.5}.sb.on i{opacity:1;color:var(--teal)}
 #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#092241,#305f79 60%,#00a2ad);overflow:auto}
 #gate[hidden]{display:none}
 #gate .gc{background:#fff;color:#092241;border-radius:18px;width:100%;max-width:400px;padding:28px 24px;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center}
@@ -333,7 +337,8 @@ body:not(.authed) #app{visibility:hidden}
     <div class="w"><button class="p" type="submit">Cadastrar demanda</button> <span id="st" class="mu"></span></div>
   </form></div>
   <div class="atq lt" id="aq" hidden><button type="button" id="aqb" class="aqh" aria-expanded="false" aria-controls="aqbody"><span><b>Atuação</b><small id="aqsum"></small></span><u id="aqt">Ver ▾</u></button><div id="aqbody" hidden><div class="mu2" id="aqus"></div><div class="atk" id="aqk"></div><div class="atb"><div class="atd" id="aqd"></div><div id="aql"></div></div></div></div>
-  <div class="tw"><table><thead><tr><th>Empreendimento / demanda</th><th>Status</th><th>Alerta</th><th>Início previsto</th><th>Data fim prevista</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+  <div class="qf noprint" id="qf"></div>
+  <div class="tw"><table><thead><tr id="th1"></tr></thead><tbody id="rows"></tbody></table></div>
   <p id="empty" class="mu" hidden>Nenhuma demanda cadastrada. Use “Nova demanda” para começar.</p>
 </section>
 <section id="v2" hidden>
@@ -466,7 +471,7 @@ const PEN='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="c
 const EYE='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 const TRASH='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/><path d="M10 11v6M14 11v6"/></svg>';
 
-let CL=[],ccol=null,CLERR=false,LD={},cfg=null,tcfg=null,avD=null,DEMO=false,REAL=[],DM=[],col=null,armed=null,anim=false,ksel=null,mid=null,cur=1,tlf="o",pmore=false,ktp="";
+let qfv="",sk="",sd=1,CL=[],ccol=null,CLERR=false,LD={},cfg=null,tcfg=null,avD=null,DEMO=false,REAL=[],DM=[],col=null,armed=null,anim=false,ksel=null,mid=null,cur=1,tlf="o",pmore=false,ktp="";
 const DS=()=>DEMO?DM:REAL;
 let TP=["Descrição do Empreendimento","Capítulos de Fauna e Flora","Descrição das áreas"],PT=[],tpcfg=null;
 const lsGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
@@ -534,19 +539,24 @@ function render(){
  const fcv=$("fc").value;$("fc").innerHTML='<option value="">Todos os clientes</option>'+[...new Set(S.map(d=>d.cliente).filter(Boolean))].sort().map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");$("fc").value=fcv;
  fillYears();const fy=$("fy").value,q=$("q").value.toLowerCase(),fs=$("fs").value,fp=$("fp").value,fc=$("fc").value,fr=$("fr").value;
  const nArq=S.filter(d=>d.arq).length;$("arqb").textContent="Arquivo ("+nArq+")";$("arqb").classList.toggle("on",arqv);$("arqb").setAttribute("aria-pressed",arqv);
- const L=S.filter(d=>(arqv?d.arq:!d.arq)&&(!fy||yOf(d)===fy)&&(!fc||d.cliente===fc)&&(!fr||respOf(d)===fr)&&(!fs||d.status===fs)&&(!fp||d.prio===fp)&&(!q||(d.titulo+d.cliente+(d.emp||"")).toLowerCase().includes(q))).sort((a,b)=>(aberta(b)-aberta(a))||(a.prazo||"9").localeCompare(b.prazo||"9"));
+ const L0=S.filter(d=>(arqv?d.arq:!d.arq)&&(!fy||yOf(d)===fy)&&(!fc||d.cliente===fc)&&(!fr||respOf(d)===fr)&&(!fs||d.status===fs)&&(!fp||d.prio===fp)&&(!q||(d.titulo+d.cliente+(d.emp||"")).toLowerCase().includes(q))).sort((a,b)=>(aberta(b)-aberta(a))||(a.prazo||"9").localeCompare(b.prazo||"9"));
+ const isAtr=d=>!fin(d)&&d.status!=="Cancelada"&&d.prazo&&d.prazo<hoje(),hasP=d=>d.status!=="Cancelada"&&pOpen(d).length>0,nAt=L0.filter(isAtr).length,nPe=L0.filter(hasP).length;
+ if(qfv==="a"&&!nAt||qfv==="p"&&!nPe)qfv="";
+ $("qf").innerHTML=[["a","Atrasadas",nAt],["p","Com pendência",nPe]].map(([k,t,n])=>`<button type="button" data-qf="${k}" class="${qfv===k?"on":""}" aria-pressed="${qfv===k}"${!n&&qfv!==k?" disabled":""}>${t} (${n})</button>`).join("");
+ const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["a","Alerta"],["p","Data fim prevista"]].filter(Boolean).map(([k,t])=>k==="a"?`<th>${t}</th>`:`<th aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}">${t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+"<th></th>";
+ let L=qfv==="a"?L0.filter(isAtr):qfv==="p"?L0.filter(hasP):L0;
+ if(sk){const kf={e:d=>(d.emp||d.titulo||"").toLowerCase(),r:d=>respOf(d).toLowerCase(),s:d=>String(CSTAT.indexOf(d.status)).padStart(2,"0"),p:d=>d.prazo||(sd>0?"9":"0")};L=[...L].sort((a,b)=>kf[sk](a).localeCompare(kf[sk](b),"pt-BR")*sd)}
  {const Sy=S.filter(d=>!fy||yOf(d)===fy);$("aq").hidden=!Sy.length;if(Sy.length){const A=atuacao(calc(Sy,hoje(),0),Sy);ATX.aq=A;renderAtu(A,"aq");$("aqsum").textContent=A.tot?A.nCl+" "+(A.nCl===1?"cliente":"clientes")+" na carteira · "+A.ntp+" "+(A.ntp===1?"tipo de serviço":"tipos de serviço")+" · tempo médio "+(A.tmed==null?"—":A.tmed+" dias"):"Ainda sem demandas concluídas";$("aqbody").hidden=!aqOpen;$("aqb").setAttribute("aria-expanded",aqOpen);$("aqt").textContent=aqOpen?"Recolher ▴":"Ver ▾";if(!$("apm").hidden&&apS.P==="aq")apRender()}}
  $("empty").hidden=L.length>0;$("empty").textContent=arqv?"Nenhuma demanda arquivada.":(fy||fs||fc||fp||q)?"Nenhuma demanda encontrada com esses filtros.":"Nenhuma demanda cadastrada. Use “Nova demanda” para começar.";
  const A=S.filter(aIniciar).sort((a,b)=>a.inicio.localeCompare(b.inicio));
  $("alert").innerHTML=A.length?`<div class="al"><i></i><div><b>${A.length} ${pl(A.length,"demanda começa","demandas começam")} em até 15 dias.</b> ${A.map(d=>{const n=dias(hoje(),d.inicio);return esc(d.emp||d.titulo)+(n<0?" (início atrasado há "+(-n)+"d)":n===0?" inicia hoje":" inicia em "+n+" dias ("+fd(d.inicio)+")")}).join("; ")}.</div></div>`:"";
  {const PW=S.filter(d=>aberta(d)&&pOpen(d).length).sort((x,y)=>(x.prazo||"9").localeCompare(y.prazo||"9")),np=PW.reduce((a,d)=>a+pOpen(d).length,0),red=PW.some(d=>d.prazo&&d.prazo<hoje()),vis=pmore?PW:PW.slice(0,3);
   $("alertp").innerHTML=PW.length?`<div class="al${red?" rd":" yw"}" style="align-items:flex-start"><i></i><div><b>${np} ${pl(np,"pendência em aberto","pendências em aberto")} (${PCt(PW)}) em ${PW.length} ${pl(PW.length,"demanda","demandas")}.</b>${vis.map(d=>{const n=d.prazo?dias(hoje(),d.prazo):null;return `<button type="button" class="pl" data-pe="${d.id}"><b>${esc(d.emp||d.titulo)}:</b> ${pOpen(d).map(p=>esc(p.t)+" ("+(pR(p)==="Cliente"?"cliente":"líder")+", "+p.s.toLowerCase()+")").join(", ")}${n==null?"":n<0?" · prazo atrasado há "+(-n)+"d":n===0?" · vence hoje":" · vence em "+n+" dias"}</button>`}).join("")}${PW.length>3?`<button type="button" class="pm" id="pmb">${pmore?"ver menos":"ver mais ("+(PW.length-3)+")"}</button>`:""}</div></div>`:""}
- $("rows").innerHTML=L.map(d=>`<tr><td><b>${esc(d.emp||d.titulo)}</b><div class="mu">${esc(d.emp?d.titulo:d.tipo)}${multiResp()?" · "+esc(respOf(d)):""}</div></td>
+ $("rows").innerHTML=L.map(d=>`<tr><td><b>${esc(d.emp||d.titulo)}</b><div class="mu">${esc(d.emp?d.titulo:d.tipo)}</div></td>${multiResp()?`<td data-l="Responsável" style="white-space:nowrap">${esc(respOf(d))}</td>`:""}
  <td data-l="Status">${esc(d.status)}</td>
  <td data-l="Alerta">${ragCell(d)}</td>
- <td data-l="Início previsto">${fd(d.inicio)}</td>
  <td data-l="Data fim prevista">${fd(d.prazo)}</td>
- <td data-l=""><div class="ac"><button class="ib" data-det="${d.id}" title="Visualizar" aria-label="Visualizar demanda">${EYE}</button>${fin(d)||d.status==="Cancelada"?"":`<button class="ib" data-pend="${d.id}" title="Incluir pendência" aria-label="Incluir pendência" ><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M15 5h2a1 1 0 0 1 1 1v6"/><path d="M9 5H7a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5"/><path d="M18 15v6M15 18h6"/></svg></button>`}<button class="ib" data-edit="${d.id}" title="Alterar" aria-label="Alterar demanda">${PEN}</button><button class="ib dl${rArm===d.id?" arm":""}" data-del="${d.id}" title="Excluir" aria-label="Excluir demanda">${TRASH}${rArm===d.id?"Confirmar exclusão":""}</button></div></td></tr>`).join("");
+ <td data-l=""><div class="ac"><button class="ib" data-det="${d.id}" title="Visualizar" aria-label="Visualizar demanda">${EYE}</button>${`<button class="ib" data-pend="${d.id}"${fin(d)||d.status==="Cancelada"?` disabled title="${d.status==="Cancelada"?"Demanda cancelada: não aceita novas pendências":"Demanda concluída: não aceita novas pendências"}"`:` title="Incluir pendência"`} aria-label="Incluir pendência"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M15 5h2a1 1 0 0 1 1 1v6"/><path d="M9 5H7a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5"/><path d="M18 15v6M15 18h6"/></svg></button>`}<button class="ib" data-edit="${d.id}" title="Alterar" aria-label="Alterar demanda">${PEN}</button><button class="ib dl${rArm===d.id?" arm":""}" data-del="${d.id}" title="Excluir" aria-label="Excluir demanda">${TRASH}${rArm===d.id?"Confirmar exclusão":""}</button></div></td></tr>`).join("");
  updBell();dash();
 }
 $("rows").onclick=e=>{const b=e.target.closest("button");if(!b)return;
@@ -1132,6 +1142,8 @@ function openPendAdd(id){const d=DS().find(x=>x.id===id);if(!d||LM||RO)return;
   if(ok){closeCq();toast("Pendência incluída.","ok")}}}
 $("rows").addEventListener("click",e=>{const b=e.target.closest("[data-pend]");if(b)openPendAdd(b.dataset.pend)});
 
+$("th1").addEventListener("click",e=>{const b=e.target.closest("[data-sk]");if(!b)return;const k=b.dataset.sk;if(sk!==k){sk=k;sd=1}else if(sd>0)sd=-1;else{sk="";sd=1}render()});
+$("qf").addEventListener("click",e=>{const b=e.target.closest("[data-qf]");if(!b||b.disabled)return;qfv=qfv===b.dataset.qf?"":b.dataset.qf;render()});
 $("bell").onclick=openBell;$("tpb").onclick=openTipos;$("acb").onclick=openConta;$("ldr").onclick=openLider;
 $("av").onclick=e=>{if(e.target===$("av"))closeAv()};$("nt").onclick=e=>{if(e.target===$("nt"))closeNt()};
 $("ntc").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.id==="ntx")return closeNt();if(b.dataset.det){closeNt();openDet(b.dataset.det)}else if(b.dataset.av){const d=DS().find(z=>z.id===b.dataset.av);closeNt();openAviso(d)}};
