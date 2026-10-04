@@ -204,7 +204,7 @@ body.ro [data-del]{display:none!important}
 #app.dash .lv{background:rgba(255,255,255,.1);color:#fff;border-color:var(--d-line)}
 body.lm .lv{background:var(--btn);color:#fff;border-color:transparent}
 .permb{margin:0 0 14px;padding:12px 16px;border-radius:12px;background:#fde4e2;color:#7a1f1a;font-size:14px;line-height:1.5;border:1px solid rgba(239,68,68,.35)}.permb.off{background:#fff3c8;color:#6b4a00;border-color:rgba(250,204,21,.6)}
-body.ro #nb,body.ro [data-edit],body.ro #tpb,body.ro #ldr,body.ro #nf{display:none!important}
+body.ro [data-pend],body.ro #nb,body.ro [data-edit],body.ro #tpb,body.ro #ldr,body.ro #nf{display:none!important}
 body.lm #go,body.lm #tpb,body.lm #ldr,body.lm #bell{display:none!important}
 @media(min-width:900px){.kp{grid-template-columns:repeat(var(--n,8),minmax(0,1fr))}}
 .tm{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:var(--d-glass);border:1px solid var(--d-line);color:#fff;border-radius:12px;padding:10px 12px;margin-bottom:8px;min-height:48px}.tm .tmt{display:flex;flex-direction:column;min-width:0}.tm b{font:600 14px var(--hd);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tm small{color:var(--d-mu);font-size:12px}.tm .rag{flex:none;margin:0}
@@ -260,6 +260,16 @@ body.lm #go,body.lm #tpb,body.lm #ldr,body.lm #bell{display:none!important}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stc{color:#7fe3ea}:root:not([data-theme="light"]) .stc.ok{color:#b9e48a}:root:not([data-theme="light"]) .stc.x{color:#ff9a93}:root:not([data-theme="light"]) .stc.w{color:#ffe27a}}
 #clc{max-width:1040px}#cls{min-width:200px}button.dg{color:#c2271f;border-color:#c2271f}
 @media(max-width:760px){.cck{grid-template-columns:1fr 1fr}.clg{grid-template-columns:1fr}}
+.gcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:16px}.gh{font-size:14px;margin:0 0 8px}.gh small{font-weight:400;opacity:.7}.gsub{font-size:12px;opacity:.75;margin:10px 0 4px}.gnote{font-size:11.5px;opacity:.7;margin-top:8px}
+.gbig{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.gbig b{font:700 34px var(--hd)}.gbig span{font-size:13px;opacity:.85}
+.gb{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 104px;gap:10px;align-items:center;font-size:13px;margin:5px 0}.gb.w{grid-template-columns:minmax(0,.8fr) minmax(0,.8fr) 200px}.gb b{text-align:right}.gb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gb i{height:8px;border-radius:4px;background:rgba(255,255,255,.14);overflow:hidden;display:block}.gb u{display:block;height:100%;background:var(--teal);border-radius:4px}.gb b{font-weight:700;white-space:nowrap}.gb small{font-weight:400;opacity:.75}
+.gtw{background:transparent;border-color:var(--d-line)}.gtw th,.gtw td{padding:8px 10px;text-align:left}.gtw table{min-width:0;width:100%;border-collapse:collapse}.gtw tr+tr td{border-top:1px solid var(--d-line)}
+#rsc{max-width:880px}.rsctl{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:12px}.rsctl label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--mu)}
+.rsdoc{background:#fff;color:#0b2540;border:1px solid var(--bd);border-radius:10px;padding:26px 28px;font-size:12.5px;line-height:1.45}.rsdoc h2{font-size:21px;margin:2px 0 0;color:#092241}.rsdoc h3{font-size:13px;margin:16px 0 6px;color:#305f79;text-transform:uppercase;letter-spacing:.04em}
+.rhd{display:flex;justify-content:space-between;gap:12px;border-bottom:3px solid #00a2ad;padding-bottom:10px}.rbr{font:700 11px var(--hd);color:#00808a;letter-spacing:.08em;text-transform:uppercase}.rdt{font-size:11.5px;color:#566f84;text-align:right}
+.rfr{font-size:13.5px;margin:12px 0}.rkg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.rk{background:#eef4f7;border-radius:8px;padding:8px 10px}.rk small{display:block;color:#566f84;font-size:10.5px;min-height:26px}.rk b{font:700 22px var(--hd);display:block}.rk span{font-size:10.5px;color:#566f84}
+.rsdoc table{min-width:0;width:100%;border-collapse:collapse;font-size:11.5px}.rsdoc th{text-align:left;color:#566f84;font-weight:700;border-bottom:1px solid #d6e2e9;padding:4px 6px}.rsdoc td{padding:5px 6px;border-bottom:1px solid #eef2f5}.rn{color:#566f84;font-size:11.5px;margin-top:4px}.rl{margin:2px 0}.rcols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.rft{margin-top:16px;font-size:10.5px;color:#566f84;border-top:1px solid #d6e2e9;padding-top:8px}
+@media(max-width:760px){.gcols,.rcols{grid-template-columns:1fr}.rkg{grid-template-columns:1fr 1fr}.rsdoc{padding:16px}.rhd{flex-direction:column}.rdt{text-align:left}}
 #gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#092241,#305f79 60%,#00a2ad);overflow:auto}
 #gate[hidden]{display:none}
 #gate .gc{background:#fff;color:#092241;border-radius:18px;width:100%;max-width:400px;padding:28px 24px;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center}
@@ -304,13 +314,13 @@ body:not(.authed) #app{visibility:hidden}
   <h1 style="font-size:24px;margin-bottom:14px">Demandas</h1>
   <div id="alert"></div>
   <div id="alertp"></div>
-  <div class="bar"><input id="q" placeholder="Buscar título, empreendimento ou cliente" aria-label="Buscar"><select id="fc" aria-label="Cliente"></select><select id="fs" aria-label="Status"></select><select id="fp" aria-label="Prioridade"></select><select id="fy" aria-label="Ano de abertura"></select><button type="button" id="arqb" aria-pressed="false">Arquivo</button><button class="p" id="nb" type="button">+ Nova demanda</button></div>
+  <div class="bar"><input id="q" placeholder="Buscar título, empreendimento ou cliente" aria-label="Buscar"><select id="fc" aria-label="Cliente"></select><select id="fr" aria-label="Responsável" hidden></select><select id="fs" aria-label="Status"></select><select id="fp" aria-label="Prioridade"></select><select id="fy" aria-label="Ano de abertura"></select><button type="button" id="arqb" aria-pressed="false">Arquivo</button><button class="p" id="nb" type="button">+ Nova demanda</button></div>
   <div class="card" id="nf" hidden><h2>Nova demanda</h2>
   <form id="f">
     <label class="w">Título*<input id="titulo" required></label>
     <label>Cliente*<select id="cliente" required></select></label>
     <label>Nome do empreendimento*<input id="emp" required></label>
-    <label>Tipo de serviço<select id="tipo"></select></label>
+    <label>Tipo de serviço<select id="tipo"></select></label><label>Responsável<select id="resp"></select></label>
     <label>Prioridade<select id="prio"></select></label>
     <label>Data de abertura<input type="date" id="abertura"></label>
     <label>Data de início prevista*<input type="date" id="inicio" required></label>
@@ -328,13 +338,14 @@ body:not(.authed) #app{visibility:hidden}
 </section>
 <section id="v2" hidden>
   <div class="dfix"><div class="dtop"><div><h1>Visão do líder</h1><div id="pos"></div></div>
-    <div class="ctl noprint"><select id="yr" aria-label="Ano"></select><select id="per" aria-label="Período"><option value="0">Todo o período</option><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Últimos 12 meses</option></select><button id="pres" type="button">Modo apresentação</button><button id="pdf" type="button" hidden>Exportar PDF</button></div></div>
+    <div class="ctl noprint"><select id="yr" aria-label="Ano"></select><select id="rsf" aria-label="Responsável" hidden></select><select id="per" aria-label="Período"><option value="0">Todo o período</option><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Últimos 12 meses</option></select><button id="rsb" type="button">Resumo mensal</button><button id="pres" type="button">Modo apresentação</button><button id="pdf" type="button" hidden>Exportar PDF</button></div></div>
   <p class="sum" id="sum" hidden style="display:none!important"></p>
   <div class="kp" id="kp"></div>
   <div class="hint">Clique em um indicador para ver as demandas dele. Variação em relação a 30 dias atrás.</div></div>
   <div class="gl" id="kd" hidden><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px"><h2 id="kt" style="margin:0"></h2><button id="kx" class="g" type="button">Fechar lista</button></div><div class="tw"><table><thead><tr><th>Empreendimento / demanda</th><th>Cliente</th><th>Status</th><th>Data fim prevista</th><th>Situação</th><th></th></tr></thead><tbody id="kr"></tbody></table></div></div>
   <div class="gl"><h2>Pendências</h2><div class="pfc" id="pfc"></div><div id="pend"></div></div>
   <div class="gl" id="atu"><h2>Atuação</h2><div class="mu2" id="atus"></div><div class="atk" id="atk"></div><div class="atb"><div class="atd" id="atd"></div><div id="atl"></div></div></div>
+  <div class="gl" id="gst"><h2>Gestão de prazos</h2><div class="mu2">Entrega no prazo, tempo parado esperando o cliente e motivos de atraso e cancelamento, conforme os filtros acima.</div><div class="gcols"><div id="gp"></div><div id="gw"></div></div><div class="gcols"><div id="gm"></div><div id="gr"></div></div><div id="gcw" hidden><h3 class="gh" style="margin-top:18px">Carga por responsável</h3><div class="tw gtw" id="gc"></div></div></div>
   <div class="gl"><h2>Timeline demandas</h2><div class="mu2" style="margin-bottom:10px">Todas as demandas, em ordem de data (prazo; conclusão nas encerradas).</div>
     <div class="tfs" id="tfs"></div><div class="tlm" id="tlm"></div><div class="tl" id="tl" hidden></div></div>
   <div class="gl" id="critc" hidden><h2>Requer atenção</h2><div class="tw"><table><thead><tr><th>Empreendimento / demanda</th><th>Cliente</th><th>Status</th><th>Data fim prevista</th><th>Alerta</th><th></th></tr></thead><tbody id="crit"></tbody></table></div></div>
@@ -349,6 +360,7 @@ body:not(.authed) #app{visibility:hidden}
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <div class="ov" id="apm" hidden><div class="pn" id="apc" role="dialog" aria-modal="true" aria-label="Atuação"></div></div>
 <div class="ov" id="clm" hidden><div class="pn" id="clc" role="dialog" aria-modal="true" aria-label="Clientes"></div></div>
+<div class="ov" id="rsm" hidden style="z-index:52"><div class="pn" id="rsc" role="dialog" aria-modal="true" aria-label="Resumo mensal" style="max-width:880px"></div></div>
 <div class="ov" id="md" hidden><div class="pn" id="mc" role="dialog" aria-modal="true"></div></div>
 <div class="ov" id="cqm" hidden style="z-index:62"><div class="pn" id="cqc" role="dialog" aria-modal="true" aria-label="Novo cliente" style="max-width:520px"></div></div>
 <script>try{var m=localStorage.getItem("tema");if(m==="dark"||m==="light")document.documentElement.setAttribute("data-theme",m)}catch(e){}</script>
@@ -419,7 +431,7 @@ auth.onAuthStateChanged(u=>{if(!u){if(unsub){unsub();unsub=null}show("g_form");r
 </script>
 <script>
 const MESES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
-const STATUS=["A iniciar","Em andamento","Aguardando aprovação do cliente","Aguardando assinatura","Concluída"];
+const STATUS=["A iniciar","Em andamento","Aguardando aprovação do cliente","Aguardando assinatura","Concluída"];const CSTAT=[...STATUS,"Cancelada"];
 const MAPST={"Nova":"A iniciar","Em análise":"Em andamento","Aguardando cliente":"Em andamento"},nz=d=>(MAPST[d.status]&&(d.status=MAPST[d.status]),d);
 const COR={"A iniciar":"#d6f3f5","Em andamento":"#00a2ad","Aguardando aprovação do cliente":"#7aa7c7","Aguardando assinatura":"#305f79","Concluída":"#8ec756","Cancelada":"#7f93a8"};
 let TIPOS=["RAS","EVA","ETA","PCA"];
@@ -478,7 +490,7 @@ function setLM(on){LM=on;$("thb").hidden=on;document.body.classList.toggle("lm",
 fillSel();
 function fillTipo(){const k=$("tipo").value;$("tipo").innerHTML=TIPOS.map(a=>`<option>${esc(a)}</option>`).join("");if(TIPOS.includes(k))$("tipo").value=k}
 function fillSel(){const f=(el,arr,all)=>{el.innerHTML=(all?`<option value="">${all}</option>`:"")+arr.map(a=>`<option>${a}</option>`).join("")};
- f($("tipo"),TIPOS);f($("prio"),PRIO);f($("status"),STATUS);f($("fs"),STATUS,"Todos os status");f($("fp"),PRIO,"Todas as prioridades");
+ f($("tipo"),TIPOS);f($("prio"),PRIO);f($("status"),STATUS);f($("fs"),CSTAT,"Todos os status");f($("fp"),PRIO,"Todas as prioridades");
  $("prio").value="Média";$("abertura").value=hoje();$("fim").max=hoje()}
 function local(){try{REAL=JSON.parse(localStorage.getItem("dem")||"[]").map(nz)}catch(e){REAL=[]}}
 function saveLocal(){try{localStorage.setItem("dem",JSON.stringify(REAL))}catch(e){}}
@@ -490,13 +502,13 @@ async function del(id){
  if(DEMO){DM=DM.filter(x=>x.id!==id);render();return true}
  if(col){try{await col.doc(id).delete();return true}catch(e){fail(e,"excluir");return false}}else{REAL=REAL.filter(x=>x.id!==id);saveLocal();render();return true}}
 local();
-(async()=>{try{const db=await window.claude?.use("db");if(!db){perm("off");return}try{const U=await window.claude?.use("user");if(U&&U.can("data.write")===false)perm("ro")}catch(e){}col=db.collection("demandas");ccol=db.collection("clientes");ccol.onSnapshot(s=>{CLERR=false;CL=s.docs.map(x=>({id:x.id,...x.data()}));clRefresh();render()},e=>{CLERR=true;updClb()});cfg=db.doc("config/lider");tpcfg=db.doc("config/pendencias");tpcfg.onSnapshot(s=>{if(s.exists&&Array.isArray((s.data()||{}).lista)){TP=s.data().lista;if($("av")&&!$("av").hidden&&avD==="P")renderAv()}},()=>{});tcfg=db.doc("config/tipos");tcfg.onSnapshot(s=>{if(s.exists&&Array.isArray((s.data()||{}).lista)){TIPOS=s.data().lista;fillTipo();if($("av")&&!$("av").hidden&&avD==="T")renderAv()}},()=>{});cfg.onSnapshot(s=>{if(s.exists)LD=s.data()||{}},()=>{});
+(async()=>{try{const db=await window.claude?.use("db");if(!db){perm("off");return}try{const U=await window.claude?.use("user");if(U&&U.can("data.write")===false)perm("ro")}catch(e){}col=db.collection("demandas");ccol=db.collection("clientes");ccol.onSnapshot(s=>{CLERR=false;CL=s.docs.map(x=>({id:x.id,...x.data()}));clRefresh();render()},e=>{CLERR=true;updClb()});cfg=db.doc("config/lider");tpcfg=db.doc("config/pendencias");tpcfg.onSnapshot(s=>{if(s.exists&&Array.isArray((s.data()||{}).lista)){TP=s.data().lista;if($("av")&&!$("av").hidden&&avD==="P")renderAv()}},()=>{});mcfg=db.doc("config/motivos");mcfg.onSnapshot(s=>{if(s.exists){const x=s.data()||{};MOT={atraso:Array.isArray(x.atraso)&&x.atraso.length?x.atraso:MOT.atraso,cancel:Array.isArray(x.cancel)&&x.cancel.length?x.cancel:MOT.cancel};if($("av")&&!$("av").hidden&&(avD==="A"||avD==="X"))renderAv()}},()=>{});tcfg=db.doc("config/tipos");tcfg.onSnapshot(s=>{if(s.exists&&Array.isArray((s.data()||{}).lista)){TIPOS=s.data().lista;fillTipo();if($("av")&&!$("av").hidden&&avD==="T")renderAv()}},()=>{});cfg.onSnapshot(s=>{if(s.exists)LD=s.data()||{};ensureMat()},()=>{});
  setAcc();if(window.FB&&FB.role()==="lider")setLM(true);col.onSnapshot(s=>{REAL=s.docs.map(x=>nz({id:x.id,...x.data()}));render()},e=>{col=null;local();perm("off");render()})}catch(e){}})();
 let DL=null;
 (async()=>{try{DL=await window.claude?.use("downloads");if(DL)$("pdf").hidden=false}catch(e){}})();
 
 $("f").onsubmit=e=>{e.preventDefault();
- const d={id:"d"+Date.now().toString(36),titulo:$("titulo").value.trim(),...cliPick($("cliente").value),emp:$("emp").value.trim(),tipo:$("tipo").value,prio:$("prio").value,abertura:$("abertura").value||hoje(),inicio:$("inicio").value,prazo:$("prazo").value,status:$("status").value,desc:$("desc").value.trim(),fim:$("fim").value};
+ const d={id:"d"+Date.now().toString(36),titulo:$("titulo").value.trim(),...cliPick($("cliente").value),emp:$("emp").value.trim(),tipo:$("tipo").value,resp:$("resp").value||RESP0,prio:$("prio").value,abertura:$("abertura").value||hoje(),inicio:$("inicio").value,prazo:$("prazo").value,status:$("status").value,desc:$("desc").value.trim(),fim:$("fim").value};
  if(fin(d)){if(!d.fim)d.fim=hoje();d.concTs=Date.now()}
  if(fin(d)&&NP.length){$("st").textContent="Há pendências em aberto. Cadastre a demanda como “A iniciar” ou “Em andamento”, ou remova as pendências.";return}$("st").textContent="";
  d.hist=[{s:d.status,d:hoje(),u:who()},...NP.map(p=>({s:"Pendência “"+p.t+"” ("+pR(p)+") cadastrada",d:hoje(),u:who()}))];d.notas=[];d.pend=JSON.parse(JSON.stringify(NP));
@@ -518,23 +530,23 @@ function setAcc(){const F=window.FB;if(!F||!F.me())return;const n=(F.me().nome||
 
 function render(){
  const S=DS();
- fillCliForm();updClb();
+ fillCliForm();updClb();fillResp();fillFr();fillRsf();
  const fcv=$("fc").value;$("fc").innerHTML='<option value="">Todos os clientes</option>'+[...new Set(S.map(d=>d.cliente).filter(Boolean))].sort().map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");$("fc").value=fcv;
- fillYears();const fy=$("fy").value,q=$("q").value.toLowerCase(),fs=$("fs").value,fp=$("fp").value,fc=$("fc").value;
+ fillYears();const fy=$("fy").value,q=$("q").value.toLowerCase(),fs=$("fs").value,fp=$("fp").value,fc=$("fc").value,fr=$("fr").value;
  const nArq=S.filter(d=>d.arq).length;$("arqb").textContent="Arquivo ("+nArq+")";$("arqb").classList.toggle("on",arqv);$("arqb").setAttribute("aria-pressed",arqv);
- const L=S.filter(d=>(arqv?d.arq:!d.arq)&&(!fy||yOf(d)===fy)&&(!fc||d.cliente===fc)&&(!fs||d.status===fs)&&(!fp||d.prio===fp)&&(!q||(d.titulo+d.cliente+(d.emp||"")).toLowerCase().includes(q))).sort((a,b)=>(aberta(b)-aberta(a))||(a.prazo||"9").localeCompare(b.prazo||"9"));
+ const L=S.filter(d=>(arqv?d.arq:!d.arq)&&(!fy||yOf(d)===fy)&&(!fc||d.cliente===fc)&&(!fr||respOf(d)===fr)&&(!fs||d.status===fs)&&(!fp||d.prio===fp)&&(!q||(d.titulo+d.cliente+(d.emp||"")).toLowerCase().includes(q))).sort((a,b)=>(aberta(b)-aberta(a))||(a.prazo||"9").localeCompare(b.prazo||"9"));
  {const Sy=S.filter(d=>!fy||yOf(d)===fy);$("aq").hidden=!Sy.length;if(Sy.length){const A=atuacao(calc(Sy,hoje(),0),Sy);ATX.aq=A;renderAtu(A,"aq");$("aqsum").textContent=A.tot?A.nCl+" "+(A.nCl===1?"cliente":"clientes")+" na carteira · "+A.ntp+" "+(A.ntp===1?"tipo de serviço":"tipos de serviço")+" · tempo médio "+(A.tmed==null?"—":A.tmed+" dias"):"Ainda sem demandas concluídas";$("aqbody").hidden=!aqOpen;$("aqb").setAttribute("aria-expanded",aqOpen);$("aqt").textContent=aqOpen?"Recolher ▴":"Ver ▾";if(!$("apm").hidden&&apS.P==="aq")apRender()}}
  $("empty").hidden=L.length>0;$("empty").textContent=arqv?"Nenhuma demanda arquivada.":(fy||fs||fc||fp||q)?"Nenhuma demanda encontrada com esses filtros.":"Nenhuma demanda cadastrada. Use “Nova demanda” para começar.";
  const A=S.filter(aIniciar).sort((a,b)=>a.inicio.localeCompare(b.inicio));
  $("alert").innerHTML=A.length?`<div class="al"><i></i><div><b>${A.length} ${pl(A.length,"demanda começa","demandas começam")} em até 15 dias.</b> ${A.map(d=>{const n=dias(hoje(),d.inicio);return esc(d.emp||d.titulo)+(n<0?" (início atrasado há "+(-n)+"d)":n===0?" inicia hoje":" inicia em "+n+" dias ("+fd(d.inicio)+")")}).join("; ")}.</div></div>`:"";
  {const PW=S.filter(d=>aberta(d)&&pOpen(d).length).sort((x,y)=>(x.prazo||"9").localeCompare(y.prazo||"9")),np=PW.reduce((a,d)=>a+pOpen(d).length,0),red=PW.some(d=>d.prazo&&d.prazo<hoje()),vis=pmore?PW:PW.slice(0,3);
   $("alertp").innerHTML=PW.length?`<div class="al${red?" rd":" yw"}" style="align-items:flex-start"><i></i><div><b>${np} ${pl(np,"pendência em aberto","pendências em aberto")} (${PCt(PW)}) em ${PW.length} ${pl(PW.length,"demanda","demandas")}.</b>${vis.map(d=>{const n=d.prazo?dias(hoje(),d.prazo):null;return `<button type="button" class="pl" data-pe="${d.id}"><b>${esc(d.emp||d.titulo)}:</b> ${pOpen(d).map(p=>esc(p.t)+" ("+(pR(p)==="Cliente"?"cliente":"líder")+", "+p.s.toLowerCase()+")").join(", ")}${n==null?"":n<0?" · prazo atrasado há "+(-n)+"d":n===0?" · vence hoje":" · vence em "+n+" dias"}</button>`}).join("")}${PW.length>3?`<button type="button" class="pm" id="pmb">${pmore?"ver menos":"ver mais ("+(PW.length-3)+")"}</button>`:""}</div></div>`:""}
- $("rows").innerHTML=L.map(d=>`<tr><td><b>${esc(d.emp||d.titulo)}</b><div class="mu">${esc(d.emp?d.titulo:d.tipo)}</div></td>
+ $("rows").innerHTML=L.map(d=>`<tr><td><b>${esc(d.emp||d.titulo)}</b><div class="mu">${esc(d.emp?d.titulo:d.tipo)}${multiResp()?" · "+esc(respOf(d)):""}</div></td>
  <td data-l="Status">${esc(d.status)}</td>
  <td data-l="Alerta">${ragCell(d)}</td>
  <td data-l="Início previsto">${fd(d.inicio)}</td>
  <td data-l="Data fim prevista">${fd(d.prazo)}</td>
- <td data-l=""><div class="ac"><button class="ib" data-det="${d.id}" title="Visualizar" aria-label="Visualizar demanda">${EYE}</button><button class="ib" data-edit="${d.id}" title="Alterar" aria-label="Alterar demanda">${PEN}</button><button class="ib dl${rArm===d.id?" arm":""}" data-del="${d.id}" title="Excluir" aria-label="Excluir demanda">${TRASH}${rArm===d.id?"Confirmar exclusão":""}</button></div></td></tr>`).join("");
+ <td data-l=""><div class="ac"><button class="ib" data-det="${d.id}" title="Visualizar" aria-label="Visualizar demanda">${EYE}</button>${fin(d)||d.status==="Cancelada"?"":`<button class="ib" data-pend="${d.id}" title="Incluir pendência" aria-label="Incluir pendência" ><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M15 5h2a1 1 0 0 1 1 1v6"/><path d="M9 5H7a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5"/><path d="M18 15v6M15 18h6"/></svg></button>`}<button class="ib" data-edit="${d.id}" title="Alterar" aria-label="Alterar demanda">${PEN}</button><button class="ib dl${rArm===d.id?" arm":""}" data-del="${d.id}" title="Excluir" aria-label="Excluir demanda">${TRASH}${rArm===d.id?"Confirmar exclusão":""}</button></div></td></tr>`).join("");
  updBell();dash();
 }
 $("rows").onclick=e=>{const b=e.target.closest("button");if(!b)return;
@@ -599,7 +611,7 @@ function renderAtu(A,P){P=P||"at";const $a=x=>$(P+x),R=A.rows,mx=Math.max(1,...R
  $a("d").innerHTML=`<svg width="140" height="140" viewBox="0 0 140 140" role="img" aria-label="Distribuição das demandas concluídas por tipo de serviço">${sv}<text x="70" y="68" text-anchor="middle" style="fill:var(--dn,#fff)" font-size="26" font-weight="800">${A.tot}</text><text x="70" y="86" text-anchor="middle" fill="#9bb4c5" font-size="11">${pl2(A.tot,"demanda","demandas")}</text></svg>`;
  $a("l").innerHTML=`<div class="ath"><div>Tipo de serviço</div><div>Demandas (qtd · % do total)</div><div style="text-align:right">Tempo médio</div></div>`+R.map((r,i)=>{const col=r.n==="Outros"?ATC[6]:ATC[i%6],pc=Math.round(r.q/A.tot*100);return `<button type="button" class="atr${ksel==="tipo"&&ktp===r.n?" on":""}" data-t="${esc(r.n)}" aria-label="${esc(r.n)}: ${r.q} ${pl2(r.q,"demanda","demandas")}, ${pc}%, tempo médio ${r.m==null?"sem dados":r.m+" dias"}. Abrir detalhes"><span class="atn"><i style="background:${col}"></i>${esc(r.n)}</span><span class="atbar"><u style="width:${Math.max(3,r.q/mx*70)}%;background:${col}"></u><span><b>${r.q}</b> · ${pc}%</span></span><span class="att">${r.m==null?"—":"<b>"+r.m+"</b> dias"}<small>${r.nm} ${pl2(r.nm,"concluída","concluídas")}</small></span></button>`}).join("")+'<div class="mu2" style="margin-top:10px">O tempo médio considera só demandas concluídas. Clique em um tipo, na pizza ou em um card para abrir os detalhes.</div>'}
 function dash(){
- const S=DS().filter(d=>!$("yr").value||yOf(d)===$("yr").value),p=+$("per").value,cur0=calc(S,hoje(),p),prev=calc(S,addD(-30),p),L=cur0.L;
+ const S=DS().filter(d=>(!$("yr").value||yOf(d)===$("yr").value)&&(!$("rsf").value||respOf(d)===$("rsf").value)),p=+$("per").value,cur0=calc(S,hoje(),p),prev=calc(S,addD(-30),p),L=cur0.L;
  $("pos").textContent="Posição em "+fd(hoje())+" · "+($("yr").value?"abertas em "+$("yr").value+" · ":"")+$("per").selectedOptions[0].text.toLowerCase();
  /* resumo */
  const nc=L.filter(d=>d.status==="Cancelada").length,tot=L.length;
@@ -607,7 +619,7 @@ function dash(){
  $("sum").innerHTML=S.length?`<span class="mu2">${S.length} ${pl(S.length,"demanda cadastrada","demandas cadastradas")}${tot!==S.length?" ("+tot+" no período)":""}: ${n} em aberto${cur0.sa.length?", "+cur0.sa.length+" aguardando assinatura":""}, ${cur0.conc.length} ${pl(cur0.conc.length,"concluída","concluídas")}${nc?", "+nc+" "+pl(nc,"cancelada","canceladas"):""}.</span><br><b>${n}</b> ${pl(n,"demanda em aberto","demandas em aberto")}: ${a?`<b>${a}</b> ${pl(a,"atrasada","atrasadas")}`:"nenhuma atrasada"} e ${v?`<b>${v}</b> ${pl(v,"vence","vencem")} em 15 dias`:"nenhuma vence em 15 dias"}.${cur0.conc.length?` <b>${cur0.conc.length}</b> ${pl(cur0.conc.length,"concluída","concluídas")} no período${cur0.sa.length?",":"."}`:""}${cur0.sa.length?` <b>${cur0.sa.length}</b> ${pl(cur0.sa.length,"aguarda","aguardam")} assinatura do líder.`:""}${cur0.pct!=null&&!LM?` <b>${cur0.pct}%</b> das entregas ficaram no prazo.`:""}`:"Ainda não há demandas cadastradas. Cadastre a primeira para ver o resumo.";
  /* KPIs */
  const PD=L.filter(d=>aberta(d)&&pOpen(d).length).sort((x,y)=>(x.prazo||"9").localeCompare(y.prazo||"9"));
- const KP0=[{k:"aberto",nm:"Demandas em aberto",v:n,pv:prev.open.length,good:0},
+ const KP0=[{k:"aberto",nm:"Demandas não iniciadas",v:cur0.open.filter(d=>d.status==="A iniciar").length,pv:prev.open.filter(d=>d.status==="A iniciar").length,good:0},
   {k:"atrasadas",nm:"Atrasadas",v:a,pv:prev.late.length,good:-1},
   {k:"aprov",nm:"Aguardando aprovação do cliente",v:cur0.ap.length,pv:prev.ap.length,good:-1},
   {k:"concl",nm:"Concluídas",v:cur0.conc.length,pv:prev.conc.length,good:1},
@@ -618,8 +630,8 @@ function dash(){
  {const oo=PD.flatMap(d=>pOpen(d)),nc=oo.filter(p=>pR(p)==="Cliente").length,cn={t:oo.length,l:oo.length-nc,c:nc};$("pfc").innerHTML=[["t","Todas"],["l","Do líder"],["c","Do cliente"]].map(([k,n])=>`<button type="button" data-f="${k}" class="${pfl===k?"on":""}" aria-pressed="${pfl===k}">${n} (${cn[k]})</button>`).join("");document.querySelectorAll("#pfc button").forEach(b=>b.onclick=()=>{pfl=b.dataset.f;render()})}
  const PDf=PD.filter(d=>pfl==="t"||pOpen(d).some(p=>pR(p)===(pfl==="c"?"Cliente":"Líder")));
  $("pend").innerHTML=PDf.length?PDf.map(d=>{const r=rag(d),all=d.pend.filter(p=>pfl==="t"||pR(p)===(pfl==="c"?"Cliente":"Líder")),done=all.filter(p=>p.s==="Concluída").length;return `<div class="pd"><div class="pdh"><div><b>${esc(d.emp||d.titulo)}</b><div class="mu">${esc(d.cliente)}</div></div><div class="pdr"><span class="rag" style="background:${r.c}"></span>${r.t} · ${fd(d.prazo)}</div></div><div class="pbar"><i style="width:${Math.round(done/all.length*100)}%"></i></div><div class="mu" style="font-size:12px;margin-bottom:6px">${done} de ${all.length} ${pl(all.length,"pronta","prontas")}</div>`+all.map(p=>`<div class="pr"><span class="${p.s==="Concluída"?"pdn":""}">${esc(p.t)}</span>${chip(p)}<span class="pst ${p.s==="Concluída"?"ok":p.s==="Em elaboração"?"wip":""}">${esc(p.s)}</span></div>`).join("")+`</div>`}).join(""):'<div class="mu">Nenhuma pendência em aberto.</div>';
- const ATR=atuacao(cur0,L);ATX.at=ATR;renderAtu(ATR,"at");if(!$("apm").hidden)apRender();
- const LS={pend:PD,assin:cur0.sa,aberto:cur0.open,atrasadas:cur0.late,aprov:cur0.ap,concl:cur0.conc,prazo:cur0.cf,tempo:cur0.tm,tipo:(ATR.rows.find(r=>r.n===ktp)||{l:[]}).l};
+ const ATR=atuacao(cur0,L);ATX.at=ATR;renderAtu(ATR,"at");if(!$("apm").hidden)apRender();renderGest(S,cur0);
+ const LS={pend:PD,assin:cur0.sa,aberto:cur0.open.filter(d=>d.status==="A iniciar"),atrasadas:cur0.late,aprov:cur0.ap,concl:cur0.conc,prazo:cur0.cf,tempo:cur0.tm,tipo:(ATR.rows.find(r=>r.n===ktp)||{l:[]}).l};
  $("kp").style.setProperty("--n",KP.length);
  $("kp").innerHTML=KP.map(x=>{const suf=x.suf||"",on=ksel===x.k;
   const ring=x.k==="prazo"&&x.v!=null?`<svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="5"/><circle cx="23" cy="23" r="19" fill="none" stroke="#8ec756" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(x.v/100*119.4).toFixed(1)} 119.4" transform="rotate(-90 23 23)"/></svg>`:"";
@@ -687,11 +699,11 @@ function evo(S){
 const opt=(a,v)=>a.map(x=>`<option${x===v?" selected":""}>${x}</option>`).join("");
 function upd(n){return put(n)}
 function closeDet(){$("md").hidden=true;mid=null}
-function openDet(id,edit){const d=DS().find(x=>x.id===id);if(!d)return;if(LM||RO)edit=false;mid=id;dArm=false;if(edit)PT=JSON.parse(JSON.stringify(d.pend||[]));$("mc").innerHTML=edit?editHtml(d):viewHtml(d,rag(d));if(edit){renderPL();fillCli($("e_cliente"),cliVal(d))}$("md").hidden=false}
+function openDet(id,edit){const d=DS().find(x=>x.id===id);if(!d)return;if(LM||RO)edit=false;mid=id;dArm=false;if(edit)PT=JSON.parse(JSON.stringify(d.pend||[]));$("mc").innerHTML=edit?editHtml(d):viewHtml(d,rag(d));if(edit){renderPL();fillCli($("e_cliente"),cliVal(d));motVis()}$("md").hidden=false}
 function viewHtml(d,a){const h=(d.hist||[]).slice().reverse().map(x=>`<div>${fd(x.d)} — ${esc(x.s)}${x.u?` <span class="mu">· ${esc(x.u)}</span>`:""}</div>`).join("")||'<span class="mu">Sem histórico registrado.</span>';
  const nl=(d.notas||[]).slice().reverse().map(n=>`<div class="nt"><span class="mu">${fd(n.d)}</span> ${esc(n.x)}${n.u?` <span class="mu">· ${esc(n.u)}</span>`:""}</div>`).join("")||'<span class="mu">Nenhum registro de andamento.</span>';
  return `<div style="display:flex;justify-content:space-between;gap:10px"><div><h3>${esc(d.titulo)}</h3><div class="mu">${esc(d.emp)} · ${esc(d.cliente)}</div></div><button type="button" onclick="closeDet()" aria-label="Fechar">✕</button></div>
- <p>${a.c?`<span class="rag" style="background:${a.c}"></span><b>${a.t}</b> · `:""}${esc(d.status)} · ${esc(d.tipo)} · Prioridade ${esc(d.prio)}</p>
+ <p>${a.c?`<span class="rag" style="background:${a.c}"></span><b>${a.t}</b> · `:""}${esc(d.status)} · ${esc(d.tipo)} · Prioridade ${esc(d.prio)} · Responsável ${esc(respOf(d))}</p>${d.motA?`<p class="mu">Motivo do atraso: ${esc(d.motA)}</p>`:""}${d.motC?`<p class="mu">Motivo do cancelamento: ${esc(d.motC)}</p>`:""}
  <div class="dg"><div><span class="mu">Abertura</span><br>${fd(d.abertura)}</div><div><span class="mu">Início previsto</span><br>${fd(d.inicio)}</div><div><span class="mu">Data fim prevista</span><br>${fd(d.prazo)}</div><div><span class="mu">Data de conclusão</span><br>${fd(d.fim)}</div></div>
  <h4>Descrição</h4><div style="white-space:pre-wrap">${esc(d.desc)||'<span class="mu">Sem descrição.</span>'}</div>
  ${(d.pend||[]).length?`<h4>Pendências</h4>${d.pend.map(p=>`<div class="pr"><span class="${p.s==="Concluída"?"pdn":""}">${esc(p.t)}</span>${chip(p)}<span class="pst ${p.s==="Concluída"?"ok":p.s==="Em elaboração"?"wip":""}">${esc(p.s)}</span>${!RO&&!LM&&pR(p)==="Líder"&&p.s!=="Concluída"?`<button type="button" class="ib" onclick="cob('${d.id}','${p.id}')" aria-label="Cobrar o líder: ${esc(p.t)}" title="Cobrar o líder">${MAIL}</button>`:""}</div>`).join("")}`:""}
@@ -699,19 +711,20 @@ function viewHtml(d,a){const h=(d.hist||[]).slice().reverse().map(x=>`<div>${fd(
  <h4>Histórico de status</h4>${h}
  ${d.linkAss?`<p class="mu" style="margin-top:12px">Documento para assinatura: <a href="${esc(d.linkAss)}" target="_blank" rel="noopener">${esc(d.linkAss)}</a></p>`:""}
  <div style="margin-top:16px">${LM||RO?"":'<button type="button" class="p" onclick="openDet(mid,true)">Alterar demanda</button> '}<button type="button" onclick="closeDet()">Fechar</button></div>`}
-function editHtml(d){const v=k=>esc(d[k]);return `<h3 style="margin-bottom:12px">Editar demanda</h3><div class="ef">
+function editHtml(d){const v=k=>esc(d[k]);return `<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px"><h3>Editar demanda</h3><button type="button" onclick="closeDet()" aria-label="Fechar" title="Fechar">✕</button></div><div class="ef">
  <label class="w">Título*<input id="e_titulo" value="${v("titulo")}"></label><label>Cliente*<select id="e_cliente"></select></label><label>Empreendimento*<input id="e_emp" value="${v("emp")}"></label>
- <label>Tipo de serviço<select id="e_tipo">${opt(!d.tipo||TIPOS.includes(d.tipo)?TIPOS:[...TIPOS,d.tipo],d.tipo)}</select></label><label>Prioridade<select id="e_prio">${opt(PRIO,d.prio)}</select></label><label>Status<select id="e_status">${opt(STATUS.includes(d.status)||!d.status?STATUS:[...STATUS,d.status],d.status)}</select></label>
+ <label>Tipo de serviço<select id="e_tipo">${opt(!d.tipo||TIPOS.includes(d.tipo)?TIPOS:[...TIPOS,d.tipo],d.tipo)}</select></label><label>Responsável<select id="e_resp">${opt(respOpts(d.resp),respOf(d))}</select></label><label>Prioridade<select id="e_prio">${opt(PRIO,d.prio)}</select></label><label>Status<select id="e_status">${opt(CSTAT.includes(d.status)||!d.status?CSTAT:[...CSTAT,d.status],d.status)}</select></label>
  <label>Abertura<input type="date" id="e_abertura" value="${v("abertura")}"></label><label>Início previsto<input type="date" id="e_inicio" value="${v("inicio")}"></label><label>Data fim prevista*<input type="date" id="e_prazo" value="${v("prazo")}"></label><label>Data de conclusão<input type="date" id="e_fim" max="${hoje()}" value="${v("fim")}"></label>
- <label class="w">Descrição<textarea id="e_desc" rows="4">${v("desc")}</textarea></label></div><div id="ee" class="late" style="margin-top:8px"></div>
+ <label class="w">Descrição<textarea id="e_desc" rows="4">${v("desc")}</textarea></label><label id="e_mal">Motivo do atraso (opcional)<select id="e_motA">${motOpts("atraso",d.motA)}</select></label><label id="e_mcl">Motivo do cancelamento (opcional)<select id="e_motC">${motOpts("cancel",d.motC)}</select></label></div><div id="ee" class="late" style="margin-top:8px"></div>
  <h4>Pendências</h4><div id="pl"></div><div class="prow"><select id="pn" aria-label="Tipo de pendência">${TP.map(t=>`<option>${esc(t)}</option>`).join("")}</select><select id="pr" aria-label="Responsável" style="flex:0 0 auto;min-width:0"><option>Líder</option><option>Cliente</option></select><button type="button" onclick="addPend()">Adicionar pendência</button></div><div class="mu" style="font-size:12px">As pendências são salvas na hora e aparecem na visão do líder.</div>
  <h4>Registrar andamento</h4><textarea id="nn" rows="2" placeholder="Escreva o andamento"></textarea><div id="ne" class="late"></div><button type="button" onclick="addNota()">Registrar andamento</button>
  <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button type="button" class="p" onclick="saveEdit()">Salvar</button><button type="button" onclick="openDet(mid)">Cancelar</button>${fin(d)?`<button type="button" onclick="closeDet();openAviso(DS().find(x=>x.id==='${d.id}'))">Avisar líder</button>`:""}${d.arq||d.status==="Concluída"||d.status==="Cancelada"?`<button type="button" onclick="arqDet()">${d.arq?"Desarquivar":"Arquivar"}</button>`:""}<button type="button" id="dx" class="dg2" style="margin-left:auto" onclick="delDet()">Excluir demanda</button></div>`}
 function saveEdit(){const d=DS().find(x=>x.id===mid),g=k=>$("e_"+k).value.trim();
  if(!g("titulo")||!cliPick(g("cliente")).cliente||!g("emp")||!g("prazo")){$("ee").textContent="Preencha título, cliente, empreendimento e data fim prevista.";return}
  if(g("fim")&&g("fim")>hoje()){$("ee").textContent="A data de conclusão não pode ser futura.";return}
- const pk=cliPick(g("cliente")),n={...d,titulo:g("titulo"),cliente:pk.cliente,emp:g("emp"),tipo:g("tipo"),prio:g("prio"),abertura:g("abertura"),inicio:g("inicio"),prazo:g("prazo"),fim:g("fim"),status:g("status"),desc:g("desc")};
+ const pk=cliPick(g("cliente")),n={...d,titulo:g("titulo"),cliente:pk.cliente,emp:g("emp"),tipo:g("tipo"),resp:g("resp"),prio:g("prio"),abertura:g("abertura"),inicio:g("inicio"),prazo:g("prazo"),fim:g("fim"),status:g("status"),desc:g("desc")};
  n.pend=PT;if(pk.clienteId)n.clienteId=pk.clienteId;else delete n.clienteId;
+ if(motSit(n).late&&g("motA"))n.motA=g("motA");else delete n.motA;if(n.status==="Cancelada"&&g("motC"))n.motC=g("motC");else delete n.motC;
  {const ab=PT.filter(p=>p.s!=="Concluída").length;if(fin(n)&&ab){$("ee").textContent="Há "+ab+" "+(ab>1?"pendências":"pendência")+" em aberto. A demanda só pode ser concluída quando o líder concluir todas.";return}}
  let goC=false;
  if(n.status!==d.status){n.hist=[...(d.hist||[]),{s:n.status,d:hoje(),u:who()}];if(fin(n)){if(!n.fim)n.fim=hoje();if(!fin(d)){n.concTs=Date.now();goC=true}if(n.status==="Concluída"&&d.status===SA&&n.fim===d.fim)n.fim=hoje()}else{n.concTs=null}}
@@ -744,7 +757,7 @@ $("md").onclick=e=>{if(e.target===$("md"))closeDet()};
 function endPres(){$("app").classList.remove("pres");try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}}
 $("pres").onclick=()=>{$("app").classList.add("pres");try{const p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(()=>{})}catch(e){}};
 $("xp").onclick=endPres;
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("cqm").hidden)closeCq();else if(!$("av").hidden)closeAv();else if(!$("nt").hidden)closeNt();else if(mid)closeDet();else if(!$("apm").hidden)closeAp();else if(!$("clm").hidden)closeCl();else endPres()});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("cqm").hidden)closeCq();else if(!$("av").hidden)closeAv();else if(!$("nt").hidden)closeNt();else if(mid)closeDet();else if(!$("apm").hidden)closeAp();else if(!$("clm").hidden)closeCl();else if(!$("rsm").hidden)closeRs();else endPres()});
 const loadJs=src=>new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)});
 $("pdf").onclick=async()=>{const b=$("pdf"),t=b.textContent;b.disabled=true;b.textContent="Gerando PDF…";
  try{
@@ -773,19 +786,23 @@ try{const t=JSON.parse(lsGet("pends")||"null");if(Array.isArray(t)&&t.length)TP=
 function saveTipos(a){TIPOS=a;lsSet("tipos",JSON.stringify(a));if(tcfg){try{tcfg.set({lista:a}).catch(()=>{})}catch(e){}}fillTipo()}
 function saveTP(a){TP=a;lsSet("pends",JSON.stringify(a));if(tpcfg){try{tpcfg.set({lista:a}).catch(()=>{})}catch(e){}}}
 function openTipos(){avD="T";renderAv();$("av").hidden=false}
-function renderTipos(){const P=avD==="P",arr=P?TP:TIPOS,use={};
- DS().forEach(d=>{if(P)(d.pend||[]).forEach(p=>{use[p.t]=(use[p.t]||0)+1});else if(d.tipo)use[d.tipo]=(use[d.tipo]||0)+1});
- const un=P?["demanda","demandas"]:["demanda","demandas"],save=P?saveTP:saveTipos;
- $("avc").innerHTML=`<div class="avh"><div><h3>Cadastro</h3><div class="mu">${P?"Tipos de pendência usados nas demandas.":"Opções do campo \"Tipo de serviço\" no cadastro e na edição."}</div></div><button type="button" id="avx" aria-label="Fechar" style="margin-left:auto">✕</button></div>
- <div class="avb" style="margin:0 0 8px"><button type="button" id="cat_t"${P?"":' class="p"'}>Tipos de serviço</button><button type="button" id="cat_p"${P?' class="p"':""}>Tipos de pendência</button></div>
- <div class="avg" style="grid-template-columns:1fr auto;align-items:end"><label>Novo ${P?"tipo de pendência":"tipo"}<input id="t_new" maxlength="60" autocomplete="off" placeholder="${P?"Ex.: Mapa de uso do solo":"Ex.: PRAD"}"></label><button type="button" class="p" id="t_add">Adicionar</button></div>
+function renderTipos(){const CAT={T:{l:"Tipos de serviço",a:()=>TIPOS,sv:saveTipos,d:'Opções do campo "Tipo de serviço" no cadastro e na edição.',n:"tipo",ph:"Ex.: PRAD",u:d=>[d.tipo]},
+  P:{l:"Tipos de pendência",a:()=>TP,sv:saveTP,d:"Tipos de pendência usados nas demandas.",n:"tipo de pendência",ph:"Ex.: Mapa de uso do solo",u:d=>(d.pend||[]).map(p=>p.t)},
+  A:{l:"Motivos de atraso",a:()=>MOT.atraso,sv:a=>saveMot("atraso",a),d:"Lista curta para explicar atrasos. O preenchimento é opcional, na edição da demanda.",n:"motivo",ph:"Ex.: Prazo subestimado",u:d=>[d.motA]},
+  X:{l:"Motivos de cancelamento",a:()=>MOT.cancel,sv:a=>saveMot("cancel",a),d:"Lista curta para explicar cancelamentos. O preenchimento é opcional, na edição da demanda.",n:"motivo",ph:"Ex.: Cliente desistiu",u:d=>[d.motC]}},
+  K=CAT[avD]||CAT.T,arr=K.a(),use={},save=K.sv;
+ DS().forEach(d=>K.u(d).forEach(t=>{if(t)use[t]=(use[t]||0)+1}));
+ const un=["demanda","demandas"];
+ $("avc").innerHTML=`<div class="avh"><div><h3>Cadastro</h3><div class="mu">${K.d}</div></div><button type="button" id="avx" aria-label="Fechar" style="margin-left:auto">✕</button></div>
+ <div class="avb" style="margin:0 0 8px">${Object.entries(CAT).map(([k,c])=>`<button type="button" data-cat="${k}"${avD===k||(k==="T"&&!CAT[avD])?' class="p"':""}>${c.l}</button>`).join("")}</div>
+ <div class="avg" style="grid-template-columns:1fr auto;align-items:end"><label>Novo ${K.n}<input id="t_new" maxlength="60" autocomplete="off" placeholder="${K.ph}"></label><button type="button" class="p" id="t_add">Adicionar</button></div>
  <div id="avm" class="avm" role="status"></div>
- <ul class="tpl">${arr.map((t,i)=>`<li><b>${esc(t)}</b><span class="mu">${use[t]?use[t]+" "+un[use[t]>1?1:0]:"sem demandas"}</span><button type="button" data-i="${i}" class="t_del" aria-label="Remover ${esc(t)}">Remover</button></li>`).join("")||'<li class="mu">Nenhum tipo cadastrado.</li>'}</ul>
- <div class="mu" style="margin-top:8px">Remover um tipo não altera demandas já cadastradas com ele.</div>
+ <ul class="tpl">${arr.map((t,i)=>`<li><b>${esc(t)}</b><span class="mu">${use[t]?use[t]+" "+un[use[t]>1?1:0]:"sem demandas"}</span><button type="button" data-i="${i}" class="t_del" aria-label="Remover ${esc(t)}">Remover</button></li>`).join("")||'<li class="mu">Nenhum item cadastrado.</li>'}</ul>
+ <div class="mu" style="margin-top:8px">Remover um item não altera demandas já cadastradas com ele.</div>
  <div class="avb"><button type="button" class="p" id="t_ok">Concluir</button></div>`;
- const add=()=>{const v=$("t_new").value.trim();if(!v){avMsg("Digite o nome.","err");return}if(arr.some(t=>t.toLowerCase()===v.toLowerCase())){avMsg("Esse tipo já existe.","err");return}save([...arr,v]);renderTipos();avMsg("Tipo adicionado.","ok");$("t_new").focus()};
+ const add=()=>{const v=$("t_new").value.trim();if(!v){avMsg("Digite o nome.","err");return}if(arr.some(t=>t.toLowerCase()===v.toLowerCase())){avMsg("Esse item já existe.","err");return}save([...arr,v]);renderTipos();avMsg("Item adicionado.","ok");$("t_new").focus()};
  $("t_add").onclick=add;$("t_new").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();add()}};
- $("cat_t").onclick=()=>{avD="T";renderAv()};$("cat_p").onclick=()=>{avD="P";renderAv()};
+ document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{avD=b.dataset.cat;renderAv()});
  document.querySelectorAll(".t_del").forEach(b=>b.onclick=()=>{save(arr.filter((_,i)=>i!==+b.dataset.i));renderTipos()});
  $("t_ok").onclick=closeAv;$("avx").onclick=closeAv}
 
@@ -793,7 +810,7 @@ let IMP=null,USR=[];
 function openConta(){avD="C";IMP=null;renderConta();$("av").hidden=false;if(window.FB&&FB.role()==="editor")loadUsers()}
 const ROLES={editor:"Editor",lider:"Líder",pendente:"Pendente"};
 async function loadUsers(){try{const s=await FB.fs.collection("users").get();USR=s.docs.map(x=>({uid:x.id,...x.data()})).sort((a,b)=>String(a.email).localeCompare(String(b.email)));if(avD==="C")renderConta()}catch(e){avMsg("Não foi possível carregar os usuários.","err")}}
-async function bkExport(){try{const o={app:"priori-demandas",versao:1,exportadoEm:new Date().toISOString(),demandas:REAL,clientes:CL,tipos:TIPOS,pendencias:TP,lider:LD||{}};
+async function bkExport(){try{const o={app:"priori-demandas",versao:1,exportadoEm:new Date().toISOString(),demandas:REAL,clientes:CL,motivos:MOT,tipos:TIPOS,pendencias:TP,lider:LD||{}};
  const blob=new Blob([JSON.stringify(o,null,1)],{type:"application/json"});
  if(!DL){avMsg("Este ambiente não permite baixar arquivos.","err");return}
  await DL.save({filename:"backup-demandas-priori-"+hoje()+".json",data:blob});toast("Backup exportado ("+REAL.length+" demandas).","ok")}catch(e){avMsg("Não foi possível exportar o backup.","err")}}
@@ -804,6 +821,7 @@ async function bkApply(){const j=IMP;if(!j)return;const f=FB.fs,ds=j.demandas.fi
  try{for(let i=0;i<ds.length;i+=400){const b=f.batch();ds.slice(i,i+400).forEach(d=>b.set(f.collection("demandas").doc(String(d.id)),d));await b.commit()}
  {const cs=Array.isArray(j.clientes)?j.clientes.filter(c=>c&&c.id):[];for(let i=0;i<cs.length;i+=400){const b=f.batch();cs.slice(i,i+400).forEach(c=>b.set(f.collection("clientes").doc(String(c.id)),c));await b.commit()}}
  if(Array.isArray(j.tipos)&&j.tipos.length)await f.doc("config/tipos").set({lista:j.tipos});
+ if(j.motivos&&Array.isArray(j.motivos.atraso)&&Array.isArray(j.motivos.cancel))await f.doc("config/motivos").set(j.motivos);
  if(Array.isArray(j.pendencias)&&j.pendencias.length)await f.doc("config/pendencias").set({lista:j.pendencias});
  if(j.lider&&typeof j.lider==="object"&&Object.keys(j.lider).length)await f.doc("config/lider").set(j.lider);
  IMP=null;renderConta();toast("Backup importado: "+ds.length+" demandas e "+(Array.isArray(j.clientes)?j.clientes.length:0)+" clientes.","ok")}catch(e){fail(e,"importar")}}
@@ -860,7 +878,7 @@ function renderCob(){const [,did,pid]=avD.split("|"),d=DS().find(z=>z.id===did),
  if($("c_wa"))$("c_wa").onclick=()=>{links();logC("WhatsApp");avMsg("WhatsApp aberto em uma nova aba. Falta clicar em Enviar lá.","ok")};
  $("c_cp").onclick=async()=>{try{await navigator.clipboard.writeText($("c_subj").value+"\n\n"+$("c_body").value);avMsg("Mensagem copiada.","ok")}catch(e){$("c_body").focus();$("c_body").select();avMsg("Não foi possível copiar sozinho. Use Ctrl+C.","err")}};
  $("c_no").onclick=closeAv;$("avx").onclick=closeAv}
-function renderAv(){if(typeof avD==="string"&&avD.startsWith("K|"))return renderCob();if(avD==="C")return renderConta();if(avD==="T"||avD==="P")return renderTipos();const d=avD,L=LD||{};
+function renderAv(){if(typeof avD==="string"&&avD.startsWith("K|"))return renderCob();if(avD==="C")return renderConta();if(avD==="T"||avD==="P"||avD==="A"||avD==="X")return renderTipos();const d=avD,L=LD||{};
  const x='<button type="button" id="avx" aria-label="Fechar" style="margin-left:auto">✕</button>';
  const flds=`<div class="avg"><label>Nome do líder<input id="l_nome" autocomplete="off"></label><label>E-mail do líder*<input id="l_email" type="email" autocomplete="off"></label><label>WhatsApp do líder (com DDD)<input id="l_zap" type="tel" placeholder="(81) 99999-9999"></label><label>Seu nome (assina a mensagem)<input id="l_de" autocomplete="off"></label></div>`;
  if(!d){const EQ=JSON.parse(JSON.stringify(L.equipe||[]));
@@ -1018,6 +1036,101 @@ async function cqSave(){const nome=$("q_nome").value.trim().replace(/\s+/g," ");
  if(!await cput(n))return;closeCq();const s=$(cqT);if(s){fillCli(s,"c:"+n.id)}toast("Cliente cadastrado.","ok");clRefresh()}
 document.addEventListener("change",e=>{const t=e.target;if(t&&(t.id==="cliente"||t.id==="e_cliente")){if(t.value==="__new"){t.value=t.dataset.prev||"";openCq(t.id)}else t.dataset.prev=t.value}});
 $("clb").onclick=()=>openCl();
+
+// ===== Responsável, motivos, gestão de prazos, resumo mensal
+const MESL=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const MOTD={atraso:["Cliente demorou a enviar informações","Aguardando aprovação do cliente","Aguardando órgão licenciador","Mudança de escopo","Prazo subestimado","Capacidade da equipe","Outro"],cancel:["Cliente desistiu","Cliente sem orçamento","Perdido para concorrente","Mudança de escopo","Cadastro duplicado ou indevido","Outro"]};
+let MOT=JSON.parse(JSON.stringify(MOTD)),mcfg=null;
+try{const m=JSON.parse(lsGet("mot")||"null");if(m&&Array.isArray(m.atraso)&&Array.isArray(m.cancel))MOT=m}catch(e){}
+function saveMot(k,a){MOT={...MOT,[k]:a};lsSet("mot",JSON.stringify(MOT));if(mcfg){try{mcfg.set(MOT).catch(()=>{})}catch(e){}}}
+const RESP0="Matheus";
+function respList(){const s=new Map([[nk(RESP0),RESP0]]);((LD&&LD.equipe)||[]).forEach(m=>{const n=String(m.nome||"").trim();if(n&&!s.has(nk(n)))s.set(nk(n),n)});return[...s.values()]}
+const respOf=d=>(d&&d.resp&&String(d.resp).trim())||RESP0;
+const multiResp=()=>respList().length>1;
+function respOpts(cur){const a=respList();if(cur&&!a.some(x=>nk(x)===nk(cur)))a.push(cur);return a}
+function fillResp(){const s=$("resp");if(!s)return;const v=s.value;s.innerHTML=respList().map(n=>`<option>${esc(n)}</option>`).join("");s.value=v&&respList().includes(v)?v:RESP0}
+function fillFr(){const s=$("fr");if(!s)return;const v=s.value,a=[...new Set([...respList(),...DS().map(respOf)])];s.innerHTML='<option value="">Todos os responsáveis</option>'+a.map(n=>`<option>${esc(n)}</option>`).join("");s.value=v;s.hidden=!multiResp()&&!v}
+function fillRsf(){const s=$("rsf");if(!s)return;const v=s.value,a=[...new Set([...respList(),...DS().map(respOf)])];s.innerHTML='<option value="">Todos os responsáveis</option>'+a.map(n=>`<option>${esc(n)}</option>`).join("");s.value=v;s.hidden=a.length<2}
+const motOpts=(k,cur)=>{const a=[...MOT[k]];if(cur&&!a.includes(cur))a.push(cur);return'<option value="">— não informado —</option>'+a.map(x=>`<option${x===cur?" selected":""}>${esc(x)}</option>`).join("")};
+function motSit(x){const hj=hoje();if(!x||x.status==="Cancelada"||!x.prazo)return{late:false};const f=x.status==="Concluída"||x.status===SA;return{late:f&&x.fim?x.fim>x.prazo:hj>x.prazo}}
+function motVis(){if(!$("e_motA"))return;const x={status:$("e_status").value,prazo:$("e_prazo").value,fim:$("e_fim").value};$("e_mal").hidden=!motSit(x).late;$("e_mcl").hidden=x.status!=="Cancelada"}
+// tempo aguardando cliente (status Aguardando aprovação do cliente e Aguardando assinatura)
+function waitD(d){const h=(d.hist||[]).filter(x=>x&&x.d&&(STATUS.includes(x.s)||x.s==="Cancelada")),r={t:0,ag:false,nd:0};
+ for(let i=0;i<h.length;i++){if(h[i].s!==AP&&h[i].s!==SA)continue;const last=i===h.length-1;if(last&&d.status!==h[i].s)continue;const n=Math.max(0,dias(h[i].d,last?hoje():h[i+1].d))||0;r.t+=n;if(last){r.ag=true;r.nd=n}}return r}
+function waitAgg(L){const g=new Map();L.forEach(d=>{const w=waitD(d),k=nk(d.cliente);if(!k||(!w.t&&!w.ag))return;let e=g.get(k);if(!e){e={n:String(d.cliente).trim(),t:0,k:0,ag:0,mx:0};g.set(k,e)}e.t+=w.t;if(w.t>0)e.k++;if(w.ag){e.ag++;e.mx=Math.max(e.mx,w.nd)}});return[...g.values()].sort((a,b)=>b.t-a.t||a.n.localeCompare(b.n,"pt-BR"))}
+const gbar=(l,v,m,r,c)=>`<div class="gb${c?" "+c:""}"><span title="${esc(l)}">${esc(l)}</span><i><u style="width:${m?Math.max(v?4:0,Math.round(v/m*100)):0}%"></u></i><b>${r}</b></div>`;
+function renderGest(S,c0){const L=c0.L,hj=hoje();
+ // 1) entrega no prazo
+ const cf=S.filter(d=>d.status==="Concluída"&&d.fim&&d.prazo),Y=+hj.slice(0,4),M0=+hj.slice(5,7)-1,ms=[];
+ for(let i=5;i>=0;i--){const dt=new Date(Y,M0-i,1),ym=dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0"),c=cf.filter(d=>d.fim.slice(0,7)===ym),ok=c.filter(d=>d.fim<=d.prazo).length;ms.push({ym,n:c.length,ok,p:c.length?Math.round(ok/c.length*100):null})}
+ const wd=ms.filter(m=>m.p!=null),tr=wd.length>1?wd[wd.length-1].p-wd[wd.length-2].p:null;
+ const okp=c0.cf.filter(d=>d.fim<=d.prazo),atr=c0.cf.filter(d=>d.fim>d.prazo),atm=atr.length?Math.round(atr.reduce((a,d)=>a+dias(d.prazo,d.fim),0)/atr.length):null;
+ $("gp").innerHTML=`<h3 class="gh">Entrega no prazo</h3>${c0.cf.length?`<div class="gbig"><b>${c0.pct}%</b><span>${okp.length} de ${c0.cf.length} ${pl(c0.cf.length,"concluída entregue","concluídas entregues")} dentro do prazo${atm!=null?" · atraso médio das demais: "+atm+" "+pl(atm,"dia","dias"):""}</span></div>`:'<div class="mu2">Ainda não há demandas concluídas com prazo no período.</div>'}
+ <div class="gsub">Por mês de conclusão${tr!=null?` · <span class="tr ${tr>=0?"g":"b"}">${tr>0?"▲":tr<0?"▼":"—"} ${Math.abs(tr)} pp vs. mês anterior com entregas</span>`:""}</div>${ms.map(m=>gbar(MESES[+m.ym.slice(5)-1]+"/"+m.ym.slice(2,4),m.p||0,100,m.p==null?"—":m.p+"% <small>("+m.ok+"/"+m.n+")</small>")).join("")}`;
+ // 2) aguardando cliente
+ const W=waitAgg(L),tot=W.reduce((a,e)=>a+e.t,0),ag=W.reduce((a,e)=>a+e.ag,0),mxn=W.reduce((a,e)=>Math.max(a,e.mx),0);
+ $("gw").innerHTML=`<h3 class="gh">Tempo aguardando o cliente</h3>${W.length?`<div class="gbig"><b>${tot}</b><span>${pl(tot,"dia parado","dias parados")} aguardando clientes${ag?" · "+ag+" "+pl(ag,"demanda aguardando agora","demandas aguardando agora")+" (a mais antiga há "+mxn+" "+pl(mxn,"dia","dias")+")":""}</span></div><div class="gsub">Por cliente</div>${W.slice(0,8).map(e=>gbar(e.n,e.t,W[0].t||1,e.t+" "+pl(e.t,"dia","dias")+" <small>("+(e.k||e.ag)+" "+pl(e.k||e.ag,"demanda","demandas")+(e.ag?" · "+e.ag+" agora":"")+")</small>","w")).join("")}${W.length>8?`<div class="mu2">+ ${W.length-8} ${pl(W.length-8,"cliente","clientes")}</div>`:""}`:'<div class="mu2">Nenhuma demanda ficou aguardando aprovação ou assinatura do cliente.</div>'}<div class="gnote">Conta os dias em “Aguardando aprovação do cliente” e “Aguardando assinatura”, a partir do histórico de status.</div>`;
+ // 3) motivos
+ const late=L.filter(d=>motSit(d).late),can=L.filter(d=>d.status==="Cancelada"),cnt=(a,k)=>{const m={};a.forEach(d=>{const v=d[k]||"Sem motivo informado";m[v]=(m[v]||0)+1});return Object.entries(m).sort((a,b)=>(a[0]==="Sem motivo informado")-(b[0]==="Sem motivo informado")||b[1]-a[1]||a[0].localeCompare(b[0],"pt-BR"))};
+ const mh=(t,a,k)=>{const c=cnt(a,k),mx=c.reduce((x,y)=>Math.max(x,y[1]),1);return`<h3 class="gh">${t} <small>(${a.length})</small></h3>${c.length?c.map(([n,q])=>gbar(n,q,mx,q)).join(""):'<div class="mu2">Nenhuma demanda nesta situação.</div>'}`};
+ $("gm").innerHTML=mh("Motivos de atraso",late,"motA")+'<div class="gnote">Demandas atrasadas em aberto e concluídas após o prazo.</div>';
+ $("gr").innerHTML=mh("Motivos de cancelamento",can,"motC");
+ // 4) carga por responsável
+ const rs=new Map();L.forEach(d=>{const n=respOf(d);let e=rs.get(n);if(!e){e={n,ab:0,at:0,ag:0,co:0};rs.set(n,e)}if(d.status==="Concluída")e.co++;else if(d.status!=="Cancelada"){e.ab++;if(motSit(d).late&&!fin(d))e.at++;if(d.status===AP||d.status===SA)e.ag++}});
+ const R=[...rs.values()].sort((a,b)=>b.ab-a.ab||a.n.localeCompare(b.n,"pt-BR"));
+ $("gcw").hidden=R.length<2&&!multiResp();
+ $("gc").innerHTML=`<table><thead><tr><th>Responsável</th><th>Em aberto</th><th>Atrasadas</th><th>Aguardando cliente</th><th>Concluídas</th></tr></thead><tbody>${R.map(e=>`<tr><td><b>${esc(e.n)}</b></td><td>${e.ab}</td><td>${e.at||"—"}</td><td>${e.ag||"—"}</td><td>${e.co}</td></tr>`).join("")}</tbody></table>`}
+// ===== Resumo mensal
+const rsMonths=()=>{const cm=hoje().slice(0,7),s=new Set([cm]);DS().forEach(d=>[d.abertura,d.fim].forEach(x=>{if(x&&x.length>=7)s.add(x.slice(0,7))}));return[...s].filter(m=>m<=cm).sort().reverse()};
+const mLbl=m=>MESL[+m.slice(5)-1]+" de "+m.slice(0,4);
+const pvm=m=>{const d=new Date(+m.slice(0,4),+m.slice(5)-2,1);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")};
+const cancYm=d=>{const h=(d.hist||[]).filter(x=>x.s==="Cancelada").pop();return h&&h.d?h.d.slice(0,7):""};
+function rsCnt(S,ym){const co=S.filter(d=>d.status==="Concluída"&&d.fim&&d.fim.slice(0,7)===ym),cp=co.filter(d=>d.prazo),ok=cp.filter(d=>d.fim<=d.prazo),tm=co.filter(d=>d.abertura);
+ return{co,cp,ok,ab:S.filter(d=>(d.abertura||"").slice(0,7)===ym),ca:S.filter(d=>d.status==="Cancelada"&&cancYm(d)===ym),pct:cp.length?Math.round(ok.length/cp.length*100):null,tm:tm.length?Math.round(tm.reduce((a,d)=>a+dias(d.abertura,d.fim),0)/tm.length):null}}
+function rsBuild(ym){const S=DS(),cm=ym===hoje().slice(0,7),last=new Date(+ym.slice(0,4),+ym.slice(5),0).getDate(),asOf=cm?hoje():ym+"-"+String(last).padStart(2,"0"),
+ k=rsCnt(S,ym),p=rsCnt(S,pvm(ym)),c=calc(S,asOf,0),dl=(a,b)=>a-b===0?"igual ao mês anterior":(a>b?"+":"−")+Math.abs(a-b)+" vs. mês anterior";
+ const sit=d=>d.fim>d.prazo?dias(d.prazo,d.fim)+" "+pl(dias(d.prazo,d.fim),"dia","dias")+" de atraso":"no prazo";
+ const frase=`Em ${mLbl(ym)} ${k.co.length?`foram concluídas <b>${k.co.length}</b> ${pl(k.co.length,"demanda","demandas")}${k.pct!=null?`, <b>${k.pct}%</b> dentro do prazo`:""}`:"não houve demandas concluídas"}; ${k.ab.length?`foram abertas <b>${k.ab.length}</b>`:"nenhuma demanda foi aberta"}. ${cm?"Hoje a":"Ao fim do mês a"} carteira em aberto tem <b>${c.open.length}</b> ${pl(c.open.length,"demanda","demandas")}${c.late.length?`, das quais <b>${c.late.length}</b> ${pl(c.late.length,"atrasada","atrasadas")}`:", nenhuma atrasada"}.`;
+ const kp=(l,v,s)=>`<div class="rk"><small>${l}</small><b>${v}</b><span>${s||"&nbsp;"}</span></div>`;
+ const W=waitAgg(S).slice(0,5),cons=k.co.slice().sort((a,b)=>a.fim.localeCompare(b.fim)),la=c.late.slice().sort((a,b)=>a.prazo.localeCompare(b.prazo));
+ const lateM=S.filter(d=>d.status==="Concluída"&&d.fim&&d.prazo&&d.fim.slice(0,7)===ym&&d.fim>d.prazo).concat(c.late),mot=(a,key)=>{const m={};a.forEach(d=>{const v=d[key]||"Sem motivo informado";m[v]=(m[v]||0)+1});return Object.entries(m).sort((x,y)=>y[1]-x[1]).map(([n,q])=>`${esc(n)}: <b>${q}</b>`).join(" · ")||"—"};
+ const rr=new Map();S.forEach(d=>{const n=respOf(d);let e=rr.get(n);if(!e){e={n,co:0,ab:0};rr.set(n,e)}if(d.status==="Concluída"&&d.fim&&d.fim.slice(0,7)===ym)e.co++;if(c.open.includes(d))e.ab++});
+ return`<div class="rhd"><div><div class="rbr">PRIORI · Gestão de Demandas</div><h2>Resumo mensal — ${mLbl(ym)}</h2></div><div class="rdt">Gerado em ${fd(hoje())}${cm?"<br>mês em andamento":""}</div></div>
+ <p class="rfr">${frase}</p>
+ <div class="rkg">${kp("Concluídas no mês",k.co.length,dl(k.co.length,p.co.length))}${kp("Abertas no mês",k.ab.length,dl(k.ab.length,p.ab.length))}${kp("Entregues no prazo",k.pct==null?"—":k.pct+"%",k.pct!=null&&p.pct!=null?(k.pct===p.pct?"igual ao mês anterior":(k.pct>p.pct?"+":"−")+Math.abs(k.pct-p.pct)+" pp vs. mês anterior"):"")}${kp("Tempo médio de atendimento",k.tm==null?"—":k.tm+" dias","das concluídas no mês")}${kp("Carteira em aberto",c.open.length,c.late.length+" "+pl(c.late.length,"atrasada","atrasadas"))}</div>
+ <h3>Entregas do mês</h3>${cons.length?`<table><thead><tr><th>Empreendimento / demanda</th><th>Cliente</th><th>Prazo</th><th>Conclusão</th><th>Situação</th></tr></thead><tbody>${cons.slice(0,12).map(d=>`<tr><td><b>${esc(d.emp||d.titulo)}</b></td><td>${esc(d.cliente)}</td><td>${fd(d.prazo)}</td><td>${fd(d.fim)}</td><td>${d.prazo?sit(d):"sem prazo"}</td></tr>`).join("")}</tbody></table>${cons.length>12?`<div class="rn">+ ${cons.length-12} ${pl(cons.length-12,"entrega","entregas")} não listadas.</div>`:""}`:'<div class="rn">Nenhuma demanda concluída no mês.</div>'}
+ <h3>Requer atenção ${cm?"hoje":"ao fim do mês"}</h3>${la.length?`<table><thead><tr><th>Empreendimento / demanda</th><th>Cliente</th>${multiResp()?"<th>Responsável</th>":""}<th>Prazo</th><th>Atraso</th></tr></thead><tbody>${la.slice(0,6).map(d=>`<tr><td><b>${esc(d.emp||d.titulo)}</b></td><td>${esc(d.cliente)}</td>${multiResp()?`<td>${esc(respOf(d))}</td>`:""}<td>${fd(d.prazo)}</td><td>${dias(d.prazo,asOf)} ${pl(dias(d.prazo,asOf),"dia","dias")}</td></tr>`).join("")}</tbody></table>${la.length>6?`<div class="rn">+ ${la.length-6} ${pl(la.length-6,"demanda atrasada","demandas atrasadas")}.</div>`:""}`:'<div class="rn">Nenhuma demanda atrasada.</div>'}
+ <div class="rcols"><div><h3>Aguardando o cliente (acumulado)</h3>${W.length?W.map(e=>`<div class="rl">${esc(e.n)}: <b>${e.t} ${pl(e.t,"dia","dias")}</b>${e.ag?` · ${e.ag} aguardando agora`:""}</div>`).join(""):'<div class="rn">Sem registros.</div>'}</div>
+ <div><h3>Motivos</h3><div class="rl">Atrasos: ${mot(lateM,"motA")}</div><div class="rl">Cancelamentos no mês: ${k.ca.length?mot(k.ca,"motC"):"—"}</div></div></div>
+ ${multiResp()?`<h3>Por responsável</h3><div class="rl">${[...rr.values()].sort((a,b)=>b.ab-a.ab).map(e=>`${esc(e.n)}: <b>${e.co}</b> ${pl(e.co,"concluída","concluídas")} no mês · <b>${e.ab}</b> em aberto`).join("<br>")}</div>`:""}
+ <div class="rft">Dados conforme o cadastro do Sistema de Demandas PRIORI em ${fd(hoje())}. Entrega no prazo = conclusão até a data fim prevista.</div>`}
+let rsYm="";
+function openRs(){const ms=rsMonths();rsYm=ms[0];$("rsc").innerHTML=`<div class="rsctl"><label>Mês<select id="rs_m">${ms.map(m=>`<option value="${m}">${mLbl(m)}</option>`).join("")}</select></label><div class="cla"><button type="button" class="p" id="rs_pdf"${DL?"":" hidden"}>Baixar PDF</button><button type="button" id="rs_x">Fechar</button></div></div><div class="rsdoc" id="rsd"></div>`;
+ $("rs_m").onchange=()=>{rsYm=$("rs_m").value;$("rsd").innerHTML=rsBuild(rsYm)};$("rs_x").onclick=closeRs;$("rs_pdf").onclick=rsPdf;$("rsd").innerHTML=rsBuild(rsYm);$("rsm").hidden=false}
+function closeRs(){$("rsm").hidden=true}
+async function rsPdf(){const b=$("rs_pdf"),t=b.textContent;b.disabled=true;b.textContent="Gerando PDF…";let w;
+ try{if(!window.html2canvas)await loadJs("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");if(!window.jspdf)await loadJs("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+  w=document.createElement("div");w.style.cssText="position:fixed;left:-10000px;top:0;width:794px";const c=$("rsd").cloneNode(true);c.removeAttribute("id");c.style.width="794px";c.style.boxShadow="none";c.style.borderRadius="0";w.appendChild(c);document.body.appendChild(w);await new Promise(r=>setTimeout(r,150));
+  const cv=await html2canvas(c,{scale:2,backgroundColor:"#ffffff",useCORS:true}),W=210,H=Math.round(W*cv.height/cv.width);
+  const pdf=new jspdf.jsPDF({orientation:"p",unit:"mm",format:H>297?[W,H]:"a4"});pdf.addImage(cv.toDataURL("image/jpeg",.92),"JPEG",0,0,W,H);
+  await DL.save({filename:"resumo-mensal-priori-"+rsYm+".pdf",data:pdf.output("blob")});b.textContent="PDF salvo";setTimeout(()=>{b.textContent=t;b.disabled=false},2000)}
+ catch(e){b.textContent=(e&&e.code==="declined")?t:"Não foi possível gerar. Tentar de novo";b.disabled=false;if(b.textContent!==t)setTimeout(()=>{b.textContent=t},3500)}finally{if(w)w.remove()}}
+$("rsb").onclick=openRs;$("rsm").addEventListener("mousedown",e=>{if(e.target===$("rsm"))closeRs()});
+$("fr").onchange=render;$("rsf").onchange=()=>{anim=true;dash()};
+document.addEventListener("change",e=>{if(["e_status","e_prazo","e_fim"].includes(e.target&&e.target.id))motVis()});
+
+// ===== incluir pendência pela lista, Matheus na equipe
+let matDone=false;
+function ensureMat(){if(matDone||!window.__matOK())return;if((LD.equipe||[]).some(m=>nk(m.nome)==="matheus")){matDone=true;return}matDone=true;saveLider({equipe:[{id:"e-matheus",nome:"Matheus",email:"matheus.neves@priorisolucoes.com",whatsapp:""},...(LD.equipe||[])]})}
+window.__matOK=()=>window.FB?(FB.role&&FB.role()==="editor"):!RO;
+function openPendAdd(id){const d=DS().find(x=>x.id===id);if(!d||LM||RO)return;
+ $("cqc").innerHTML=`<div class="avh"><div><h3>Incluir pendência</h3><div class="mu">${esc(d.emp||d.titulo)} · ${esc(d.cliente)}</div></div><button type="button" id="cqx" aria-label="Fechar" style="margin-left:auto">✕</button></div><div class="ef"><label class="w">Tipo de pendência<select id="pa_t">${TP.map(t=>`<option>${esc(t)}</option>`).join("")}</select></label><label class="w">Responsável pela pendência<select id="pa_r"><option>Líder</option><option>Cliente</option></select></label></div><div id="pa_err" class="late" style="margin-top:6px"></div><div class="cla" style="margin-top:12px"><button type="button" class="p" id="pa_ok">Incluir pendência</button><button type="button" id="pa_no">Cancelar</button></div>`;
+ $("cqm").hidden=false;$("pa_t").focus();$("cqx").onclick=$("pa_no").onclick=closeCq;
+ $("pa_ok").onclick=async()=>{const t=$("pa_t").value,r=$("pa_r").value;if(!t){$("pa_err").textContent="Cadastre um tipo de pendência em Cadastro primeiro.";return}
+  const cur=DS().find(x=>x.id===id);if(!cur)return;if(pDup(cur.pend||[],t,r)){$("pa_err").textContent="Essa pendência já existe para esse responsável.";return}
+  const ok=await upd({...cur,pend:[...(cur.pend||[]),{id:"p"+Date.now().toString(36)+Math.floor(Math.random()*1e3),t,s:"Pendente",r}],hist:[...(cur.hist||[]),{s:"Pendência “"+t+"” ("+r+") cadastrada",d:hoje(),u:who()}]});
+  if(ok){closeCq();toast("Pendência incluída.","ok")}}}
+$("rows").addEventListener("click",e=>{const b=e.target.closest("[data-pend]");if(b)openPendAdd(b.dataset.pend)});
 
 $("bell").onclick=openBell;$("tpb").onclick=openTipos;$("acb").onclick=openConta;$("ldr").onclick=openLider;
 $("av").onclick=e=>{if(e.target===$("av"))closeAv()};$("nt").onclick=e=>{if(e.target===$("nt"))closeNt()};
