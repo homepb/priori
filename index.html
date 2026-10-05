@@ -648,8 +648,14 @@ applyTheme(lsGet("tema"));
 $("thb").onclick=()=>{const m=isDark()?"light":"dark";lsSet("tema",m);applyTheme(m)};
 function setAcc(){const F=window.FB;if(!F||!F.me())return;const n=(F.me().nome||F.me().email||"?").trim(),p=n.split(/[\s@._-]+/).filter(Boolean),ini=((p[0]||"?")[0]+(p.length>1?p[1][0]:"")).toUpperCase();$("sbi").textContent=ini;$("sbn").textContent=n;$("sbr").textContent=({editor:"Editor",lider:"Líder",pendente:"Pendente"})[F.role()]||"";$("sbu").title="Minha conta ("+F.me().email+")";$("sbu").hidden=false}
 
+/* ordem padrão da lista: em andamento, aguardando aprovação, aguardando assinatura, a iniciar, concluída e cancelada por último */
+var ORD=["Em andamento","Aguardando aprovação do cliente","Aguardando assinatura","A iniciar","Concluída","Cancelada"];
+function oRank(d){const i=ORD.indexOf(d.status);return i<0?3.5:i}
+// nas ordenações por coluna, concluídas e canceladas ficam no fim, nessa ordem
+function oFim(d){return d.status==="Concluída"?1:d.status==="Cancelada"?2:0}
+function ordPad(a,b){return(oRank(a)-oRank(b))||(a.status==="Concluída"&&b.status==="Concluída"?(b.fim||"").localeCompare(a.fim||""):(a.prazo||"9").localeCompare(b.prazo||"9"))}
 /* paginação da lista de demandas */
-var DPP=20,dpg=1,dpgSig="";
+var DPP=10,dpg=1,dpgSig="";
 function pgrHtml(n,p,np){const a=(p-1)*DPP+1,b=Math.min(p*DPP,n),B=(k,t,l,c,dis,cur)=>`<button type="button" class="${c}" data-pg="${k}" aria-label="${l}"${dis?" disabled":""}${cur?' aria-current="page"':""}>${t}</button>`;
  let ns=[],last=0;for(let i=1;i<=np;i++)if(i===1||i===np||Math.abs(i-p)<=1){if(i-last>1)ns.push('<span class="pge" aria-hidden="true">…</span>');ns.push(B(i,i,"Página "+i,"pgn",false,i===p));last=i}
  return `<span class="pgi">Mostrando ${a}–${b} de ${n} demandas</span><div class="pgb">${B(p-1,"‹ Anterior","Página anterior","pgp",p===1)}${ns.join("")}<span class="pgm">Página ${p} de ${np}</span>${B(p+1,"Próxima ›","Próxima página","pgp",p===np)}</div>`}
@@ -658,14 +664,14 @@ function render(){
  fillCliForm();updClb();fillResp();fillFr();fillRsf();
  fillYears();const fy=$("fy").value,q=$("q").value.toLowerCase(),fs=$("fs").value,fp="",fc="",fr="";
  const nArq=S.filter(d=>d.arq).length;$("arqb").textContent="Arquivo ("+nArq+")";$("arqb").classList.toggle("on",arqv);$("arqb").setAttribute("aria-pressed",arqv);
- const L0=S.filter(d=>(arqv?d.arq:!d.arq)&&(!fy||yOf(d)===fy)&&(!fc||d.cliente===fc)&&(!fr||respOf(d)===fr)&&(!fs||d.status===fs)&&(!fp||d.prio===fp)&&(!q||(d.titulo+d.cliente+(d.emp||"")).toLowerCase().includes(q))).sort((a,b)=>(aberta(b)-aberta(a))||(a.prazo||"9").localeCompare(b.prazo||"9"));
+ const L0=S.filter(d=>(arqv?d.arq:!d.arq)&&(!fy||yOf(d)===fy)&&(!fc||d.cliente===fc)&&(!fr||respOf(d)===fr)&&(!fs||d.status===fs)&&(!fp||d.prio===fp)&&(!q||(d.titulo+d.cliente+(d.emp||"")).toLowerCase().includes(q))).sort(ordPad);
  const isAtr=d=>!fin(d)&&d.status!=="Cancelada"&&d.prazo&&d.prazo<hoje(),hasP=temPend,nAt=L0.filter(isAtr).length,nPe=L0.filter(hasP).length;
  const isUrg=d=>d.prio==="Urgente"&&d.status!=="Concluída"&&d.status!=="Cancelada",meu=meuResp(),isMeu=d=>!!meu&&nk(respOf(d))===nk(meu),nUr=L0.filter(isUrg).length,nMe=L0.filter(isMeu).length;
  if(qfv==="a"&&!nAt||qfv==="p"&&!nPe||qfv==="u"&&!nUr||qfv==="m"&&!nMe)qfv="";
  $("qf").innerHTML=[["a","Atrasadas",nAt],["p","Com pendência",nPe],["u","Urgentes",nUr],["m","Minhas demandas",nMe]].map(([k,t,n])=>`<button type="button" data-qf="${k}" class="${qfv===k?"on":""}" aria-pressed="${qfv===k}"${!n&&qfv!==k?" disabled":""}${k==="m"&&!meu?' title="Seu usuário não está ligado a nenhum responsável. Cadastre seu e-mail em Equipe."':""}>${t} (${n})</button>`).join("");
  const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["o","Prioridade"],["a","Alerta"],["p","Prazo"]].filter(Boolean).map(([k,t])=>k==="a"?`<th>${t}</th>`:`<th aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}">${t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+"<th></th>";
  let L=qfv==="a"?L0.filter(isAtr):qfv==="p"?L0.filter(hasP):qfv==="u"?L0.filter(isUrg):qfv==="m"?L0.filter(isMeu):L0;
- if(sk){const kf={e:d=>(d.emp||d.titulo||"").toLowerCase(),r:d=>respOf(d).toLowerCase(),s:d=>String(CSTAT.indexOf(d.status)).padStart(2,"0"),o:d=>String(PRIO.indexOf(d.prio)),p:d=>d.prazo||(sd>0?"9":"0")};L=[...L].sort((a,b)=>kf[sk](a).localeCompare(kf[sk](b),"pt-BR")*sd)}
+ if(sk){const kf={e:d=>(d.emp||d.titulo||"").toLowerCase(),r:d=>respOf(d).toLowerCase(),s:d=>String(oRank(d)).padStart(2,"0"),o:d=>String(PRIO.indexOf(d.prio)),p:d=>d.prazo||(sd>0?"9":"0")};L=[...L].sort((a,b)=>(sk==="s"?0:oFim(a)-oFim(b))||kf[sk](a).localeCompare(kf[sk](b),"pt-BR")*sd)}
  {const Sy=S.filter(d=>!fy||yOf(d)===fy);$("aq").hidden=!Sy.length;if(Sy.length){const A=atuacao(calc(Sy,hoje(),0),Sy);ATX.aq=A;renderAtu(A,"aq");$("aqsum").textContent=A.tot?A.nCl+" "+(A.nCl===1?"cliente":"clientes")+" na carteira · "+A.ntp+" "+(A.ntp===1?"tipo de serviço":"tipos de serviço")+" · tempo médio "+(A.tmed==null?"—":A.tmed+" dias"):"Ainda sem demandas concluídas";$("aqbody").hidden=!aqOpen;$("aqb").setAttribute("aria-expanded",aqOpen);$("aqt").textContent=aqOpen?"Recolher ▴":"Ver ▾";if(!$("apm").hidden&&apS.P==="aq")apRender()}}
  $("empty").hidden=L.length>0;$("empty").textContent=arqv?"Nenhuma demanda arquivada.":(fy||fs||fc||fp||q)?"Nenhuma demanda encontrada com esses filtros.":"Nenhuma demanda cadastrada. Use “Nova demanda” para começar.";
  const A=S.filter(aIniciar).sort((a,b)=>a.inicio.localeCompare(b.inicio));
