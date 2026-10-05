@@ -443,6 +443,21 @@ body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:
  .ov.pg .pn{min-height:0;padding:14px 12px 28px}
  .toast{bottom:calc(env(safe-area-inset-bottom,0px) + 84px)}
 }
+
+/* revisão de poluição visual: cor só para risco, ações no foco, grade suave, visão resumida */
+#rows .stc{background:transparent;color:var(--tx);border:1px solid var(--bd);font-weight:600}
+#rows .pri{background:none;border:0;padding:0;font-weight:600;color:var(--mu)}#rows .pri.u{color:#c2271f;font-weight:800}#rows .pri.a{color:#b45309;font-weight:700}
+:root[data-theme="dark"] #rows .stc{color:var(--tx)}:root[data-theme="dark"] #rows .pri.u{color:#ff8a80}:root[data-theme="dark"] #rows .pri.a{color:#fbbf24}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #rows .stc{color:var(--tx)}:root:not([data-theme="light"]) #rows .pri.u{color:#ff8a80}:root:not([data-theme="light"]) #rows .pri.a{color:#fbbf24}}
+#rows .rav{background:#8197a8!important}
+#v1 .tw td,#v1 .tw th{border-left-color:color-mix(in srgb,var(--bd) 40%,transparent);border-right-color:color-mix(in srgb,var(--bd) 40%,transparent)}
+@media (min-width:700px){#v1 .tw td[data-l="Prazo"]{width:24%;max-width:0;overflow:hidden;text-overflow:ellipsis}}#rows .pzd{font-weight:600}
+@media (hover:hover) and (pointer:fine) and (min-width:700px){#rows .ac{opacity:0;transition:opacity .12s}#rows tr:hover .ac,#rows tr:focus-within .ac,#rows .ac:has(.arm){opacity:1}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.vis{margin-left:auto;display:inline-flex;border:1px solid var(--bd);border-radius:999px;overflow:hidden;flex:none;align-self:flex-start}.vis button{border:0;border-radius:0;padding:5px 12px;font-size:12.5px;background:var(--card);color:var(--mu)}.vis button+button{border-left:1px solid var(--bd)}.vis button.on{background:var(--soft);color:var(--tx);font-weight:700}
+.qf button[hidden]{display:none!important}
+@media (max-width:699px){.vis{display:none!important}}
+@media (min-width:700px){#v1.resum td[data-l="Prioridade"],#v1.resum th[data-k="o"],#v1.resum .ces,#v1.resum td[data-l=""],#v1.resum th[data-k="ac"]{display:none}}
 </style>
 <div id="app">
 <aside id="side" class="noprint" aria-label="Menu principal">
@@ -498,7 +513,7 @@ body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:
     <div class="w"><button class="p" type="submit">Cadastrar demanda</button> <span id="st" class="mu"></span></div>
   </form></div>
   <div class="atq lt" id="aq" hidden><button type="button" id="aqb" class="aqh" aria-expanded="false" aria-controls="aqbody"><span><b>Atuação</b><small id="aqsum"></small></span><u id="aqt">Ver ▾</u></button><div id="aqbody" hidden><div class="mu2" id="aqus"></div><div class="atk" id="aqk"></div><div class="atb"><div class="atd" id="aqd"></div><div id="aql"></div></div></div></div>
-  <div class="qrow noprint"><div class="qf" id="qf"></div><nav class="pgr" id="pgr" aria-label="Paginação das demandas" hidden></nav></div>
+  <div class="qrow noprint"><div class="qf" id="qf"></div><div class="vis" id="vis" role="group" aria-label="Visão da lista"><button type="button" data-vis="r">Resumida</button><button type="button" data-vis="d">Detalhada</button></div><nav class="pgr" id="pgr" aria-label="Paginação das demandas" hidden></nav></div>
   <div class="tw"><table><thead><tr id="th1"></tr></thead><tbody id="rows"></tbody></table></div>
   <nav class="pgr pgr2 noprint" id="pgr2" aria-label="Paginação das demandas (fim da lista)" hidden></nav>
   <p id="empty" class="mu" hidden>Nenhuma demanda cadastrada. Use “Nova demanda” para começar.</p>
@@ -631,13 +646,15 @@ const aberta=d=>!["Concluída","Cancelada",SA].includes(d.status);
 const atrasada=d=>aberta(d)&&d.prazo&&d.prazo<hoje();
 const aIniciar=d=>d.status==="A iniciar"&&d.inicio&&dias(hoje(),d.inicio)<=15;
 const desdeSA=d=>{const h=(d.hist||[]).filter(x=>x.s===SA).map(x=>x.d).sort().pop();return h||d.fim||(d.concTs?ymd(new Date(d.concTs)):hoje())};
-function rag(d){if(d.status===SA){const n=Math.max(0,dias(desdeSA(d),hoje()));return{c:n>5?RED:n>=3?YEL:GRN,t:n===0?"Aguarda desde hoje":"Aguarda há "+n+(n===1?" dia":" dias")}}
+function rag(d){if(d.status===SA){const n=Math.max(0,dias(desdeSA(d),hoje()));return{c:n>5?RED:n>=3?YEL:GRN,t:n===0?"Assinatura pendente desde hoje":"Assinatura pendente há "+n+(n===1?" dia":" dias")}}
  if(!aberta(d))return{c:null,t:""};
  const ini=d.status==="A iniciar"&&d.inicio,ref=ini?d.inicio:d.prazo;if(!ref)return{c:GRY,t:"Sem data"};
  const n=dias(hoje(),ref);
- if(n<0)return{c:RED,t:(ini?"Início atrasado ":"Atrasada ")+(-n)+"d"};
- if(n<=15)return{c:YEL,t:(ini?"Inicia em ":"Vence em ")+(n?n+" dias":"hoje")};
+ if(n<0)return{c:RED,t:(ini?"Início previsto há ":"Atrasada há ")+(-n)+(n===-1?" dia":" dias")};
+ if(n<=15)return{c:YEL,t:(ini?"Inicia ":"Vence ")+(n===0?"hoje":n===1?"amanhã":"em "+n+" dias")};
  return{c:GRN,t:"No prazo"}}
+const prazoTx=d=>{const a=rag(d);let t=a.t;if(!a.c)t=d.status==="Concluída"?(d.fim?"Concluída em "+fd(d.fim):"Concluída"):d.status==="Cancelada"?"Cancelada":"";else if(t==="Sem data")t="";return t};
+const prazoCell=d=>{const a=rag(d),t=prazoTx(d);return `${a.c?`<span class="rag" style="background:${a.c}"></span>`:""}<b class="pzd">${d.prazo?fd(d.prazo):"Sem prazo"}</b>${t?`<span class="mu pzt"> · ${t}</span>`:""}`};
 const ragCell=d=>{const a=rag(d);if(!a.c)return '<span class="mu">—</span>';return `<span class="rag" style="background:${a.c}"></span><span class="mu">${a.t}</span>`};
 const PEN='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
 const EYE='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
@@ -716,7 +733,7 @@ function ordPad(a,b){return(oRank(a)-oRank(b))||(a.status==="Concluída"&&b.stat
 var DPP=10,dpg=1,dpgSig="",UIR=(()=>{try{return JSON.parse(sessionStorage.getItem("demui")||"null")}catch(e){return null}})();
 function pgrHtml(n,p,np,curto){const a=(p-1)*DPP+1,b=Math.min(p*DPP,n),B=(k,t,l,c,dis,cur)=>`<button type="button" class="${c}" data-pg="${k}" aria-label="${l}"${dis?" disabled":""}${cur?' aria-current="page"':""}>${t}</button>`;
  let ns=[],last=0;for(let i=1;i<=np;i++)if(i===1||i===np||Math.abs(i-p)<=1){if(i-last>1)ns.push('<span class="pge" aria-hidden="true">…</span>');ns.push(B(i,i,"Página "+i,"pgn",false,i===p));last=i}
- return `<span class="pgi">${curto?`${a}–${b} de ${n}`:`Mostrando ${a}–${b} de ${n} demandas`}</span><div class="pgb">${B(p-1,"‹","Página anterior","pgp",p===1)}${ns.join("")}<span class="pgm">Página ${p} de ${np}</span>${B(p+1,"›","Próxima página","pgp",p===np)}</div>`}
+ return `<span class="pgi">${curto?`${a}–${b} de ${n} demandas`:`Mostrando ${a}–${b} de ${n} demandas`}</span><div class="pgb">${B(p-1,"‹","Página anterior","pgp",p===1)}${ns.join("")}<span class="pgm">Página ${p} de ${np}</span>${B(p+1,"›","Próxima página","pgp",p===np)}</div>`}
 function render(){
  const S=DS();
  fillCliForm();updClb();fillResp();fillFr();fillRsf();
@@ -727,8 +744,8 @@ function render(){
  const isAtr=d=>!fin(d)&&d.status!=="Cancelada"&&d.prazo&&d.prazo<hoje(),hasP=temPend,nAt=L0.filter(isAtr).length,nPe=L0.filter(hasP).length;
  const isIni=d=>aIniciar(d),nIn=L0.filter(isIni).length,iniRed=L0.some(d=>isIni(d)&&dias(hoje(),d.inicio)<0),penRed=L0.some(d=>hasP(d)&&d.prazo&&d.prazo<hoje()),isUrg=d=>d.prio==="Urgente"&&d.status!=="Concluída"&&d.status!=="Cancelada",meu=meuResp(),isMeu=d=>!!meu&&nk(respOf(d))===nk(meu),nUr=L0.filter(isUrg).length,nMe=L0.filter(isMeu).length;
  if(qfv==="a"&&!nAt||qfv==="p"&&!nPe||qfv==="i"&&!nIn||qfv==="u"&&!nUr||qfv==="m"&&!nMe)qfv="";
- $("qf").innerHTML=[["a","Atrasadas",nAt,"r"],["p","Com pendência",nPe,penRed?"r":"y"],["i","Começam em 15 dias",nIn,iniRed?"r":"y"],["u","Urgentes",nUr],["m","Minhas demandas",nMe]].map(([k,t,n,c])=>`<button type="button" data-qf="${k}" class="${qfv===k?"on":""}" aria-pressed="${qfv===k}"${!n&&qfv!==k?" disabled":""}${k==="i"&&n?' title="Demandas a iniciar com início nos próximos 15 dias ou já atrasado"':""}${k==="m"&&!meu?' title="Seu usuário não está ligado a nenhum responsável. Cadastre seu e-mail em Equipe."':""}>${c&&n?`<i class="qd${c==="r"?" r":""}" aria-hidden="true"></i>`:""}${t} (${n})</button>`).join("");
- const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["o","Prioridade"],["a","Alerta"],["p","Prazo"]].filter(Boolean).map(([k,t])=>k==="a"?`<th>${t}</th>`:`<th${k==="r"?' class="rth"':""} aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}"${k==="r"?' title="Responsável" aria-label="Responsável: ordenar"':""}>${k==="r"?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>':t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+"<th></th>";
+ $("qf").innerHTML=[["a","Atrasadas",nAt,"r"],["p","Com pendência",nPe,penRed?"r":"y"],["i","Início em até 15 dias",nIn,iniRed?"r":"y"],["u","Urgentes",nUr],["m","Minhas demandas",nMe]].map(([k,t,n,c])=>`<button type="button" data-qf="${k}" class="${qfv===k?"on":""}" aria-pressed="${qfv===k}"${!n&&qfv!==k?(k==="m"&&meu?" disabled":" disabled hidden"):""}${k==="i"&&n?' title="Demandas a iniciar com início nos próximos 15 dias. A bolinha vermelha indica que alguma já passou da data de início."':""}${k==="m"&&!meu?' title="Seu usuário não está ligado a nenhum responsável. Cadastre seu e-mail em Equipe."':""}>${c&&n?`<i class="qd${c==="r"?" r":""}" aria-hidden="true"></i>`:""}${t} (${n})</button>`).join("");
+ const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["o","Prioridade"],["p","Prazo"]].filter(Boolean).map(([k,t])=>`<th data-k="${k}"${k==="r"?' class="rth"':""} aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}"${k==="r"?' title="Responsável" aria-label="Responsável: ordenar"':""}>${k==="r"?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>':t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+'<th data-k="ac"><span class="sr">Ações</span></th>';
  let L=qfv==="i"?L0.filter(isIni):qfv==="a"?L0.filter(isAtr):qfv==="p"?L0.filter(hasP):qfv==="u"?L0.filter(isUrg):qfv==="m"?L0.filter(isMeu):L0;
  if(sk){const kf={e:d=>(d.emp||d.titulo||"").toLowerCase(),r:d=>respOf(d).toLowerCase(),s:d=>String(oRank(d)).padStart(2,"0"),o:d=>String(PRIO.indexOf(d.prio)),p:d=>d.prazo||(sd>0?"9":"0")};L=[...L].sort((a,b)=>(sk==="s"?0:oFim(a)-oFim(b))||kf[sk](a).localeCompare(kf[sk](b),"pt-BR")*sd)}
  if($("atp")&&!$("atp").hidden)atuRender();
@@ -741,13 +758,16 @@ function render(){
  $("rows").innerHTML=L.slice((dpg-1)*DPP,dpg*DPP).map(d=>`<tr class="clk" data-row="${d.id}" tabindex="0" aria-label="Abrir ${esc(d.emp||d.titulo)}"><td class="ce" title="${esc((d.emp||d.titulo)+" · "+(d.emp?d.titulo:d.tipo||""))}"><b>${esc(d.emp||d.titulo)}</b><span class="mu ces"> · ${esc(d.emp?d.titulo:d.tipo)}</span></td>${multiResp()?`<td data-l="Responsável" class="rcell" title="${esc(respOf(d))}"><span class="rav" style="background:${rCor(respOf(d))}" aria-hidden="true">${esc((respOf(d)||"?").trim().charAt(0).toUpperCase())}</span><span class="rnm">${esc(respOf(d))}</span></td>`:""}
  <td data-l="Status" title="${esc(d.status)}">${stc(d)}</td>
  <td data-l="Prioridade">${d.prio?`<span class="pri${d.prio==="Urgente"?" u":d.prio==="Alta"?" a":d.prio==="Baixa"?" b":""}">${esc(d.prio)}</span>`:'<span class="mu">—</span>'}</td>
- <td data-l="Alerta" title="${esc(String(ragCell(d)).replace(/<[^>]+>/g,"").trim())}">${ragCell(d)}</td>
- <td data-l="Prazo">${fd(d.prazo)}</td>
+ <td data-l="Prazo" title="${esc((d.prazo?"Prazo "+fd(d.prazo):"Sem prazo")+(prazoTx(d)?" · "+prazoTx(d):""))}">${prazoCell(d)}</td>
  <td data-l=""><div class="ac">${`<button class="ib" data-pend="${d.id}"${fin(d)||d.status==="Cancelada"?` disabled title="${d.status==="Cancelada"?"Demanda cancelada: não aceita novas pendências":"Demanda concluída: não aceita novas pendências"}"`:` title="Incluir pendência"`} aria-label="Incluir pendência"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M15 5h2a1 1 0 0 1 1 1v6"/><path d="M9 5H7a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5"/><path d="M18 15v6M15 18h6"/></svg></button>`}<button class="ib" data-edit="${d.id}" title="Alterar" aria-label="Alterar demanda">${PEN}</button><button class="ib dl${rArm===d.id?" arm":""}" data-del="${d.id}" title="Excluir" aria-label="Excluir demanda">${TRASH}${rArm===d.id?"Confirmar exclusão":""}</button></div></td></tr>`).join("");
  $("qx").hidden=!$("q").value;
  try{sessionStorage.setItem("demui",JSON.stringify({q:$("q").value,fs:$("fs").value,fy:$("fy").value,arqv,qfv,sk,sd,dpg}))}catch(e){}
- updBell();dash();
+ visLoad();updBell();dash();
 }
+function visKey(){const F=window.FB,m=F&&F.me&&F.me();return "demvis:"+String((m&&m.email)||"").toLowerCase()}
+function visSet(v,salvar){const r=v==="r";$("v1").classList.toggle("resum",r);$("vis").querySelectorAll("button").forEach(b=>{const on=(b.dataset.vis==="r")===r;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});if(salvar)try{localStorage.setItem(visKey(),v)}catch(e){}}
+function visLoad(){let v="d";try{v=localStorage.getItem(visKey())||"d"}catch(e){}visSet(v)}
+$("vis").onclick=e=>{const b=e.target.closest("button[data-vis]");if(b){visSet(b.dataset.vis,true);toast(b.dataset.vis==="r"?"Visão resumida ativada":"Visão detalhada ativada")}};
 $("rows").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.det)return openDet(b.dataset.det);
  if(b.dataset.edit)return openDet(b.dataset.edit,true);
