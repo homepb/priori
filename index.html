@@ -311,6 +311,7 @@ body:not(.authed) #app{visibility:hidden}
 /* paginação */
 .pgr{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin:0 0 10px}
 .pgi{font-size:13px;color:var(--mu);font-variant-numeric:tabular-nums}
+.pgr2{margin:10px 0 0}
 .pgb{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .pgb button{min-width:38px;padding:7px 12px;border-radius:10px;font-variant-numeric:tabular-nums}
 .pgb button:disabled{opacity:.45;cursor:default}
@@ -445,6 +446,7 @@ body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:
   <div class="qf noprint" id="qf"></div>
   <nav class="pgr noprint" id="pgr" aria-label="Paginação das demandas" hidden></nav>
   <div class="tw"><table><thead><tr id="th1"></tr></thead><tbody id="rows"></tbody></table></div>
+  <nav class="pgr pgr2 noprint" id="pgr2" aria-label="Paginação das demandas (fim da lista)" hidden></nav>
   <p id="empty" class="mu" hidden>Nenhuma demanda cadastrada. Use “Nova demanda” para começar.</p>
 </section>
 <section id="v2" hidden>
@@ -680,7 +682,7 @@ function render(){
   $("alertp").innerHTML=PW.length?`<div class="al${red?" rd":" yw"}" style="align-items:flex-start"><i></i><div><b>${np} ${pl(np,"pendência em aberto","pendências em aberto")} (${PCt(PW)}) em ${PW.length} ${pl(PW.length,"demanda","demandas")}.</b>${vis.map(d=>{const n=d.prazo?dias(hoje(),d.prazo):null;return `<button type="button" class="pl" data-pe="${d.id}"><b>${esc(d.emp||d.titulo)}:</b> ${pOpen(d).map(p=>esc(p.t)+" ("+(pR(p)==="Cliente"?"cliente":"líder")+", "+p.s.toLowerCase()+")").join(", ")}${n==null?"":n<0?" · prazo atrasado há "+(-n)+"d":n===0?" · vence hoje":" · vence em "+n+" dias"}</button>`}).join("")}${PW.length>3?`<button type="button" class="pm" id="pmb">${pmore?"ver menos":"ver mais ("+(PW.length-3)+")"}</button>`:""}</div></div>`:""}
  {const sig=[arqv,fy,q,fs,fp,fc,fr,qfv,sk,sd].join("|");if(sig!==dpgSig){dpgSig=sig;dpg=1}}
  const npg=Math.max(1,Math.ceil(L.length/DPP));if(dpg>npg)dpg=npg;
- $("pgr").hidden=L.length<=DPP;$("pgr").innerHTML=L.length>DPP?pgrHtml(L.length,dpg,npg):"";
+ {const ph=L.length>DPP?pgrHtml(L.length,dpg,npg):"";["pgr","pgr2"].forEach(i=>{$(i).hidden=!ph;$(i).innerHTML=ph})}
  $("rows").innerHTML=L.slice((dpg-1)*DPP,dpg*DPP).map(d=>`<tr><td><b>${esc(d.emp||d.titulo)}</b><div class="mu">${esc(d.emp?d.titulo:d.tipo)}</div></td>${multiResp()?`<td data-l="Responsável" style="white-space:nowrap">${esc(respOf(d))}</td>`:""}
  <td data-l="Status">${esc(d.status)}</td>
  <td data-l="Prioridade">${d.prio?`<span class="pri${d.prio==="Urgente"?" u":d.prio==="Alta"?" a":d.prio==="Baixa"?" b":""}">${esc(d.prio)}</span>`:'<span class="mu">—</span>'}</td>
@@ -1285,7 +1287,7 @@ function toast(msg,k){const t=$("toast");t.className="toast"+(k?" "+k:"");t.text
 function hh(){const r=document.documentElement.style;r.setProperty("--hh",$("hd").offsetHeight+"px");r.setProperty("--th",$("v1t").offsetHeight+"px")}
 addEventListener("resize",()=>{hh();if(cur===2)evo(DS())});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(hh);hh();
 function tab(n){if(LM)n=2;cur=n;$("app").classList.toggle("dash",n===2);document.body.classList.toggle("dash",n===2);$("v1").hidden=n!==1;$("v2").hidden=n!==2;if(n===2)anim=true;if(n===1)endPres();render();scrollTo(0,0);hh();navSync()}
-$("pgr").addEventListener("click",e=>{const b=e.target.closest("[data-pg]");if(!b||b.disabled)return;dpg=+b.dataset.pg;render();const t=$("rows").closest(".tw"),bar=document.querySelector("#v1 .bar");scrollTo(0,Math.max(0,t.getBoundingClientRect().top+scrollY-(bar?bar.offsetHeight:0)-$("hd").offsetHeight-$("v1t").offsetHeight-8))});
+["pgr","pgr2"].forEach(i=>$(i).addEventListener("click",e=>{const b=e.target.closest("[data-pg]");if(!b||b.disabled)return;dpg=+b.dataset.pg;render();const t=$("rows").closest(".tw"),bar=document.querySelector("#v1 .bar");scrollTo(0,Math.max(0,t.getBoundingClientRect().top+scrollY-(bar?bar.offsetHeight:0)-$("hd").offsetHeight-$("v1t").offsetHeight-8))}));
 /* navegação: menu lateral, barra inferior e telas inteiras */
 var PG=null,PGB=1;
 var CFGK=["T","P","A","X"],CFGO=false;
