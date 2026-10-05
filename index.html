@@ -389,6 +389,11 @@ body:not(.authed) #app{visibility:hidden}
  #v1 td[data-l=""]{order:4;flex:1 1 100%}#v1 td[data-l=""] .ac{justify-content:flex-end;width:100%}
  #atp .pn{max-width:none}
 }
+/* coluna Responsável: ícone no título e inicial na linha */
+.rav{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#fff;font:700 12px/1 var(--hd);flex:none}
+.rnm{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(min-width:700px){#v1 .tw th.rth,#v1 .tw td.rcell{width:1%;text-align:center;padding-inline:10px}#v1 .tw th.rth .sb{justify-content:center}}
+@media(max-width:699px){#v1 td.rcell{display:inline-flex!important;flex-direction:row!important;align-items:center;gap:6px}#v1 td.rcell .rav{width:22px;height:22px;font-size:11px}#v1 td.rcell .rnm{position:static;width:auto;height:auto;clip:auto}}
 /* relatório na ficha da demanda */
 .relb{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;background:var(--soft);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin:12px 0 4px}.relb>svg{color:var(--ac);flex:none}.relb .rt{flex:1;min-width:180px;display:flex;flex-direction:column}.relb .rt .mu{font-size:12.5px}.relb.vz{background:transparent;border-style:dashed}
 /* submenu de Configurações */
@@ -721,7 +726,7 @@ function render(){
  const isIni=d=>aIniciar(d),nIn=L0.filter(isIni).length,iniRed=L0.some(d=>isIni(d)&&dias(hoje(),d.inicio)<0),penRed=L0.some(d=>hasP(d)&&d.prazo&&d.prazo<hoje()),isUrg=d=>d.prio==="Urgente"&&d.status!=="Concluída"&&d.status!=="Cancelada",meu=meuResp(),isMeu=d=>!!meu&&nk(respOf(d))===nk(meu),nUr=L0.filter(isUrg).length,nMe=L0.filter(isMeu).length;
  if(qfv==="a"&&!nAt||qfv==="p"&&!nPe||qfv==="i"&&!nIn||qfv==="u"&&!nUr||qfv==="m"&&!nMe)qfv="";
  $("qf").innerHTML=[["a","Atrasadas",nAt,"r"],["p","Com pendência",nPe,penRed?"r":"y"],["i","Começam em 15 dias",nIn,iniRed?"r":"y"],["u","Urgentes",nUr],["m","Minhas demandas",nMe]].map(([k,t,n,c])=>`<button type="button" data-qf="${k}" class="${qfv===k?"on":""}" aria-pressed="${qfv===k}"${!n&&qfv!==k?" disabled":""}${k==="i"&&n?' title="Demandas a iniciar com início nos próximos 15 dias ou já atrasado"':""}${k==="m"&&!meu?' title="Seu usuário não está ligado a nenhum responsável. Cadastre seu e-mail em Equipe."':""}>${c&&n?`<i class="qd${c==="r"?" r":""}" aria-hidden="true"></i>`:""}${t} (${n})</button>`).join("");
- const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["o","Prioridade"],["a","Alerta"],["p","Prazo"]].filter(Boolean).map(([k,t])=>k==="a"?`<th>${t}</th>`:`<th aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}">${t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+"<th></th>";
+ const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["o","Prioridade"],["a","Alerta"],["p","Prazo"]].filter(Boolean).map(([k,t])=>k==="a"?`<th>${t}</th>`:`<th${k==="r"?' class="rth"':""} aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}"${k==="r"?' title="Responsável" aria-label="Responsável: ordenar"':""}>${k==="r"?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>':t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+"<th></th>";
  let L=qfv==="i"?L0.filter(isIni):qfv==="a"?L0.filter(isAtr):qfv==="p"?L0.filter(hasP):qfv==="u"?L0.filter(isUrg):qfv==="m"?L0.filter(isMeu):L0;
  if(sk){const kf={e:d=>(d.emp||d.titulo||"").toLowerCase(),r:d=>respOf(d).toLowerCase(),s:d=>String(oRank(d)).padStart(2,"0"),o:d=>String(PRIO.indexOf(d.prio)),p:d=>d.prazo||(sd>0?"9":"0")};L=[...L].sort((a,b)=>(sk==="s"?0:oFim(a)-oFim(b))||kf[sk](a).localeCompare(kf[sk](b),"pt-BR")*sd)}
  {const Sy=S.filter(d=>!fy||yOf(d)===fy);$("aq").hidden=!Sy.length;if(Sy.length){const A=atuacao(calc(Sy,hoje(),0),Sy);ATX.aq=A;renderAtu(A,"aq");$("aqsum").textContent=A.tot?A.nCl+" "+(A.nCl===1?"cliente":"clientes")+" na carteira · "+A.ntp+" "+(A.ntp===1?"tipo de serviço":"tipos de serviço")+" · tempo médio "+(A.tmed==null?"—":A.tmed+" dias"):"Ainda sem demandas concluídas";$("aqbody").hidden=!aqOpen;$("aqb").setAttribute("aria-expanded",aqOpen);$("aqt").textContent=aqOpen?"Recolher ▴":"Ver ▾";if(!$("apm").hidden&&apS.P==="aq")apRender()}}
@@ -731,7 +736,7 @@ function render(){
  {const sig=[arqv,fy,q,fs,fp,fc,fr,qfv,sk,sd].join("|");if(UIR){dpgSig=sig;UIR=null}else if(sig!==dpgSig){dpgSig=sig;dpg=1}}
  const npg=Math.max(1,Math.ceil(L.length/DPP));if(dpg>npg)dpg=npg;
  {const on=L.length>DPP;$("pgr").hidden=!on;$("pgr").innerHTML=on?pgrHtml(L.length,dpg,npg,true):"";$("pgr2").hidden=!on;$("pgr2").innerHTML=on?pgrHtml(L.length,dpg,npg):""}
- $("rows").innerHTML=L.slice((dpg-1)*DPP,dpg*DPP).map(d=>`<tr><td class="ce" title="${esc((d.emp||d.titulo)+" · "+(d.emp?d.titulo:d.tipo||""))}"><b>${esc(d.emp||d.titulo)}</b><span class="mu ces"> · ${esc(d.emp?d.titulo:d.tipo)}</span></td>${multiResp()?`<td data-l="Responsável" style="white-space:nowrap">${esc(respOf(d))}</td>`:""}
+ $("rows").innerHTML=L.slice((dpg-1)*DPP,dpg*DPP).map(d=>`<tr><td class="ce" title="${esc((d.emp||d.titulo)+" · "+(d.emp?d.titulo:d.tipo||""))}"><b>${esc(d.emp||d.titulo)}</b><span class="mu ces"> · ${esc(d.emp?d.titulo:d.tipo)}</span></td>${multiResp()?`<td data-l="Responsável" class="rcell" title="${esc(respOf(d))}"><span class="rav" style="background:${rCor(respOf(d))}" aria-hidden="true">${esc((respOf(d)||"?").trim().charAt(0).toUpperCase())}</span><span class="rnm">${esc(respOf(d))}</span></td>`:""}
  <td data-l="Status" title="${esc(d.status)}">${stc(d)}</td>
  <td data-l="Prioridade">${d.prio?`<span class="pri${d.prio==="Urgente"?" u":d.prio==="Alta"?" a":d.prio==="Baixa"?" b":""}">${esc(d.prio)}</span>`:'<span class="mu">—</span>'}</td>
  <td data-l="Alerta" title="${esc(String(ragCell(d)).replace(/<[^>]+>/g,"").trim())}">${ragCell(d)}</td>
@@ -1240,6 +1245,9 @@ const RESPS=["Matheus","Renan","Felipe"];
 function respList(){return[...RESPS]}
 const respOf=d=>(d&&d.resp&&String(d.resp).trim())||RESP0;
 const multiResp=()=>respList().length>1;
+// cor fixa por responsável, para a inicial na lista de demandas
+const RCOR=["#00808a","#305f79","#4c7d1a","#8a5a00","#6b3fa0","#b0413e"];
+function rCor(n){const i=respList().findIndex(r=>nk(r)===nk(n));if(i>=0)return RCOR[i%RCOR.length];let h=0;for(const c of String(n||""))h=(h*31+c.charCodeAt(0))>>>0;return RCOR[h%RCOR.length]}
 // responsável ligado ao usuário logado: e-mail cadastrado em Equipe ou primeiro nome
 function meuResp(){const F=window.FB,m=F&&F.me&&F.me();if(!m)return"";const em=String(m.email||"").toLowerCase(),eq=[LD||{},...((LD&&LD.equipe)||[])].find(p=>p&&p.email&&String(p.email).toLowerCase()===em);
  const c=[eq&&eq.nome,m.nome,em.split("@")[0]].filter(Boolean).map(x=>nk(String(x).split(/[\s._-]+/)[0]));return respList().find(r=>c.includes(nk(r)))||""}
