@@ -364,9 +364,9 @@ body:not(.authed) #app{visibility:hidden}
 .qrow{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin:0 0 10px}.qrow .qf{margin:0}
 .qf button:disabled{opacity:.6!important}
 /* Atuação em painel lateral */
-#atp{justify-content:flex-end;align-items:stretch;padding:0}
-#atp .pn{margin:0;max-width:640px;border-radius:0;min-height:100%;box-shadow:-12px 0 40px rgba(0,0,0,.25);animation:ntIn .2s ease-out}
-#atp #aq,#atp #aq[hidden]{display:block!important;border:0;background:none;padding:0;margin:0}
+.atf{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.atf select{min-width:170px}
+#atdet .aph{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;background:none;color:var(--tx);border:0;border-bottom:1px solid var(--bd);margin:0 0 12px;padding:0 0 10px}#atdet .aph b{display:flex;align-items:center;gap:8px;font:700 18px var(--hd)}#atdet .aph b i{width:12px;height:12px;border-radius:3px;display:inline-block}#atdet .aph small{display:block;color:var(--mu);font-size:13px;margin-top:2px}#atdet .apb{max-height:none;overflow:visible;padding:0}#atdet .apx{color:var(--mu);font-size:12px;margin-top:10px}#atdet .apf{padding:0;margin:0 0 10px}#atdet #atback{margin:0 0 10px;padding:6px 0;color:var(--ac);font-weight:700;background:none;border:0}
+#atp #aq{border:0;background:none;padding:0;margin:0}
 #atp #aqb{display:none}#atp #aqbody,#atp #aqbody[hidden]{display:block!important}
 /* status com cor e cabeçalho da grade fixo */
 #v1 td[data-l="Status"] .stc{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;font-size:11.5px}
@@ -387,13 +387,13 @@ body:not(.authed) #app{visibility:hidden}
  #v1 td[data-l="Status"]{order:2;flex:0 0 auto}
  #v1 td[data-l="Responsável"],#v1 td[data-l="Prioridade"],#v1 td[data-l="Alerta"],#v1 td[data-l="Prazo"]{order:3;font-size:12.5px;color:var(--mu)}
  #v1 td[data-l=""]{order:4;flex:1 1 100%}#v1 td[data-l=""] .ac{justify-content:flex-end;width:100%}
- #atp .pn{max-width:none}
 }
 /* coluna Responsável: ícone no título e inicial na linha */
 .rav{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#fff;font:700 12px/1 var(--hd);flex:none}
 .rnm{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(min-width:700px){#v1 .tw th.rth,#v1 .tw td.rcell{width:1%;text-align:center;padding-inline:10px}#v1 .tw th.rth .sb{justify-content:center}}
 @media(max-width:699px){#v1 td.rcell{display:inline-flex!important;flex-direction:row!important;align-items:center;gap:6px}#v1 td.rcell .rav{width:22px;height:22px;font-size:11px}#v1 td.rcell .rnm{position:static;width:auto;height:auto;clip:auto}}
+#v1 tr.clk{cursor:pointer}#v1 tr.clk:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
 /* relatório na ficha da demanda */
 .relb{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;background:var(--soft);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin:12px 0 4px}.relb>svg{color:var(--ac);flex:none}.relb .rt{flex:1;min-width:180px;display:flex;flex-direction:column}.relb .rt .mu{font-size:12.5px}.relb.vz{background:transparent;border-style:dashed}
 /* submenu de Configurações */
@@ -411,7 +411,7 @@ body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:
 /* telas inteiras: Clientes, Configurações, Equipe, Conta */
 .ov.pg,#av.pg,#clm.pg{left:212px;z-index:25;background:var(--bg);padding:0;display:block}
 .ov.pg .pn{max-width:1120px;margin:0 auto;border-radius:0;background:transparent;padding:22px 16px 48px;min-height:0}
-.ov.pg #avx,.ov.pg #t_ok,.ov.pg [data-a="close"]{display:none}
+.ov.pg #avx,.ov.pg #atpx,.ov.pg #t_ok,.ov.pg [data-a="close"]{display:none}
 .ov.pg .avh h3,.ov.pg .clhd h3{font-size:24px}
 /* concluídas: painel lateral */
 #nt{justify-content:flex-end;align-items:stretch;padding:0}
@@ -450,7 +450,7 @@ body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:
    <div class="grp gvis">Visões</div>
    <button type="button" class="it" id="nv1" data-nav="1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg><span class="t">Demandas</span></button>
    <button type="button" class="it" id="bell" aria-label="Concluídas recentemente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="t">Concluídas</span><span class="bd" id="bdg" hidden></span></button>
-   <button type="button" class="it" id="atb" aria-haspopup="dialog"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg><span class="t">Atuação</span></button>
+   <button type="button" class="it" id="atb" data-nav="atu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg><span class="t">Atuação</span></button>
    <button type="button" class="it" id="lvb" data-nav="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span class="t">Dashboard</span></button>
    <div class="grp gcad">Cadastros</div>
    <button type="button" class="it" id="clb" data-nav="cl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16"/><path d="M14 10h5a1 1 0 0 1 1 1v10"/><path d="M8 8h2M8 12h2M8 16h2M3 21h18"/></svg><span class="t">Clientes</span><span class="bd" id="clbd" hidden></span></button>
@@ -527,7 +527,7 @@ body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:
 <button class="xp" id="xp" type="button">Sair da apresentação</button>
 </div>
 <div class="ov" id="av" hidden><div class="pn" id="avc" role="dialog" aria-modal="true" aria-label="Avisar o líder"></div></div>
-<div class="ov" id="atp" hidden><div class="pn" id="atpc" role="dialog" aria-modal="true" aria-label="Atuação"><div class="avh"><div><h3>Atuação</h3></div><button type="button" id="atpx" aria-label="Fechar" style="margin-left:auto">✕</button></div></div></div>
+<div class="ov" id="atp" hidden><div class="pn" id="atpc" aria-label="Atuação"><div class="avh"><div><h3>Atuação</h3></div><button type="button" id="atpx" aria-label="Fechar" style="margin-left:auto">✕</button></div><div class="atf"><select id="ay" aria-label="Ano"></select><select id="ar" aria-label="Responsável"></select><select id="ape" aria-label="Período"><option value="0">Todo o período</option><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Últimos 12 meses</option></select></div><div id="atdet" hidden></div></div></div>
 <div class="ov" id="nt" hidden><div class="pn" id="ntc" role="dialog" aria-modal="true" aria-label="Concluídas recentemente"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <div class="ov" id="apm" hidden><div class="pn" id="apc" role="dialog" aria-modal="true" aria-label="Atuação"></div></div>
@@ -729,19 +729,19 @@ function render(){
  const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["o","Prioridade"],["a","Alerta"],["p","Prazo"]].filter(Boolean).map(([k,t])=>k==="a"?`<th>${t}</th>`:`<th${k==="r"?' class="rth"':""} aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}"${k==="r"?' title="Responsável" aria-label="Responsável: ordenar"':""}>${k==="r"?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>':t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+"<th></th>";
  let L=qfv==="i"?L0.filter(isIni):qfv==="a"?L0.filter(isAtr):qfv==="p"?L0.filter(hasP):qfv==="u"?L0.filter(isUrg):qfv==="m"?L0.filter(isMeu):L0;
  if(sk){const kf={e:d=>(d.emp||d.titulo||"").toLowerCase(),r:d=>respOf(d).toLowerCase(),s:d=>String(oRank(d)).padStart(2,"0"),o:d=>String(PRIO.indexOf(d.prio)),p:d=>d.prazo||(sd>0?"9":"0")};L=[...L].sort((a,b)=>(sk==="s"?0:oFim(a)-oFim(b))||kf[sk](a).localeCompare(kf[sk](b),"pt-BR")*sd)}
- {const Sy=S.filter(d=>!fy||yOf(d)===fy);$("aq").hidden=!Sy.length;if(Sy.length){const A=atuacao(calc(Sy,hoje(),0),Sy);ATX.aq=A;renderAtu(A,"aq");$("aqsum").textContent=A.tot?A.nCl+" "+(A.nCl===1?"cliente":"clientes")+" na carteira · "+A.ntp+" "+(A.ntp===1?"tipo de serviço":"tipos de serviço")+" · tempo médio "+(A.tmed==null?"—":A.tmed+" dias"):"Ainda sem demandas concluídas";$("aqbody").hidden=!aqOpen;$("aqb").setAttribute("aria-expanded",aqOpen);$("aqt").textContent=aqOpen?"Recolher ▴":"Ver ▾";if(!$("apm").hidden&&apS.P==="aq")apRender()}}
+ if($("atp")&&!$("atp").hidden)atuRender();
  $("empty").hidden=L.length>0;$("empty").textContent=arqv?"Nenhuma demanda arquivada.":(fy||fs||fc||fp||q)?"Nenhuma demanda encontrada com esses filtros.":"Nenhuma demanda cadastrada. Use “Nova demanda” para começar.";
  // avisos de início próximo e de pendências ficam nos atalhos (bolinha colorida)
  $("alert").innerHTML="";$("alertp").innerHTML="";
  {const sig=[arqv,fy,q,fs,fp,fc,fr,qfv,sk,sd].join("|");if(UIR){dpgSig=sig;UIR=null}else if(sig!==dpgSig){dpgSig=sig;dpg=1}}
  const npg=Math.max(1,Math.ceil(L.length/DPP));if(dpg>npg)dpg=npg;
  {const on=L.length>DPP;$("pgr").hidden=!on;$("pgr").innerHTML=on?pgrHtml(L.length,dpg,npg,true):"";$("pgr2").hidden=!on;$("pgr2").innerHTML=on?pgrHtml(L.length,dpg,npg):""}
- $("rows").innerHTML=L.slice((dpg-1)*DPP,dpg*DPP).map(d=>`<tr><td class="ce" title="${esc((d.emp||d.titulo)+" · "+(d.emp?d.titulo:d.tipo||""))}"><b>${esc(d.emp||d.titulo)}</b><span class="mu ces"> · ${esc(d.emp?d.titulo:d.tipo)}</span></td>${multiResp()?`<td data-l="Responsável" class="rcell" title="${esc(respOf(d))}"><span class="rav" style="background:${rCor(respOf(d))}" aria-hidden="true">${esc((respOf(d)||"?").trim().charAt(0).toUpperCase())}</span><span class="rnm">${esc(respOf(d))}</span></td>`:""}
+ $("rows").innerHTML=L.slice((dpg-1)*DPP,dpg*DPP).map(d=>`<tr class="clk" data-row="${d.id}" tabindex="0" aria-label="Abrir ${esc(d.emp||d.titulo)}"><td class="ce" title="${esc((d.emp||d.titulo)+" · "+(d.emp?d.titulo:d.tipo||""))}"><b>${esc(d.emp||d.titulo)}</b><span class="mu ces"> · ${esc(d.emp?d.titulo:d.tipo)}</span></td>${multiResp()?`<td data-l="Responsável" class="rcell" title="${esc(respOf(d))}"><span class="rav" style="background:${rCor(respOf(d))}" aria-hidden="true">${esc((respOf(d)||"?").trim().charAt(0).toUpperCase())}</span><span class="rnm">${esc(respOf(d))}</span></td>`:""}
  <td data-l="Status" title="${esc(d.status)}">${stc(d)}</td>
  <td data-l="Prioridade">${d.prio?`<span class="pri${d.prio==="Urgente"?" u":d.prio==="Alta"?" a":d.prio==="Baixa"?" b":""}">${esc(d.prio)}</span>`:'<span class="mu">—</span>'}</td>
  <td data-l="Alerta" title="${esc(String(ragCell(d)).replace(/<[^>]+>/g,"").trim())}">${ragCell(d)}</td>
  <td data-l="Prazo">${fd(d.prazo)}</td>
- <td data-l=""><div class="ac"><button class="ib" data-det="${d.id}" title="Visualizar" aria-label="Visualizar demanda">${EYE}</button>${`<button class="ib" data-pend="${d.id}"${fin(d)||d.status==="Cancelada"?` disabled title="${d.status==="Cancelada"?"Demanda cancelada: não aceita novas pendências":"Demanda concluída: não aceita novas pendências"}"`:` title="Incluir pendência"`} aria-label="Incluir pendência"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M15 5h2a1 1 0 0 1 1 1v6"/><path d="M9 5H7a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5"/><path d="M18 15v6M15 18h6"/></svg></button>`}<button class="ib" data-edit="${d.id}" title="Alterar" aria-label="Alterar demanda">${PEN}</button><button class="ib dl${rArm===d.id?" arm":""}" data-del="${d.id}" title="Excluir" aria-label="Excluir demanda">${TRASH}${rArm===d.id?"Confirmar exclusão":""}</button></div></td></tr>`).join("");
+ <td data-l=""><div class="ac">${`<button class="ib" data-pend="${d.id}"${fin(d)||d.status==="Cancelada"?` disabled title="${d.status==="Cancelada"?"Demanda cancelada: não aceita novas pendências":"Demanda concluída: não aceita novas pendências"}"`:` title="Incluir pendência"`} aria-label="Incluir pendência"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M15 5h2a1 1 0 0 1 1 1v6"/><path d="M9 5H7a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5"/><path d="M18 15v6M15 18h6"/></svg></button>`}<button class="ib" data-edit="${d.id}" title="Alterar" aria-label="Alterar demanda">${PEN}</button><button class="ib dl${rArm===d.id?" arm":""}" data-del="${d.id}" title="Excluir" aria-label="Excluir demanda">${TRASH}${rArm===d.id?"Confirmar exclusão":""}</button></div></td></tr>`).join("");
  $("qx").hidden=!$("q").value;
  try{sessionStorage.setItem("demui",JSON.stringify({q:$("q").value,fs:$("fs").value,fy:$("fy").value,arqv,qfv,sk,sd,dpg}))}catch(e){}
  updBell();dash();
@@ -786,9 +786,10 @@ function apRender(){const A=ATX[apS.P];if(!A){closeAp();return}const M=apS.mode,
  let h=`<div class="aph"><div><b>${M==="tipo"?`<i style="background:${col}"></i>`:""}${esc(title)}</b><small>${esc(sub)}</small></div><button type="button" id="apx" aria-label="Fechar">✕</button></div>`;
  if(M==="cli")h+=`<div class="apf">${[["t","Todas ("+all.length+")"],["a","Em aberto ("+nA+")"],["c","Concluídas ("+nC+")"]].map(([k,t])=>`<button type="button" data-af="${k}" class="${F===k?"on":""}" aria-pressed="${F===k}">${t}</button>`).join("")}</div>`;
  h+='<div class="apb">'+(M==="tm"?bar:(apGroups(all,F).map(([c,l])=>`<div class="apg">${esc(c)} · ${l.length}</div>`+l.map(d=>{const cc=d.status==="Concluída",dd=cc?(d.abertura&&d.fim?fd(d.abertura)+" → "+fd(d.fim)+" · "+dias(d.abertura,d.fim)+" dias":"Concluída em "+fd(d.fim)):(d.prazo?"Prazo "+fd(d.prazo):"Sem prazo");return `<button type="button" class="apr" data-det="${d.id}"><span><b>${esc(d.emp||d.titulo)}</b><small>${esc(M==="tipo"?(d.emp?d.titulo:""):(d.tipo||"Sem tipo"))}${M==="tipo"&&d.emp?" · ":(M!=="tipo"&&d.tipo?" · ":"")}${dd}</small></span><span class="st${cc?" ok":""}">${esc(d.status)}</span></button>`}).join("")).join("")||'<div class="mu" style="padding:12px 0">Nenhuma demanda neste filtro.</div>'))+'</div><div class="apx">Clique em uma demanda para abrir o detalhe · Esc fecha</div>';
+ if(apS.P==="aq"&&!$("atp").hidden){$("atdet").innerHTML='<button type="button" class="g" id="atback">← Voltar à Atuação</button>'+h.replace(/<button type="button" id="apx"[^>]*>✕<\/button>/,"").replace("Clique em uma demanda para abrir o detalhe · Esc fecha","Clique em uma demanda para abrir a ficha");$("atdet").className="atdi";$("atdet").hidden=false;$("aq").hidden=true;return}
  $("apc").className="pn apn";$("apc").innerHTML=h;$("apm").hidden=false}
 function openAp(P,mode,n){apS.P=P;apS.mode=mode;apS.n=n||"";apS.f="t";apRender()}
-function closeAp(){$("apm").hidden=true}
+function closeAp(){$("apm").hidden=true;if(apS.P==="aq"&&$("atp")&&!$("atp").hidden)atuBack()}
 const ATC=["#00a2ad","#2cc4cd","#6fd3d8","#8ec756","#b5e38a","#e7c84a","#7aa7c7"];
 function atuacao(cur0,L){const norm=nk,C0=cur0.conc;
  const cl=new Set(L.filter(d=>d.status!=="Cancelada").map(d=>norm(d.cliente)).filter(Boolean)),cc=new Set(C0.map(d=>norm(d.cliente)).filter(Boolean));
@@ -951,7 +952,7 @@ $("md").onclick=e=>{if(e.target===$("md"))closeDet()};
 function endPres(){$("app").classList.remove("pres");try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}}
 $("pres").onclick=()=>{$("app").classList.add("pres");try{const p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(()=>{})}catch(e){}};
 $("xp").onclick=endPres;
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(document.body.classList.contains("msh"))msh(false);else if(!$("atp").hidden)closeAtu();else if(!$("cqm").hidden)closeCq();else if(!$("av").hidden)closeAv();else if(!$("nt").hidden)closeNt();else if(mid)closeDet();else if(!$("apm").hidden)closeAp();else if(!$("clm").hidden)closeCl();else if(!$("rsm").hidden)closeRs();else endPres()});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(document.body.classList.contains("msh"))msh(false);else if(!$("cqm").hidden)closeCq();else if(!$("av").hidden)closeAv();else if(!$("nt").hidden)closeNt();else if(mid)closeDet();else if(!$("apm").hidden)closeAp();else if(!$("clm").hidden)closeCl();else if(!$("atp").hidden){if(!$("atdet").hidden)atuBack();else closeAtu()}else if(!$("rsm").hidden)closeRs();else endPres()});
 const loadJs=src=>new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)});
 $("pdf").onclick=async()=>{const b=$("pdf"),t=b.textContent;b.disabled=true;b.textContent="Gerando PDF…";
  try{
@@ -1335,14 +1336,26 @@ function openPendAdd(id){const d=DS().find(x=>x.id===id);if(!d||LM||RO||isLid())
   const ok=await upd({...cur,pend:[...(cur.pend||[]),{id:"p"+Date.now().toString(36)+Math.floor(Math.random()*1e3),t,s:"Pendente",r}],hist:[...(cur.hist||[]),{s:"Pendência “"+t+"” ("+r+") cadastrada",d:hoje(),u:who()}]});
   if(ok){closeCq();toast("Pendência “"+t+"” incluída.","ok")}}}
 $("rows").addEventListener("click",e=>{const b=e.target.closest("[data-pend]");if(b)openPendAdd(b.dataset.pend)});
+// clicar na linha (fora dos botões) abre a ficha da demanda
+$("rows").addEventListener("click",e=>{if(e.target.closest("button,a,input,select,label"))return;const tr=e.target.closest("tr[data-row]");if(tr)openDet(tr.dataset.row)});
+$("rows").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("tr[data-row]")){e.preventDefault();openDet(e.target.dataset.row)}});
 
 $("th1").addEventListener("click",e=>{const b=e.target.closest("[data-sk]");if(!b)return;const k=b.dataset.sk;if(sk!==k){sk=k;sd=1}else if(sd>0)sd=-1;else{sk="";sd=1}render()});
 $("qf").addEventListener("click",e=>{const b=e.target.closest("[data-qf]");if(!b||b.disabled)return;qfv=qfv===b.dataset.qf?"":b.dataset.qf;render()});
 $("bell").onclick=$("bellm").onclick=()=>{msh(false);openBell()};
 $("atpc").appendChild($("aq"));
-function openAtu(){msh(false);aqOpen=true;render();$("atp").hidden=false;$("atpx").focus()}
-function closeAtu(){$("atp").hidden=true}
-$("atb").onclick=openAtu;$("atpx").onclick=closeAtu;$("atp").onclick=e=>{if(e.target===$("atp"))closeAtu()};
+$("atpc").insertBefore($("aq"),$("atdet"));
+function atuFill(){const A=anos(),y=$("ay"),r=$("ar"),vy=y.value,vr=r.value,R=[...new Set([...respList(),...DS().map(respOf)])];
+ y.innerHTML='<option value="">Todos os anos</option>'+A.map(x=>`<option>${x}</option>`).join("");y.value=A.includes(vy)?vy:"";
+ r.innerHTML='<option value="">Todos os responsáveis</option>'+R.map(n=>`<option>${esc(n)}</option>`).join("");r.value=R.includes(vr)?vr:"";r.hidden=R.length<2}
+// Atuação: mesmo cálculo do Dashboard, com os filtros da própria tela
+function atuRender(){if(!$("ay"))return;atuFill();const y=$("ay").value,r=$("ar").value,S=DS().filter(d=>(!y||yOf(d)===y)&&(!r||respOf(d)===r)),c=calc(S,hoje(),+$("ape").value),A=atuacao(c,c.L);ATX.aq=A;renderAtu(A,"aq");
+ $("aqus").textContent="Serviços atendidos (demandas concluídas), carteira de clientes e tempo de atendimento"+(y?" em "+y:"")+(r?" · "+r:"")+".";if(!$("atdet").hidden)apRender()}
+function openAtu(){aqOpen=true;atuBack();atuRender();$("atp").hidden=false}
+function atuBack(){$("atdet").hidden=true;$("atdet").innerHTML="";$("aq").hidden=false}
+function closeAtu(){$("atp").hidden=true;atuBack();if(PG==="atu")pgDone()}
+$("atpx").onclick=closeAtu;["ay","ar","ape"].forEach(i=>$(i).onchange=atuRender);
+$("atdet").onclick=e=>{if(e.target.closest("#atback")){atuBack();return}const f=e.target.closest("[data-af]");if(f){apS.f=f.dataset.af;apRender();return}const b=e.target.closest("[data-det]");if(b)openDet(b.dataset.det)};
 $("qx").onclick=()=>{$("q").value="";render();$("q").focus()};
 $("fbt").onclick=()=>{const o=!$("v1").classList.contains("fo");$("v1").classList.toggle("fo",o);$("fbt").setAttribute("aria-expanded",o)};
 $("av").onclick=e=>{if(e.target===$("av")&&!PG)closeAv()};$("nt").onclick=e=>{if(e.target===$("nt"))closeNt()};
@@ -1357,18 +1370,18 @@ function tab(n){if(LM)n=2;cur=n;$("app").classList.toggle("dash",n===2);document
 var PG=null,PGB=1;
 var CFGK=["T","P","A","X"],CFGO=false;
 function navSync(){const oc=PG==="cfg";$("side").classList.toggle("cfgo",oc||CFGO);$("tpb").setAttribute("aria-expanded",oc||CFGO);$("tpb").classList.toggle("on",oc);document.querySelectorAll("#cfgs [data-sub]").forEach(b=>b.toggleAttribute("aria-current",false));if(oc){const c=document.querySelector('#cfgs [data-sub="'+avD+'"]');if(c)c.setAttribute("aria-current","page")}
- const k=PG||(LM?2:1),m={1:["nv1","bn1"],2:["lvb","bn2"],cl:["clb","bnc"],cfg:["bnm"],eq:["ldr","bnm"],conta:["acb","bnm"]};
+ const k=PG||(LM?2:1),m={1:["nv1","bn1"],2:["lvb","bn2"],cl:["clb","bnc"],atu:["atb","bnm"],cfg:["bnm"],eq:["ldr","bnm"],conta:["acb","bnm"]};
  ["nv1","lvb","clb","tpb","ldr","acb","bn1","bn2","bnc","bnm"].forEach(i=>$(i).removeAttribute("aria-current"));(m[k]||[]).forEach(i=>$(i).setAttribute("aria-current","page"))}
 function msh(on){document.body.classList.toggle("msh",on);$("bnm").setAttribute("aria-expanded",on)}
-function pgOff(){$("av").classList.remove("pg");$("clm").classList.remove("pg")}
+function pgOff(){$("av").classList.remove("pg");$("clm").classList.remove("pg");$("atp").classList.remove("pg")}
 function pgDone(){PG=null;pgOff();if(PGB===2&&!LM)setLM(true);else tab(LM?2:1)}
 function nav(k,sub){msh(false);
- if(PG){const p=PG;PG=null;pgOff();if(p==="cl")$("clm").hidden=true;else{$("av").hidden=true;avD=null}}
+ if(PG){const p=PG;PG=null;pgOff();if(p==="cl")$("clm").hidden=true;else if(p==="atu"){$("atp").hidden=true;atuBack()}else{$("av").hidden=true;avD=null}}
  else if(k!==1&&k!==2)PGB=LM?2:1;
  if(k===1||k===2){if(isLid())setLM(true);else if((k===2)!==LM)setLM(k===2);else tab(k);return}
  if(LM&&!isLid())setLM(false);
  PG=k;$("app").classList.remove("dash");document.body.classList.remove("dash");
- if(k==="cl"){$("clm").classList.add("pg");openCl()}else{$("av").classList.add("pg");if(k==="cfg")openTipos(sub);else if(k==="eq")openLider();else openConta()}
+ if(k==="cl"){$("clm").classList.add("pg");openCl()}else if(k==="atu"){$("atp").classList.add("pg");openAtu()}else{$("av").classList.add("pg");if(k==="cfg")openTipos(sub);else if(k==="eq")openLider();else openConta()}
  navSync();scrollTo(0,0)}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-nav]");if(!b)return;const k=b.dataset.nav;if(b.dataset.sub)CFGO=true;nav(k==="1"?1:k==="2"?2:k,b.dataset.sub)});
 $("tpb").onclick=()=>{if(PG==="cfg")return;CFGO=!CFGO;navSync()};
