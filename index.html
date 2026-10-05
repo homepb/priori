@@ -593,7 +593,7 @@ const lsGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
 const PCt=L=>{const o=L.flatMap(d=>pOpen(d)),c=o.filter(p=>pR(p)==="Cliente").length,l=o.length-c;return [l?l+" do líder":"",c?c+" do cliente":""].filter(Boolean).join(" · ")},pR=p=>p&&p.r==="Cliente"?"Cliente":"Líder",chip=p=>'<span class="rsp'+(pR(p)==="Cliente"?" cl":"")+'">'+pR(p)+'</span>',pDup=(a,t,r)=>a.some(p=>p.t===t&&pR(p)===r);
 const who=()=>{const F=window.FB,m=F&&F.me&&F.me();return m?(m.nome||String(m.email||"").split("@")[0]||""):""};
-const PST=["Pendente","Em elaboração","Concluída"],pOpen=d=>(d.pend||[]).filter(p=>p.s!=="Concluída");
+const PST=["Pendente","Em elaboração","Concluída"],pOpen=d=>(d.pend||[]).filter(p=>p.s!=="Concluída"),temPend=d=>d.status!=="Cancelada"&&pOpen(d).length>0;
 function setPend(id,pid,st){const d=DS().find(x=>x.id===id);if(!d)return Promise.resolve();const p=(d.pend||[]).find(x=>x.id===pid);if(!p||p.s===st)return Promise.resolve();
  return upd({...d,pend:d.pend.map(x=>x.id===pid?{...x,s:st}:x),hist:[...(d.hist||[]),{s:"Pendência “"+p.t+"”: "+st,d:hoje(),u:who()}]})}
 let LM=false,RO=false,WS="ok",pfl="t";
@@ -660,7 +660,7 @@ function render(){
  fillYears();const fy=$("fy").value,q=$("q").value.toLowerCase(),fs=$("fs").value,fp=$("fp").value,fc=$("fc").value,fr=$("fr").value;
  const nArq=S.filter(d=>d.arq).length;$("arqb").textContent="Arquivo ("+nArq+")";$("arqb").classList.toggle("on",arqv);$("arqb").setAttribute("aria-pressed",arqv);
  const L0=S.filter(d=>(arqv?d.arq:!d.arq)&&(!fy||yOf(d)===fy)&&(!fc||d.cliente===fc)&&(!fr||respOf(d)===fr)&&(!fs||d.status===fs)&&(!fp||d.prio===fp)&&(!q||(d.titulo+d.cliente+(d.emp||"")).toLowerCase().includes(q))).sort((a,b)=>(aberta(b)-aberta(a))||(a.prazo||"9").localeCompare(b.prazo||"9"));
- const isAtr=d=>!fin(d)&&d.status!=="Cancelada"&&d.prazo&&d.prazo<hoje(),hasP=d=>d.status!=="Cancelada"&&pOpen(d).length>0,nAt=L0.filter(isAtr).length,nPe=L0.filter(hasP).length;
+ const isAtr=d=>!fin(d)&&d.status!=="Cancelada"&&d.prazo&&d.prazo<hoje(),hasP=temPend,nAt=L0.filter(isAtr).length,nPe=L0.filter(hasP).length;
  if(qfv==="a"&&!nAt||qfv==="p"&&!nPe)qfv="";
  $("qf").innerHTML=[["a","Atrasadas",nAt],["p","Com pendência",nPe]].map(([k,t,n])=>`<button type="button" data-qf="${k}" class="${qfv===k?"on":""}" aria-pressed="${qfv===k}"${!n&&qfv!==k?" disabled":""}>${t} (${n})</button>`).join("");
  const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["o","Prioridade"],["a","Alerta"],["p","Prazo"]].filter(Boolean).map(([k,t])=>k==="a"?`<th>${t}</th>`:`<th aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}">${t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+"<th></th>";
@@ -670,7 +670,7 @@ function render(){
  $("empty").hidden=L.length>0;$("empty").textContent=arqv?"Nenhuma demanda arquivada.":(fy||fs||fc||fp||q)?"Nenhuma demanda encontrada com esses filtros.":"Nenhuma demanda cadastrada. Use “Nova demanda” para começar.";
  const A=S.filter(aIniciar).sort((a,b)=>a.inicio.localeCompare(b.inicio));
  $("alert").innerHTML=A.length?`<div class="al"><i></i><div><b>${A.length} ${pl(A.length,"demanda começa","demandas começam")} em até 15 dias.</b> ${A.map(d=>{const n=dias(hoje(),d.inicio);return esc(d.emp||d.titulo)+(n<0?" (início atrasado há "+(-n)+"d)":n===0?" inicia hoje":" inicia em "+n+" dias ("+fd(d.inicio)+")")}).join("; ")}.</div></div>`:"";
- {const PW=S.filter(d=>aberta(d)&&pOpen(d).length).sort((x,y)=>(x.prazo||"9").localeCompare(y.prazo||"9")),np=PW.reduce((a,d)=>a+pOpen(d).length,0),red=PW.some(d=>d.prazo&&d.prazo<hoje()),vis=pmore?PW:PW.slice(0,3);
+ {const PW=S.filter(temPend).sort((x,y)=>(x.prazo||"9").localeCompare(y.prazo||"9")),np=PW.reduce((a,d)=>a+pOpen(d).length,0),red=PW.some(d=>d.prazo&&d.prazo<hoje()),vis=pmore?PW:PW.slice(0,3);
   $("alertp").innerHTML=PW.length?`<div class="al${red?" rd":" yw"}" style="align-items:flex-start"><i></i><div><b>${np} ${pl(np,"pendência em aberto","pendências em aberto")} (${PCt(PW)}) em ${PW.length} ${pl(PW.length,"demanda","demandas")}.</b>${vis.map(d=>{const n=d.prazo?dias(hoje(),d.prazo):null;return `<button type="button" class="pl" data-pe="${d.id}"><b>${esc(d.emp||d.titulo)}:</b> ${pOpen(d).map(p=>esc(p.t)+" ("+(pR(p)==="Cliente"?"cliente":"líder")+", "+p.s.toLowerCase()+")").join(", ")}${n==null?"":n<0?" · prazo atrasado há "+(-n)+"d":n===0?" · vence hoje":" · vence em "+n+" dias"}</button>`}).join("")}${PW.length>3?`<button type="button" class="pm" id="pmb">${pmore?"ver menos":"ver mais ("+(PW.length-3)+")"}</button>`:""}</div></div>`:""}
  {const sig=[arqv,fy,q,fs,fp,fc,fr,qfv,sk,sd].join("|");if(sig!==dpgSig){dpgSig=sig;dpg=1}}
  const npg=Math.max(1,Math.ceil(L.length/DPP));if(dpg>npg)dpg=npg;
@@ -752,7 +752,7 @@ function dash(){
  const n=cur0.open.length,a=cur0.late.length,v=cur0.v15.length;
  $("sum").innerHTML=S.length?`<span class="mu2">${S.length} ${pl(S.length,"demanda cadastrada","demandas cadastradas")}${tot!==S.length?" ("+tot+" no período)":""}: ${n} em aberto${cur0.sa.length?", "+cur0.sa.length+" aguardando assinatura":""}, ${cur0.conc.length} ${pl(cur0.conc.length,"concluída","concluídas")}${nc?", "+nc+" "+pl(nc,"cancelada","canceladas"):""}.</span><br><b>${n}</b> ${pl(n,"demanda em aberto","demandas em aberto")}: ${a?`<b>${a}</b> ${pl(a,"atrasada","atrasadas")}`:"nenhuma atrasada"} e ${v?`<b>${v}</b> ${pl(v,"vence","vencem")} em 15 dias`:"nenhuma vence em 15 dias"}.${cur0.conc.length?` <b>${cur0.conc.length}</b> ${pl(cur0.conc.length,"concluída","concluídas")} no período${cur0.sa.length?",":"."}`:""}${cur0.sa.length?` <b>${cur0.sa.length}</b> ${pl(cur0.sa.length,"aguarda","aguardam")} assinatura do líder.`:""}${cur0.pct!=null&&!LM?` <b>${cur0.pct}%</b> das entregas ficaram no prazo.`:""}`:"Ainda não há demandas cadastradas. Cadastre a primeira para ver o resumo.";
  /* KPIs */
- const PD=L.filter(d=>aberta(d)&&pOpen(d).length).sort((x,y)=>(x.prazo||"9").localeCompare(y.prazo||"9"));
+ const PD=L.filter(temPend).sort((x,y)=>(x.prazo||"9").localeCompare(y.prazo||"9"));
  const KP0=[{k:"aberto",nm:"Demandas não iniciadas",v:cur0.open.filter(d=>d.status==="A iniciar").length,pv:prev.open.filter(d=>d.status==="A iniciar").length,good:0},
   {k:"atrasadas",nm:"Atrasadas",v:a,pv:prev.late.length,good:-1},
   {k:"aprov",nm:"Aguardando aprovação do cliente",v:cur0.ap.length,pv:prev.ap.length,good:-1},
