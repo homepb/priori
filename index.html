@@ -760,6 +760,7 @@ function dash(){
  /* KPIs */
  const PD=L.filter(temPend).sort((x,y)=>(x.prazo||"9").localeCompare(y.prazo||"9"));
  const KP0=[{k:"aberto",nm:"Demandas não iniciadas",v:cur0.open.filter(d=>d.status==="A iniciar").length,pv:prev.open.filter(d=>d.status==="A iniciar").length,good:0},
+  {k:"andamento",nm:"Em andamento",v:cur0.open.filter(d=>d.status==="Em andamento").length,pv:prev.open.filter(d=>d.status==="Em andamento").length,good:0},
   {k:"atrasadas",nm:"Atrasadas",v:a,pv:prev.late.length,good:-1},
   {k:"aprov",nm:"Aguardando aprovação do cliente",v:cur0.ap.length,pv:prev.ap.length,good:-1},
   {k:"concl",nm:"Concluídas",v:cur0.conc.length,pv:prev.conc.length,good:1},
@@ -771,7 +772,7 @@ function dash(){
  const PDf=PD.filter(d=>pfl==="t"||pOpen(d).some(p=>pR(p)===(pfl==="c"?"Cliente":"Líder")));
  $("pend").innerHTML=PDf.length?PDf.map(d=>{const r=rag(d),all=d.pend.filter(p=>pfl==="t"||pR(p)===(pfl==="c"?"Cliente":"Líder")),done=all.filter(p=>p.s==="Concluída").length;return `<div class="pd"><div class="pdh"><div><b>${esc(d.emp||d.titulo)}</b><div class="mu">${esc(d.cliente)}</div></div><div class="pdr"><span class="rag" style="background:${r.c}"></span>${r.t} · ${fd(d.prazo)}</div></div><div class="pbar"><i style="width:${Math.round(done/all.length*100)}%"></i></div><div class="mu" style="font-size:12px;margin-bottom:6px">${done} de ${all.length} ${pl(all.length,"pronta","prontas")}</div>`+all.map(p=>`<div class="pr"><span class="${p.s==="Concluída"?"pdn":""}">${esc(p.t)}</span>${chip(p)}<span class="pst ${p.s==="Concluída"?"ok":p.s==="Em elaboração"?"wip":""}">${esc(p.s)}</span></div>`).join("")+`</div>`}).join(""):'<div class="mu">Nenhuma pendência em aberto.</div>';
  const ATR=atuacao(cur0,L);ATX.at=ATR;renderAtu(ATR,"at");if(!$("apm").hidden)apRender();
- const LS={pend:PD,assin:cur0.sa,aberto:cur0.open.filter(d=>d.status==="A iniciar"),atrasadas:cur0.late,aprov:cur0.ap,concl:cur0.conc,prazo:cur0.cf,tempo:cur0.tm,tipo:(ATR.rows.find(r=>r.n===ktp)||{l:[]}).l};
+ const LS={pend:PD,assin:cur0.sa,aberto:cur0.open.filter(d=>d.status==="A iniciar"),andamento:cur0.open.filter(d=>d.status==="Em andamento"),atrasadas:cur0.late,aprov:cur0.ap,concl:cur0.conc,prazo:cur0.cf,tempo:cur0.tm,tipo:(ATR.rows.find(r=>r.n===ktp)||{l:[]}).l};
  $("kp").style.setProperty("--n",KP.length);
  $("kp").innerHTML=KP.map(x=>{const suf=x.suf||"",on=ksel===x.k;
   const ring=x.k==="prazo"&&x.v!=null?`<svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="5"/><circle cx="23" cy="23" r="19" fill="none" stroke="#8ec756" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(x.v/100*119.4).toFixed(1)} 119.4" transform="rotate(-90 23 23)"/></svg>`:"";
