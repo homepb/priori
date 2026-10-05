@@ -309,7 +309,7 @@ body:not(.authed) #app{visibility:hidden}
 :root[data-theme="dark"] #gate .gn{display:block!important}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #gate .gc{background:#0f2a48;color:#e7f1f6}:root:not([data-theme="light"]) #gate h2{color:#e7f1f6}:root:not([data-theme="light"]) #gate p{color:#9bb4c5}:root:not([data-theme="light"]) #gate .gm{color:#9bb4c5}:root:not([data-theme="light"]) #gate .gs{color:#9bb4c5}:root:not([data-theme="light"]) #gate label{color:#9bb4c5}:root:not([data-theme="light"]) #gate input{background:#06182d;color:#e7f1f6;border-color:#1f4160}:root:not([data-theme="light"]) #gate .gp{background:#00a2ad;color:#06182d}:root:not([data-theme="light"]) #gate .gk button{color:#2cc4cd}:root:not([data-theme="light"]) #gate #g_rv{color:#2cc4cd}:root:not([data-theme="light"]) #gate .go{display:none!important}:root:not([data-theme="light"]) #gate .gn{display:block!important}}
 /* paginação */
-.pgr{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin:12px 0 0}
+.pgr{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin:0 0 10px}
 .pgi{font-size:13px;color:var(--mu);font-variant-numeric:tabular-nums}
 .pgb{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .pgb button{min-width:38px;padding:7px 12px;border-radius:10px;font-variant-numeric:tabular-nums}
@@ -423,7 +423,7 @@ body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:
   <h1 id="v1t">Demandas</h1>
   <div id="alert"></div>
   <div id="alertp"></div>
-  <div class="bar"><input id="q" placeholder="Buscar título, empreendimento ou cliente" aria-label="Buscar"><select id="fc" aria-label="Cliente"></select><select id="fr" aria-label="Responsável" hidden></select><select id="fs" aria-label="Status"></select><select id="fp" aria-label="Prioridade"></select><select id="fy" aria-label="Ano de abertura"></select><button type="button" id="arqb" aria-pressed="false">Arquivo</button><button class="p" id="nb" type="button">+ Nova demanda</button></div>
+  <div class="bar"><input id="q" placeholder="Buscar título, empreendimento ou cliente" aria-label="Buscar"><select id="fs" aria-label="Status"></select><select id="fy" aria-label="Ano de abertura"></select><button type="button" id="arqb" aria-pressed="false">Arquivo</button><button class="p" id="nb" type="button">+ Nova demanda</button></div>
   <div class="card" id="nf" hidden><h2>Nova demanda</h2>
   <form id="f">
     <label class="w">Título*<input id="titulo" required></label>
@@ -443,8 +443,8 @@ body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:
   </form></div>
   <div class="atq lt" id="aq" hidden><button type="button" id="aqb" class="aqh" aria-expanded="false" aria-controls="aqbody"><span><b>Atuação</b><small id="aqsum"></small></span><u id="aqt">Ver ▾</u></button><div id="aqbody" hidden><div class="mu2" id="aqus"></div><div class="atk" id="aqk"></div><div class="atb"><div class="atd" id="aqd"></div><div id="aql"></div></div></div></div>
   <div class="qf noprint" id="qf"></div>
-  <div class="tw"><table><thead><tr id="th1"></tr></thead><tbody id="rows"></tbody></table></div>
   <nav class="pgr noprint" id="pgr" aria-label="Paginação das demandas" hidden></nav>
+  <div class="tw"><table><thead><tr id="th1"></tr></thead><tbody id="rows"></tbody></table></div>
   <p id="empty" class="mu" hidden>Nenhuma demanda cadastrada. Use “Nova demanda” para começar.</p>
 </section>
 <section id="v2" hidden>
@@ -610,7 +610,7 @@ function setLM(on){LM=on;document.body.classList.toggle("lm",on);tab(on?2:1)}
 fillSel();
 function fillTipo(){const k=$("tipo").value;$("tipo").innerHTML='<option value="">Selecione o tipo de serviço…</option>'+TIPOS.map(a=>`<option>${esc(a)}</option>`).join("");if(TIPOS.includes(k))$("tipo").value=k}
 function fillSel(){const f=(el,arr,all)=>{el.innerHTML=(all?`<option value="">${all}</option>`:"")+arr.map(a=>`<option>${a}</option>`).join("")};
- f($("tipo"),TIPOS,"Selecione o tipo de serviço…");f($("prio"),PRIO);f($("status"),STATUS);f($("fs"),CSTAT,"Todos os status");f($("fp"),PRIO,"Todas as prioridades");
+ f($("tipo"),TIPOS,"Selecione o tipo de serviço…");f($("prio"),PRIO);f($("status"),STATUS);f($("fs"),CSTAT,"Todos os status");
  $("prio").value="Média";$("abertura").value=hoje();$("fim").max=hoje()}
 function local(){try{REAL=JSON.parse(localStorage.getItem("dem")||"[]").map(nz)}catch(e){REAL=[]}}
 function saveLocal(){try{localStorage.setItem("dem",JSON.stringify(REAL))}catch(e){}}
@@ -656,15 +656,15 @@ function pgrHtml(n,p,np){const a=(p-1)*DPP+1,b=Math.min(p*DPP,n),B=(k,t,l,c,dis,
 function render(){
  const S=DS();
  fillCliForm();updClb();fillResp();fillFr();fillRsf();
- const fcv=$("fc").value;$("fc").innerHTML='<option value="">Todos os clientes</option>'+[...new Set(S.map(d=>d.cliente).filter(Boolean))].sort().map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");$("fc").value=fcv;
- fillYears();const fy=$("fy").value,q=$("q").value.toLowerCase(),fs=$("fs").value,fp=$("fp").value,fc=$("fc").value,fr=$("fr").value;
+ fillYears();const fy=$("fy").value,q=$("q").value.toLowerCase(),fs=$("fs").value,fp="",fc="",fr="";
  const nArq=S.filter(d=>d.arq).length;$("arqb").textContent="Arquivo ("+nArq+")";$("arqb").classList.toggle("on",arqv);$("arqb").setAttribute("aria-pressed",arqv);
  const L0=S.filter(d=>(arqv?d.arq:!d.arq)&&(!fy||yOf(d)===fy)&&(!fc||d.cliente===fc)&&(!fr||respOf(d)===fr)&&(!fs||d.status===fs)&&(!fp||d.prio===fp)&&(!q||(d.titulo+d.cliente+(d.emp||"")).toLowerCase().includes(q))).sort((a,b)=>(aberta(b)-aberta(a))||(a.prazo||"9").localeCompare(b.prazo||"9"));
  const isAtr=d=>!fin(d)&&d.status!=="Cancelada"&&d.prazo&&d.prazo<hoje(),hasP=temPend,nAt=L0.filter(isAtr).length,nPe=L0.filter(hasP).length;
- if(qfv==="a"&&!nAt||qfv==="p"&&!nPe)qfv="";
- $("qf").innerHTML=[["a","Atrasadas",nAt],["p","Com pendência",nPe]].map(([k,t,n])=>`<button type="button" data-qf="${k}" class="${qfv===k?"on":""}" aria-pressed="${qfv===k}"${!n&&qfv!==k?" disabled":""}>${t} (${n})</button>`).join("");
+ const isUrg=d=>d.prio==="Urgente"&&d.status!=="Concluída"&&d.status!=="Cancelada",meu=meuResp(),isMeu=d=>!!meu&&nk(respOf(d))===nk(meu),nUr=L0.filter(isUrg).length,nMe=L0.filter(isMeu).length;
+ if(qfv==="a"&&!nAt||qfv==="p"&&!nPe||qfv==="u"&&!nUr||qfv==="m"&&!nMe)qfv="";
+ $("qf").innerHTML=[["a","Atrasadas",nAt],["p","Com pendência",nPe],["u","Urgentes",nUr],["m","Minhas demandas",nMe]].map(([k,t,n])=>`<button type="button" data-qf="${k}" class="${qfv===k?"on":""}" aria-pressed="${qfv===k}"${!n&&qfv!==k?" disabled":""}${k==="m"&&!meu?' title="Seu usuário não está ligado a nenhum responsável. Cadastre seu e-mail em Equipe."':""}>${t} (${n})</button>`).join("");
  const MR=multiResp();$("th1").innerHTML=[["e","Empreendimento / demanda"],MR?["r","Responsável"]:null,["s","Status"],["o","Prioridade"],["a","Alerta"],["p","Prazo"]].filter(Boolean).map(([k,t])=>k==="a"?`<th>${t}</th>`:`<th aria-sort="${sk===k?(sd>0?"ascending":"descending"):"none"}"><button type="button" class="sb${sk===k?" on":""}" data-sk="${k}">${t}<i>${sk===k?(sd>0?"▲":"▼"):"↕"}</i></button></th>`).join("")+"<th></th>";
- let L=qfv==="a"?L0.filter(isAtr):qfv==="p"?L0.filter(hasP):L0;
+ let L=qfv==="a"?L0.filter(isAtr):qfv==="p"?L0.filter(hasP):qfv==="u"?L0.filter(isUrg):qfv==="m"?L0.filter(isMeu):L0;
  if(sk){const kf={e:d=>(d.emp||d.titulo||"").toLowerCase(),r:d=>respOf(d).toLowerCase(),s:d=>String(CSTAT.indexOf(d.status)).padStart(2,"0"),o:d=>String(PRIO.indexOf(d.prio)),p:d=>d.prazo||(sd>0?"9":"0")};L=[...L].sort((a,b)=>kf[sk](a).localeCompare(kf[sk](b),"pt-BR")*sd)}
  {const Sy=S.filter(d=>!fy||yOf(d)===fy);$("aq").hidden=!Sy.length;if(Sy.length){const A=atuacao(calc(Sy,hoje(),0),Sy);ATX.aq=A;renderAtu(A,"aq");$("aqsum").textContent=A.tot?A.nCl+" "+(A.nCl===1?"cliente":"clientes")+" na carteira · "+A.ntp+" "+(A.ntp===1?"tipo de serviço":"tipos de serviço")+" · tempo médio "+(A.tmed==null?"—":A.tmed+" dias"):"Ainda sem demandas concluídas";$("aqbody").hidden=!aqOpen;$("aqb").setAttribute("aria-expanded",aqOpen);$("aqt").textContent=aqOpen?"Recolher ▴":"Ver ▾";if(!$("apm").hidden&&apS.P==="aq")apRender()}}
  $("empty").hidden=L.length>0;$("empty").textContent=arqv?"Nenhuma demanda arquivada.":(fy||fs||fc||fp||q)?"Nenhuma demanda encontrada com esses filtros.":"Nenhuma demanda cadastrada. Use “Nova demanda” para começar.";
@@ -688,7 +688,7 @@ $("rows").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.edit)return openDet(b.dataset.edit,true);
  if(b.dataset.del)return delRow(b.dataset.del)};
 $("alertp").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.id==="pmb"){pmore=!pmore;return render()}if(b.dataset.pe)openDet(b.dataset.pe,true)};
-["q","fc","fs","fp"].forEach(i=>$(i).oninput=render);
+["q","fs"].forEach(i=>$(i).oninput=render);
 $("per").onchange=()=>{anim=true;dash()};
 $("yr").onchange=()=>{anim=true;dash()};$("fy").onchange=render;$("arqb").onclick=()=>{arqv=!arqv;render()};
 
@@ -1066,7 +1066,7 @@ async function wr(ops){const f=window.FB&&FB.fs,r=ops.map(([k,x])=>[k==="c"?ccol
  ops.forEach(([k,x])=>{if(k==="c"){const i=CL.findIndex(y=>y.id===x.id);i>=0?CL[i]=x:CL.push(x)}else{const i=REAL.findIndex(y=>y.id===x.id);if(i>=0)REAL[i]=x}});
  if(!ccol)saveCl();if(!col)saveLocal()}
 const clDem=c=>REAL.filter(d=>d.clienteId===c.id||(!d.clienteId&&nk(d.cliente)===nk(c.nome)));
-function clStat(c){const L=clDem(c),co=L.filter(d=>d.status==="Concluída"),ab=L.filter(d=>aberta(d)),tm=co.filter(d=>d.abertura&&d.fim),ds=L.filter(d=>d.status!=="Cancelada");
+function clStat(c){const L=clDem(c),co=L.filter(d=>d.status==="Concluída"),ab=L.filter(d=>d.status!=="Concluída"&&d.status!=="Cancelada"),tm=co.filter(d=>d.abertura&&d.fim),ds=L.filter(d=>d.status!=="Cancelada");
  return{L,co,ab,m:tm.length?Math.round(tm.reduce((a,d)=>a+dias(d.abertura,d.fim),0)/tm.length):null,ult:ds.map(d=>d.fim||d.abertura||"").filter(Boolean).sort().pop()||"",pri:ds.map(d=>d.abertura||"").filter(Boolean).sort()[0]||""}}
 // seleção de cliente nos formulários
 function cliVal(d){if(d.clienteId&&CL.some(c=>c.id===d.clienteId))return"c:"+d.clienteId;const m=CL.find(c=>nk(c.nome)===nk(d.cliente));return m?"c:"+m.id:(d.cliente?"n:"+d.cliente:"")}
@@ -1180,6 +1180,9 @@ const RESPS=["Matheus","Renan","Felipe"];
 function respList(){return[...RESPS]}
 const respOf=d=>(d&&d.resp&&String(d.resp).trim())||RESP0;
 const multiResp=()=>respList().length>1;
+// responsável ligado ao usuário logado: e-mail cadastrado em Equipe ou primeiro nome
+function meuResp(){const F=window.FB,m=F&&F.me&&F.me();if(!m)return"";const em=String(m.email||"").toLowerCase(),eq=[LD||{},...((LD&&LD.equipe)||[])].find(p=>p&&p.email&&String(p.email).toLowerCase()===em);
+ const c=[eq&&eq.nome,m.nome,em.split("@")[0]].filter(Boolean).map(x=>nk(String(x).split(/[\s._-]+/)[0]));return respList().find(r=>c.includes(nk(r)))||""}
 function respOpts(cur){const a=respList();if(cur&&!a.some(x=>nk(x)===nk(cur)))a.push(cur);return a}
 function fillResp(){const s=$("resp");if(!s)return;const v=s.value;s.innerHTML=respList().map(n=>`<option>${esc(n)}</option>`).join("");s.value=v&&respList().includes(v)?v:RESP0}
 function fillFr(){const s=$("fr");if(!s)return;const v=s.value,a=[...new Set([...respList(),...DS().map(respOf)])];s.innerHTML='<option value="">Todos os responsáveis</option>'+a.map(n=>`<option>${esc(n)}</option>`).join("");s.value=v;s.hidden=!multiResp()&&!v}
@@ -1249,7 +1252,7 @@ async function rsPdf(){const b=$("rs_pdf"),t=b.textContent;b.disabled=true;b.tex
   await DL.save({filename:"resumo-mensal-priori-"+rsYm+".pdf",data:pdf.output("blob")});b.textContent="PDF salvo";setTimeout(()=>{b.textContent=t;b.disabled=false},2000)}
  catch(e){b.textContent=(e&&e.code==="declined")?t:"Não foi possível gerar. Tentar de novo";b.disabled=false;if(b.textContent!==t)setTimeout(()=>{b.textContent=t},3500)}finally{if(w)w.remove()}}
 $("rsb").onclick=openRs;$("rsm").addEventListener("mousedown",e=>{if(e.target===$("rsm"))closeRs()});
-$("fr").onchange=render;$("rsf").onchange=()=>{anim=true;dash()};
+$("rsf").onchange=()=>{anim=true;dash()};
 document.addEventListener("change",e=>{if(["e_status","e_prazo","e_fim"].includes(e.target&&e.target.id))motVis()});
 
 // ===== incluir pendência pela lista, Matheus na equipe
