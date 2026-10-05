@@ -648,11 +648,11 @@ applyTheme(lsGet("tema"));
 $("thb").onclick=()=>{const m=isDark()?"light":"dark";lsSet("tema",m);applyTheme(m)};
 function setAcc(){const F=window.FB;if(!F||!F.me())return;const n=(F.me().nome||F.me().email||"?").trim(),p=n.split(/[\s@._-]+/).filter(Boolean),ini=((p[0]||"?")[0]+(p.length>1?p[1][0]:"")).toUpperCase();$("sbi").textContent=ini;$("sbn").textContent=n;$("sbr").textContent=({editor:"Editor",lider:"Líder",pendente:"Pendente"})[F.role()]||"";$("sbu").title="Minha conta ("+F.me().email+")";$("sbu").hidden=false}
 
-/* ordem padrão da lista: em andamento, aguardando aprovação, aguardando assinatura, a iniciar, concluída e cancelada por último */
+/* ordem padrão da lista: em andamento, aguardando aprovação, aguardando assinatura, a iniciar, concluída e cancelada sempre por último */
 var ORD=["Em andamento","Aguardando aprovação do cliente","Aguardando assinatura","A iniciar","Concluída","Cancelada"];
 function oRank(d){const i=ORD.indexOf(d.status);return i<0?3.5:i}
-// nas ordenações por coluna, concluídas e canceladas ficam no fim, nessa ordem
-function oFim(d){return d.status==="Concluída"?1:d.status==="Cancelada"?2:0}
+// nas ordenações por coluna, as canceladas ficam sempre no fim
+function oFim(d){return d.status==="Cancelada"?1:0}
 function ordPad(a,b){return(oRank(a)-oRank(b))||(a.status==="Concluída"&&b.status==="Concluída"?(b.fim||"").localeCompare(a.fim||""):(a.prazo||"9").localeCompare(b.prazo||"9"))}
 /* paginação da lista de demandas */
 var DPP=10,dpg=1,dpgSig="";
