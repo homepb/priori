@@ -344,6 +344,18 @@ body:not(.authed) #app{visibility:hidden}
 :root[data-theme="dark"] #app.dash #side .logo-o,:root[data-theme="dark"] #app.dash #hd .logo-o{display:none}:root[data-theme="dark"] #app.dash #side .logo-n,:root[data-theme="dark"] #app.dash #hd .logo-n{display:block}
 #app.dash #hd,#app.dash:not(.pres) #hd{background:var(--hdr);border-color:var(--bd);backdrop-filter:none}#app.dash #hd::after{display:block}
 #app.dash #hd .hb{background:var(--card);color:var(--tx);border-color:var(--bd)}
+/* submenu de Configurações */
+#side .cfgp .chv{transition:transform .2s;opacity:.7}
+#side .cfgp[aria-expanded="true"] .chv{transform:rotate(180deg)}
+#side .cfgp.on{color:var(--ac)}
+#cfgs{display:none;flex-direction:column;gap:2px;margin:2px 0 4px}
+#side.cfgo #cfgs{display:flex}
+#side .it.csub{min-height:36px;font-size:13px;padding-left:38px}#side .it.csub .t{white-space:normal;line-height:1.25;padding:6px 0}
+#side .it.csub svg{display:none}
+#side .it.csub::after{content:"";position:absolute;left:20px;top:0;bottom:0;width:1px;background:var(--bd)}
+#side .gcfgm{display:none}
+body.ro #cfgs,body.lid #cfgs,body.ro #side .gcfgm,body.lid #side .gcfgm{display:none!important}
+.crumb{font:600 12px var(--hd);color:var(--mu);margin-bottom:2px}
 /* telas inteiras: Clientes, Configurações, Equipe, Conta */
 .ov.pg,#av.pg,#clm.pg{left:248px;z-index:25;background:var(--bg);padding:0;display:block}
 .ov.pg .pn{max-width:1120px;margin:0 auto;border-radius:0;background:transparent;padding:22px 16px 48px;min-height:0}
@@ -371,6 +383,8 @@ body:not(.authed) #app{visibility:hidden}
  body.msh #mscr{display:block;position:fixed;inset:0;z-index:45;background:rgba(3,14,28,.5);border:0;padding:0;border-radius:0}
  main{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 96px)}
  #v1t{margin:0 -12px;padding:4px 12px 10px;font-size:22px}
+ #side #tpb{display:none}#side .gcfgm{display:block;order:2}#cfgs{display:flex;order:3}
+ #side .it.csub{min-height:44px;font-size:14px;padding-left:12px}#side .it.csub svg{display:block}#side .it.csub::after{display:none}
  .ov.pg,#av.pg,#clm.pg{left:0;top:var(--hh,56px);bottom:calc(env(safe-area-inset-bottom,0px) + 68px)}
  .ov.pg .pn{min-height:0;padding:14px 12px 28px}
  .toast{bottom:calc(env(safe-area-inset-bottom,0px) + 84px)}
@@ -387,7 +401,9 @@ body:not(.authed) #app{visibility:hidden}
    <button type="button" class="it" id="lvb" data-nav="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span class="t">Dashboard</span></button>
    <div class="grp gcad">Cadastros</div>
    <button type="button" class="it" id="clb" data-nav="cl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16"/><path d="M14 10h5a1 1 0 0 1 1 1v10"/><path d="M8 8h2M8 12h2M8 16h2M3 21h18"/></svg><span class="t">Clientes</span><span class="bd" id="clbd" hidden></span></button>
-   <button type="button" class="it" id="tpb" data-nav="cfg" title="Tipos de serviço, tipos de pendência e motivos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h11M4 12h8M4 18h8"/><path d="M18 14v6M15 17h6"/></svg><span class="t">Configurações</span></button>
+   <button type="button" class="it cfgp" id="tpb" aria-expanded="false" aria-controls="cfgs"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h11M4 12h8M4 18h8"/><path d="M18 14v6M15 17h6"/></svg><span class="t">Configurações</span><svg class="chv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+   <div class="grp gcfgm">Configurações</div>
+   <div id="cfgs"><button type="button" class="it csub" data-nav="cfg" data-sub="T"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span class="t">Tipos de serviço</span></button><button type="button" class="it csub" data-nav="cfg" data-sub="P"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M15 5h2a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h2"/><path d="M9 13h6M9 17h4"/></svg><span class="t">Tipos de pendência</span></button><button type="button" class="it csub" data-nav="cfg" data-sub="A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="t">Motivos de atraso</span></button><button type="button" class="it csub" data-nav="cfg" data-sub="X"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg><span class="t">Motivos de cancelamento</span></button></div>
    <button type="button" class="it" id="ldr" data-nav="eq" title="Líder e membros da equipe"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1"/><circle cx="17" cy="9" r="2.6"/><path d="M17 14h.5a4.5 4.5 0 0 1 4.5 4.5V20"/></svg><span class="t">Equipe</span></button>
   </nav>
   <div class="sft">
@@ -898,7 +914,7 @@ try{const t=JSON.parse(lsGet("tipos")||"null");if(Array.isArray(t)&&t.length)TIP
 try{const t=JSON.parse(lsGet("pends")||"null");if(Array.isArray(t)&&t.length)TP=t}catch(e){}
 function saveTipos(a){TIPOS=a;lsSet("tipos",JSON.stringify(a));if(tcfg){try{tcfg.set({lista:a}).catch(()=>{})}catch(e){}}fillTipo()}
 function saveTP(a){TP=a;lsSet("pends",JSON.stringify(a));if(tpcfg){try{tpcfg.set({lista:a}).catch(()=>{})}catch(e){}}}
-function openTipos(){avD="T";renderAv();$("av").hidden=false}
+function openTipos(c){avD=CFGK.includes(c)?c:"T";renderAv();$("av").hidden=false}
 function renderTipos(){const CAT={T:{l:"Tipos de serviço",a:()=>TIPOS,sv:saveTipos,d:'Opções do campo "Tipo de serviço" no cadastro e na edição.',n:"tipo",ph:"Ex.: PRAD",u:d=>[d.tipo]},
   P:{l:"Tipos de pendência",a:()=>TP,sv:saveTP,d:"Tipos de pendência usados nas demandas.",n:"tipo de pendência",ph:"Ex.: Mapa de uso do solo",u:d=>(d.pend||[]).map(p=>p.t)},
   A:{l:"Motivos de atraso",a:()=>MOT.atraso,sv:a=>saveMot("atraso",a),d:"Lista curta para explicar atrasos. O preenchimento é opcional, na edição da demanda.",n:"motivo",ph:"Ex.: Prazo subestimado",u:d=>[d.motA]},
@@ -906,8 +922,7 @@ function renderTipos(){const CAT={T:{l:"Tipos de serviço",a:()=>TIPOS,sv:saveTi
   K=CAT[avD]||CAT.T,arr=K.a(),use={},save=K.sv;
  DS().forEach(d=>K.u(d).forEach(t=>{if(t)use[t]=(use[t]||0)+1}));
  const un=["demanda","demandas"];
- $("avc").innerHTML=`<div class="avh"><div><h3>Configurações</h3><div class="mu">${K.d}</div></div><button type="button" id="avx" aria-label="Fechar" style="margin-left:auto">✕</button></div>
- <div class="avb" style="margin:0 0 8px">${Object.entries(CAT).map(([k,c])=>`<button type="button" data-cat="${k}"${avD===k||(k==="T"&&!CAT[avD])?' class="p"':""}>${c.l}</button>`).join("")}</div>
+ $("avc").innerHTML=`<div class="avh"><div><div class="crumb">Configurações ›</div><h3>${K.l}</h3><div class="mu">${K.d}</div></div><button type="button" id="avx" aria-label="Fechar" style="margin-left:auto">✕</button></div>
  <div class="avg" style="grid-template-columns:1fr auto;align-items:end"><label>Novo ${K.n}<input id="t_new" maxlength="60" autocomplete="off" placeholder="${K.ph}"></label><button type="button" class="p" id="t_add">Adicionar</button></div>
  <div id="avm" class="avm" role="status"></div>
  <ul class="tpl">${arr.map((t,i)=>`<li><b>${esc(t)}</b><span class="mu">${use[t]?use[t]+" "+un[use[t]>1?1:0]:"sem demandas"}</span><button type="button" data-i="${i}" class="t_del" aria-label="Remover ${esc(t)}">Remover</button></li>`).join("")||'<li class="mu">Nenhum item cadastrado.</li>'}</ul>
@@ -1244,7 +1259,7 @@ window.__matOK=()=>window.FB?(FB.role&&FB.role()==="editor"):!RO;
 function openPendAdd(id){const d=DS().find(x=>x.id===id);if(!d||LM||RO||isLid())return;
  $("cqc").innerHTML=`<div class="avh"><div><h3>Incluir pendência</h3><div class="mu">${esc(d.emp||d.titulo)} · ${esc(d.cliente)}</div></div><button type="button" id="cqx" aria-label="Fechar" style="margin-left:auto">✕</button></div><div class="ef"><label class="w">Tipo de pendência<select id="pa_t">${TP.map(t=>`<option>${esc(t)}</option>`).join("")}</select></label><label class="w">Responsável pela pendência<select id="pa_r"><option>Líder</option><option>Cliente</option></select></label></div><div id="pa_err" class="late" style="margin-top:6px"></div><div class="cla" style="margin-top:12px"><button type="button" class="p" id="pa_ok">Incluir pendência</button><button type="button" id="pa_no">Cancelar</button></div>`;
  $("cqm").hidden=false;$("pa_t").focus();$("cqx").onclick=$("pa_no").onclick=closeCq;
- $("pa_ok").onclick=async()=>{const t=$("pa_t").value,r=$("pa_r").value;if(!t){$("pa_err").textContent="Cadastre um tipo de pendência em Cadastro primeiro.";return}
+ $("pa_ok").onclick=async()=>{const t=$("pa_t").value,r=$("pa_r").value;if(!t){$("pa_err").textContent="Cadastre um tipo de pendência em Configurações › Tipos de pendência primeiro.";return}
   const cur=DS().find(x=>x.id===id);if(!cur)return;if(pDup(cur.pend||[],t,r)){$("pa_err").textContent="Essa pendência já existe para esse responsável.";return}
   const ok=await upd({...cur,pend:[...(cur.pend||[]),{id:"p"+Date.now().toString(36)+Math.floor(Math.random()*1e3),t,s:"Pendente",r}],hist:[...(cur.hist||[]),{s:"Pendência “"+t+"” ("+r+") cadastrada",d:hoje(),u:who()}]});
   if(ok){closeCq();toast("Pendência “"+t+"” incluída.","ok")}}}
@@ -1263,20 +1278,23 @@ function tab(n){if(LM)n=2;cur=n;$("app").classList.toggle("dash",n===2);document
 $("pgr").addEventListener("click",e=>{const b=e.target.closest("[data-pg]");if(!b||b.disabled)return;dpg=+b.dataset.pg;render();const t=$("rows").closest(".tw"),bar=document.querySelector("#v1 .bar");scrollTo(0,Math.max(0,t.getBoundingClientRect().top+scrollY-(bar?bar.offsetHeight:0)-$("hd").offsetHeight-$("v1t").offsetHeight-8))});
 /* navegação: menu lateral, barra inferior e telas inteiras */
 var PG=null,PGB=1;
-function navSync(){const k=PG||(LM?2:1),m={1:["nv1","bn1"],2:["lvb","bn2"],cl:["clb","bnc"],cfg:["tpb","bnm"],eq:["ldr","bnm"],conta:["acb","bnm"]};
+var CFGK=["T","P","A","X"],CFGO=false;
+function navSync(){const oc=PG==="cfg";$("side").classList.toggle("cfgo",oc||CFGO);$("tpb").setAttribute("aria-expanded",oc||CFGO);$("tpb").classList.toggle("on",oc);document.querySelectorAll("#cfgs [data-sub]").forEach(b=>b.toggleAttribute("aria-current",false));if(oc){const c=document.querySelector('#cfgs [data-sub="'+avD+'"]');if(c)c.setAttribute("aria-current","page")}
+ const k=PG||(LM?2:1),m={1:["nv1","bn1"],2:["lvb","bn2"],cl:["clb","bnc"],cfg:["bnm"],eq:["ldr","bnm"],conta:["acb","bnm"]};
  ["nv1","lvb","clb","tpb","ldr","acb","bn1","bn2","bnc","bnm"].forEach(i=>$(i).removeAttribute("aria-current"));(m[k]||[]).forEach(i=>$(i).setAttribute("aria-current","page"))}
 function msh(on){document.body.classList.toggle("msh",on);$("bnm").setAttribute("aria-expanded",on)}
 function pgOff(){$("av").classList.remove("pg");$("clm").classList.remove("pg")}
 function pgDone(){PG=null;pgOff();if(PGB===2&&!LM)setLM(true);else tab(LM?2:1)}
-function nav(k){msh(false);
+function nav(k,sub){msh(false);
  if(PG){const p=PG;PG=null;pgOff();if(p==="cl")$("clm").hidden=true;else{$("av").hidden=true;avD=null}}
  else if(k!==1&&k!==2)PGB=LM?2:1;
  if(k===1||k===2){if(isLid())setLM(true);else if((k===2)!==LM)setLM(k===2);else tab(k);return}
  if(LM&&!isLid())setLM(false);
  PG=k;$("app").classList.remove("dash");document.body.classList.remove("dash");
- if(k==="cl"){$("clm").classList.add("pg");openCl()}else{$("av").classList.add("pg");if(k==="cfg")openTipos();else if(k==="eq")openLider();else openConta()}
+ if(k==="cl"){$("clm").classList.add("pg");openCl()}else{$("av").classList.add("pg");if(k==="cfg")openTipos(sub);else if(k==="eq")openLider();else openConta()}
  navSync();scrollTo(0,0)}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-nav]");if(!b)return;const k=b.dataset.nav;nav(k==="1"?1:k==="2"?2:k)});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-nav]");if(!b)return;const k=b.dataset.nav;if(b.dataset.sub)CFGO=true;nav(k==="1"?1:k==="2"?2:k,b.dataset.sub)});
+$("tpb").onclick=()=>{if(PG==="cfg")return;CFGO=!CFGO;navSync()};
 $("bnm").onclick=()=>msh(!document.body.classList.contains("msh"));$("mscr").onclick=()=>msh(false);
 tab(1);window.addEventListener("resize",hh);
 </script>
