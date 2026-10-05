@@ -328,17 +328,16 @@ body:not(.authed) #app{visibility:hidden}
 .usr .ut{min-width:0;display:flex;flex-direction:column}.usr b{font:600 13px var(--hd);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.usr small{color:var(--mu);font-size:11.5px}
 #app{padding-left:248px}#app.pres,#app.cap{padding-left:0}
 #hd,#bn,#mscr{display:none}
-#app.dash #side{background:rgba(9,34,65,.6);border-color:var(--d-line);backdrop-filter:blur(10px)}
-#app.dash #side::after{display:none}
-#app.dash #side .sub,#app.dash #side .grp,#app.dash .usr small{color:var(--d-mu)}
-#app.dash #side .sub,#app.dash .sft{border-color:var(--d-line)}
-#app.dash #side .it,#app.dash .usr{color:var(--d-tx)}
-#app.dash #side .it:hover,#app.dash .usr:hover{background:var(--d-glass)}
-#app.dash #side .it[aria-current="page"]{background:rgba(0,162,173,.22);color:#7fe3ea}
+#app.dash #side .sub{color:var(--mu);border-color:var(--bd)}
+#app.dash #side .logo-o,#app.dash #hd .logo-o{display:block}#app.dash #side .logo-n,#app.dash #hd .logo-n{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #app.dash #side .logo-o,:root:not([data-theme="light"]) #app.dash #hd .logo-o{display:none}:root:not([data-theme="light"]) #app.dash #side .logo-n,:root:not([data-theme="light"]) #app.dash #hd .logo-n{display:block}}
+:root[data-theme="dark"] #app.dash #side .logo-o,:root[data-theme="dark"] #app.dash #hd .logo-o{display:none}:root[data-theme="dark"] #app.dash #side .logo-n,:root[data-theme="dark"] #app.dash #hd .logo-n{display:block}
+#app.dash #hd,#app.dash:not(.pres) #hd{background:var(--hdr);border-color:var(--bd);backdrop-filter:none}#app.dash #hd::after{display:block}
+#app.dash #hd .hb{background:var(--card);color:var(--tx);border-color:var(--bd)}
 /* telas inteiras: Clientes, Configurações, Equipe, Conta */
 .ov.pg,#av.pg,#clm.pg{left:248px;z-index:25;background:var(--bg);padding:0;display:block}
 .ov.pg .pn{max-width:1120px;margin:0 auto;border-radius:0;background:transparent;padding:22px 16px 48px;min-height:0}
-.ov.pg #avx,.ov.pg [data-a="close"]{display:none}
+.ov.pg #avx,.ov.pg #t_ok,.ov.pg [data-a="close"]{display:none}
 .ov.pg .avh h3,.ov.pg .clhd h3{font-size:24px}
 /* concluídas: painel lateral */
 #nt{justify-content:flex-end;align-items:stretch;padding:0}
@@ -352,7 +351,6 @@ body:not(.authed) #app{visibility:hidden}
  body.msh #side{transform:none;visibility:visible;transition:transform .25s ease}
  #side::after,#side .brand,#side .sub,#side .gvis,#side #nv1,#side #lvb,#side #bell,#side #clb{display:none}
  .snav{flex:none}
- #app.dash #side{background:#0b2340}
  body.ro #side .gcad,body.lid #side .gcad{display:none}
  #bn{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);position:fixed;left:0;right:0;bottom:0;z-index:47;background:var(--hdr);border-top:1px solid var(--bd);padding:4px 6px calc(env(safe-area-inset-bottom,0px) + 4px)}
  #bn button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:60px;border:0;background:none;color:var(--mu);font:600 11px var(--hd);padding:0;border-radius:12px}
@@ -360,9 +358,6 @@ body:not(.authed) #app{visibility:hidden}
  #bn [aria-current="page"],#bn [aria-expanded="true"]{color:var(--ac)}
  #bn [aria-current="page"] .ic,#bn [aria-expanded="true"] .ic{background:var(--soft)}
  #bn .bd{top:2px;right:auto;left:calc(50% + 8px)}
- #app.dash #bn{background:rgba(9,34,65,.97);border-color:var(--d-line)}
- #app.dash #bn button{color:var(--d-mu)}#app.dash #bn [aria-current="page"],#app.dash #bn [aria-expanded="true"]{color:#7fe3ea}
- #app.dash #bn [aria-current="page"] .ic,#app.dash #bn [aria-expanded="true"] .ic{background:rgba(0,162,173,.22)}
  body.msh #mscr{display:block;position:fixed;inset:0;z-index:45;background:rgba(3,14,28,.5);border:0;padding:0;border-radius:0}
  main{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 96px)}
  .ov.pg,#av.pg,#clm.pg{left:0;top:var(--hh,56px);bottom:calc(env(safe-area-inset-bottom,0px) + 68px)}
@@ -377,8 +372,8 @@ body:not(.authed) #app{visibility:hidden}
   <nav class="snav">
    <div class="grp gvis">Visões</div>
    <button type="button" class="it" id="nv1" data-nav="1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg><span class="t">Demandas</span></button>
-   <button type="button" class="it" id="lvb" data-nav="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span class="t">Dashboard</span></button>
    <button type="button" class="it" id="bell" aria-label="Concluídas recentemente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="t">Concluídas</span><span class="bd" id="bdg" hidden></span></button>
+   <button type="button" class="it" id="lvb" data-nav="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span class="t">Dashboard</span></button>
    <div class="grp gcad">Cadastros</div>
    <button type="button" class="it" id="clb" data-nav="cl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16"/><path d="M14 10h5a1 1 0 0 1 1 1v10"/><path d="M8 8h2M8 12h2M8 16h2M3 21h18"/></svg><span class="t">Clientes</span><span class="bd" id="clbd" hidden></span></button>
    <button type="button" class="it" id="tpb" data-nav="cfg" title="Tipos de serviço, tipos de pendência e motivos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h11M4 12h8M4 18h8"/><path d="M18 14v6M15 17h6"/></svg><span class="t">Configurações</span></button>
@@ -898,10 +893,10 @@ function renderTipos(){const CAT={T:{l:"Tipos de serviço",a:()=>TIPOS,sv:saveTi
  <ul class="tpl">${arr.map((t,i)=>`<li><b>${esc(t)}</b><span class="mu">${use[t]?use[t]+" "+un[use[t]>1?1:0]:"sem demandas"}</span><button type="button" data-i="${i}" class="t_del" aria-label="Remover ${esc(t)}">Remover</button></li>`).join("")||'<li class="mu">Nenhum item cadastrado.</li>'}</ul>
  <div class="mu" style="margin-top:8px">Remover um item não altera demandas já cadastradas com ele.</div>
  <div class="avb"><button type="button" class="p" id="t_ok">Concluir</button></div>`;
- const add=()=>{const v=$("t_new").value.trim();if(!v){avMsg("Digite o nome.","err");return}if(arr.some(t=>t.toLowerCase()===v.toLowerCase())){avMsg("Esse item já existe.","err");return}save([...arr,v]);renderTipos();avMsg("Item adicionado.","ok");$("t_new").focus()};
+ const add=()=>{const v=$("t_new").value.trim();if(!v){avMsg("Digite o nome.","err");return}if(arr.some(t=>t.toLowerCase()===v.toLowerCase())){avMsg("Esse item já existe.","err");return}save([...arr,v]);renderTipos();avMsg("Item adicionado.","ok");toast("“"+v+"” adicionado com sucesso.","ok");$("t_new").focus()};
  $("t_add").onclick=add;$("t_new").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();add()}};
  document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{avD=b.dataset.cat;renderAv()});
- document.querySelectorAll(".t_del").forEach(b=>b.onclick=()=>{save(arr.filter((_,i)=>i!==+b.dataset.i));renderTipos()});
+ document.querySelectorAll(".t_del").forEach(b=>b.onclick=()=>{const t=arr[+b.dataset.i];save(arr.filter((_,i)=>i!==+b.dataset.i));renderTipos();toast("“"+t+"” removido com sucesso.","ok")});
  $("t_ok").onclick=closeAv;$("avx").onclick=closeAv}
 
 // aviso de cadastros aguardando liberação (só Editor)
@@ -986,7 +981,7 @@ function renderAv(){if(typeof avD==="string"&&avD.startsWith("K|"))return render
  const x='<button type="button" id="avx" aria-label="Fechar" style="margin-left:auto">✕</button>';
  const flds=`<div class="avg"><label>Nome do líder<input id="l_nome" autocomplete="off"></label><label>E-mail do líder*<input id="l_email" type="email" autocomplete="off"></label><label>WhatsApp do líder (com DDD)<input id="l_zap" type="tel" placeholder="(81) 99999-9999"></label><label>Seu nome (assina a mensagem)<input id="l_de" autocomplete="off"></label></div>`;
  if(!d){const EQ=JSON.parse(JSON.stringify(L.equipe||[]));
-  $("avc").innerHTML=`<div class="avh"><div><h3>Equipe</h3><div class="mu">O líder recebe os avisos e as cobranças. Os membros ficam aqui como consulta rápida.</div></div>${x}</div><h4 style="margin:0 0 6px">Líder</h4>`+flds+`<h4 style="margin:6px 0 6px">Membros</h4><div id="eq"></div>${RO?"":'<div class="avb" style="margin:6px 0 0"><button type="button" id="eq_add">+ Adicionar membro</button></div>'}<div id="avm" class="avm" role="status"></div><div class="avb">${RO?"":'<button type="button" class="p" id="l_save">Salvar equipe</button>'}<button type="button" id="l_cancel">${RO?"Fechar":"Cancelar"}</button></div>`;
+  $("avc").innerHTML=`<div class="avh"><div><h3>Equipe</h3><div class="mu">O líder recebe os avisos e as cobranças. Os membros ficam aqui como consulta rápida.</div></div>${x}</div><h4 style="margin:0 0 6px">Líder</h4>`+flds+`<h4 style="margin:6px 0 6px">Membros</h4><div id="eq"></div>${RO?"":'<div class="avb" style="margin:6px 0 0"><button type="button" id="eq_add">+ Adicionar membro</button></div>'}<div id="avm" class="avm" role="status"></div><div class="avb">${RO?"":'<button type="button" class="p" id="l_save">Salvar equipe</button>'}<button type="button" id="l_cancel">${RO?"Fechar":PG?"Descartar alterações":"Cancelar"}</button></div>`;
   $("l_nome").value=L.nome||"";$("l_email").value=L.email||"";$("l_zap").value=L.whatsapp||"";$("l_de").value=L.de||"";
   const rdEq=()=>{document.querySelectorAll("#eq .eqr").forEach((r,i)=>{if(!EQ[i])return;EQ[i].nome=r.querySelector(".en").value.trim();EQ[i].email=r.querySelector(".em").value.trim();EQ[i].whatsapp=r.querySelector(".ez").value.trim()})};
   const drEq=()=>{$("eq").innerHTML=EQ.length?EQ.map((p,i)=>`<div class="eqr"><input class="en" placeholder="Nome" value="${esc(p.nome||"")}" aria-label="Nome" ${RO||isLid()?"disabled":""}><input class="em" type="email" placeholder="E-mail" value="${esc(p.email||"")}" aria-label="E-mail" ${RO||isLid()?"disabled":""}><input class="ez" type="tel" placeholder="WhatsApp com DDD" value="${esc(p.whatsapp||"")}" aria-label="WhatsApp" ${RO||isLid()?"disabled":""}><span class="eql">${p.email?`<a href="https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(p.email)}" target="_blank" rel="noopener">E-mail</a>`:""}${zapNum(p.whatsapp).length>=12?`<a href="https://wa.me/${zapNum(p.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a>`:""}</span>${RO?"":`<button type="button" class="ib" data-i="${i}" aria-label="Remover" title="Remover">${TRASH}</button>`}</div>`).join(""):'<div class="mu">Nenhum membro cadastrado.</div>';
@@ -995,8 +990,8 @@ function renderAv(){if(typeof avD==="string"&&avD.startsWith("K|"))return render
   if(RO||isLid())document.querySelectorAll("#avc .avg input").forEach(i=>i.disabled=true);
   if($("l_save"))$("l_save").onclick=()=>{rdEq();const o=readLd();if(o.email&&!okMail(o.email)){avMsg("Digite um e-mail válido para o líder.","err");return}if(o.whatsapp&&zapNum(o.whatsapp).length<12){avMsg("Digite o WhatsApp do líder com DDD.","err");return}
    const eq=EQ.filter(p=>p.nome||p.email||p.whatsapp);for(const p of eq){if(!p.nome){avMsg("Informe o nome de cada membro.","err");return}if(p.email&&!okMail(p.email)){avMsg("E-mail inválido em "+p.nome+".","err");return}if(p.whatsapp&&zapNum(p.whatsapp).length<12){avMsg("WhatsApp de "+p.nome+" precisa do DDD.","err");return}}
-   saveLider({...o,equipe:eq});closeAv();toast("Equipe salva.","ok")};
-  $("l_cancel").onclick=closeAv;$("avx").onclick=closeAv;return}
+   saveLider({...o,equipe:eq});if(PG)renderAv();else closeAv();toast("Equipe salva com sucesso.","ok")};
+  $("l_cancel").onclick=()=>{if(PG){renderAv();toast("Alterações descartadas.")}else closeAv()};$("avx").onclick=closeAv;return}
  $("avc").innerHTML=`<div class="avh"><div class="ck"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></div><div><h3>Demanda concluída</h3><div class="mu">Avise ${L.nome?esc(L.nome):"o líder"} por e-mail ou WhatsApp.</div></div>${x}</div>
  <div class="avs"><b>${esc(d.emp||d.titulo)}</b>${d.emp?" · "+esc(d.titulo):""}<br>${esc(d.cliente)} · concluída em ${fd(d.fim)} · ${situ(d)}</div>`+flds+
  `<label class="avf">Link do documento para assinatura*<input id="a_link" type="url" inputmode="url" autocomplete="off" placeholder="https://drive.google.com/..."></label><div class="mu" style="font-size:12px;margin:-4px 0 10px">Confira se o arquivo está compartilhado com o líder, senão ele cairá na tela de pedir acesso.</div><label class="avf">Assunto<input id="a_subj"></label><label class="avf">Mensagem<textarea id="a_body" rows="9"></textarea></label>
